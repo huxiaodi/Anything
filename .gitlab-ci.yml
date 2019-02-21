@@ -1,0 +1,77 @@
+image: registry.gitlab.qiatuchina.com/docker/builder:latest
+
+stages:
+  - build
+  - push
+  - finishupgrade
+  - upgrade
+
+dev-maven-docker-build:
+  stage: build
+  script:
+  - du -sh /
+  - mvn package -B -Dmaven.test.skip=true -P dev
+  - docker login -u luhang -p $CI_BUILD_TOKEN registry.gitlab.qiatuchina.com
+  - docker build -t registry.gitlab.qiatuchina.com/java/dleb:dev .
+  - pwd
+  - ifconfig
+  - docker push registry.gitlab.qiatuchina.com/java/dleb:dev
+  - docker logout registry.gitlab.qiatuchina.com
+  tags:
+    - docker
+  only:
+    - dev
+
+master-maven-docker-build:
+  stage: build
+  script:
+  - mvn package -B -Dmaven.test.skip=false -P prod
+  - docker login -u luhang -p $CI_BUILD_TOKEN registry.gitlab.qiatuchina.com
+  - docker build -t registry.gitlab.qiatuchina.com/java/dleb .
+  - docker push registry.gitlab.qiatuchina.com/java/dleb
+  - docker logout registry.gitlab.qiatuchina.com
+  tags:
+    - docker
+  only:
+    - master
+
+dev-maven-docker-push:
+  stage: push
+  script:
+    - docker login -u admin -p 123 192.168.1.28:8055
+    - docker tag registry.gitlab.qiatuchina.com/java/dleb:dev 192.168.1.28:8055/library/dleb:dev
+    - docker push 192.168.1.28:8055/library/dleb:dev
+    - docker logout 192.168.1.28:8055
+  tags:
+    - docker
+  only:
+    - dev
+
+
+dev-maven-docker-upgrade:
+  stage: upgrade
+  script:
+
+    - "curl -u \"1159FE45A83BE0A3B79A:SifMyqMwtutehkVMZvt2gd7G4uNDtXL5u8nkczhx\" \
+    -X POST \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{\"inServiceStrategy\":{\"batchSize\":1,\"launchConfig\":{\"networkMode\":\"managed\",\"dataVolumes\":[\"/qiatu/static:/qiatu/static\",\"/qiatu/logs/dleb-logs:/logs\"],\"imageUuid\":\"docker:192.168.1.28:8055/library/dleb:dev\",\"labels\":{\"io.rancher.container.pull_image\":\"always\"},\"ports\":[\"8092:8092/tcp\"]}}}' \
+    'http://rancher.qiatuchina.com/v2-beta/projects/1a5/services/1s51/?action=upgrade' "
+  tags:
+    - docker
+  only:
+    - dev
+dev-maven-docker-finishupgrade:
+  stage: finishupgrade
+  script:
+    - "curl -u \"1159FE45A83BE0A3B79A:SifMyqMwtutehkVMZvt2gd7G4uNDtXL5u8nkczhx\" \
+    -X POST \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{}' \
+    'http://rancher.qiatuchina.com/v2-beta/projects/1a5/services/1s51/?action=finishupgrade' "
+  tags:
+    - docker
+  only:
+    - dev

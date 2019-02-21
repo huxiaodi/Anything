@@ -1,0 +1,22 @@
+awesome:
+  ebpay:
+    uid: N95420
+    mrchCode: 3284
+    masterId: 2000904398
+    smsAccount: dllg,1538
+    smsPwd: dllgadmin
+    smsSignature: 【德邻陆港】
+    staticUrl: http://staticstest.qiatuchina.com
+    staticPath: /qiatu/static
+    projectPath: ebpay
+    fundSummaryAcctNo: 15000092454462
+    tradeCallbackUrl: http://dlebapi.qiatuchina.com:8380/callback/pa/trade/inspection
+    setPasswordBackUrl: http://dlebapi.qiatuchina.com:8380/accountSub/accountSubController/returnBack
+    businessCallBackUrl: http://dlebapi.qiatuchina.com:8380/api/pay/paymentCallBack
+    transferReturnUrl: http://dleb.qiatuchina.com/FrontHome
+    paymentDisposeReturnUrl: http://dleb.qiatuchina.com:8380/Payment
+    frontUrl: https://my-uat1.orangebank.com.cn/corporbank/nonpartyVerify.do
+    topupUrl: https://my-uat1.orangebank.com.cn/khpayment/khPayment_sfj.do
+    returnbackForBusiness: http://dlebapi.qiatuchina.com:8380/pay/returnbackForBusiness
+    returnback: http://dlebapi.qiatuchina.com:8380/pay/returnback
+    reimburseBackUrl: http://dlebapi.qiatuchina.com:8380/refund/reimburseBack

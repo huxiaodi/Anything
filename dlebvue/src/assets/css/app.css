@@ -1,0 +1,82 @@
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+body{
+  font-family: "Microsoft YaHei","微软雅黑",Arial,sans-serif!important;
+}
+a {
+  color: #4285F4;
+  text-decoration: none;
+}
+
+
+
+/*.text-red {*/
+
+/*color: #EA4335;*/
+
+/*}*/
+
+/*.text-green {*/
+
+/*color: #34A853;*/
+
+/*}*/
+
+/* table */
+
+.el-table th, .el-table td {
+  padding: 6px 0;
+}
+
+.el-table tr.el-table__row.el-table__row--striped td {
+  background: #f6f8fa;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: #E6E6E6;
+}
+
+table {
+  background-color: #fff;
+  border: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+table * {
+  background-color: none;
+}
+
+.el-table__header {
+  width: 100%;
+}
+
+html {
+  overflow: visible !important;
+}
+
+body, html {
+  width: 100%;
+}

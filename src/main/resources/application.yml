@@ -1,0 +1,120 @@
+druid-public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIEopNjvUKeGp5M+aKc+yY/a/PDYKI/O96U04PFFjmZ+ukTf00H0uU7mexYyLx0C6+opdKKdNJfdC94x+2fAdP8CAwEAAQ==
+
+
+server:
+  port: 8092
+
+spring:
+  profiles:
+    active: "@springProfileActive@"
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://192.168.1.26:3306/dleb?useSSL=false
+    url: jdbc:mysql://wuxiqiatu.f3322.net:3306/dleb?useSSL=false
+    username: root
+    password: KxU08WZP6Rwi+Ux7fMeUqMU27ojzMdkaicuxkmWeXbiVRX2az/WtAvfep3EavFetTC1hV6Ssve4PzGt//XPZmw==
+    #password: xdYI1IjV2lAGWUaQIAqV44pwAmrimydkM2zL3MrNMoPbRtsMB5FN2mR2k5F+OvZnTPtCq7gJEMzt6n8+ueBO8w==
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat,wall,log4j2
+      filter:
+        config:
+          enabled: true
+        stat:
+          enabled: true
+          statement-executable-sql-log-enable: true
+          db-type: mysql
+        wall:
+          enabled: true
+        log4j2:
+          enabled: true
+          statement-executable-sql-log-enable: true
+      connection-properties: config.decrypt=true;config.decrypt.key=${druid-public-key}
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 0
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_PROPERTIES: true
+  redis:
+    database: 12
+    host: wuxiqiatu.f3322.net
+    port: 6379
+    password: zuDz9mGGqkAbApEUWAy6
+    timeout: 3000
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 50mb
+      max-request-size: 50mb
+
+mybatis:
+  configuration:
+    callSettersOnNulls: true
+    mapUnderscoreToCamelCase: true
+
+logging:
+  level:
+    root: info
+  pattern:
+    file:
+
+
+awesome:
+  jwt:
+    issuer: awesomeApp
+    base64EncodedSecretKey: awesomeSecretKey
+  ebpay:
+#    mrchCode: 3281   #qiatu
+#    masterId: 2000903938  #qiatu
+    uid: N95420
+    mrchCode: 3284  #dleb
+    masterId: 2000904398   #dleb
+    smsAccount: dllg,1538
+    smsPwd: dllgadmin
+    smsSignature: 【德邻陆港】
+    staticUrl: http://staticstest.qiatuchina.com
+    staticPath: /qiatu/static
+    projectPath: ebpay
+    fundSummaryAcctNo: 15000092454462
+    tradeCallbackUrl: http://pa2.qiatuchina.com:8380/callback/pa/trade/inspection
+    setPasswordBackUrl: http://pa2.qiatuchina.com:8380/accountSub/accountSubController/returnBack
+    businessCallBackUrl: http://pa2.qiatuchina.com:8380/api/pay/paymentCallBack
+    transferReturnUrl: http://localhost:8091/FrontHome
+    paymentDisposeReturnUrl: http://localhost:8091/Payment
+    frontUrl: https://my-uat1.orangebank.com.cn/corporbank/nonpartyVerify.do
+    topupUrl: https://my-uat1.orangebank.com.cn/khpayment/khPayment_sfj.do
+    returnbackForBusiness: http://pa2.qiatuchina.com:8380/pay/returnbackForBusiness
+    returnback: http://pa2.qiatuchina.com:8380/pay/returnback
+    reimburseBackUrl: http://pa2.qiatuchina.com:8380/refund/reimburseBack
+pagehelper:
+  helper-dialect: mysql
+  offsetAsPageNum: true
+  rowBoundsWithCount: true
+  reasonable: true
+  pageSizeZero: true
+
+
+
+

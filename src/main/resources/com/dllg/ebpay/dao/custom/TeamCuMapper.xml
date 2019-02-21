@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dllg.ebpay.dao.custom.TeamCuMapper">
+  <resultMap id="BaseResultMap" type="com.dllg.ebpay.model.generator.Team">
+    <id column="team_id" jdbcType="CHAR" property="teamId" />
+    <result column="team_company_id" jdbcType="CHAR" property="teamCompanyId" />
+    <result column="team_name" jdbcType="VARCHAR" property="teamName" />
+    <result column="team_type" jdbcType="INTEGER" property="teamType" />
+    <result column="team_remark" jdbcType="VARCHAR" property="teamRemark" />
+    <result column="team_create_time" jdbcType="TIMESTAMP" property="teamCreateTime" />
+    <result column="team_create_user_id" jdbcType="CHAR" property="teamCreateUserId" />
+    <result column="team_update_time" jdbcType="TIMESTAMP" property="teamUpdateTime" />
+    <result column="team_update_user_id" jdbcType="CHAR" property="teamUpdateUserId" />
+    <result column="team_is_delete" jdbcType="BIT" property="teamIsDelete" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    team_id, team_company_id, team_name, team_type, team_remark, team_create_time, team_create_user_id, 
+    team_update_time, team_update_user_id, team_is_delete
+  </sql>
+
+  <select id="getTeamByUserId" resultMap="BaseResultMap">
+    SELECT t.team_id,t.team_name
+    FROM team t
+    LEFT JOIN user_team ut ON ut.user_team_team_id = t.team_id
+    WHERE ut.user_team_user_id = #{userId} AND t.team_is_delete = 0
+  </select>
+</mapper>

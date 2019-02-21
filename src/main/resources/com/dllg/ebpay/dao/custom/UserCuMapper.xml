@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dllg.ebpay.dao.custom.UserCuMapper">
+    <select id="getUserAccountName" resultType="java.lang.String">
+        SELECT
+            CASE WHEN user_type = 1 THEN user_cn_name
+                 WHEN user_type = 2 THEN company_name
+                 ELSE ''
+            END
+        FROM user
+        LEFT JOIN company ON user_company_id = company_id
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getOutSubAcctNameList" resultType="com.dllg.ebpay.model.response.OutSubAcctResponse">
+        SELECT
+            user_id,
+            user_cn_name AS userAccountName
+        FROM user
+        WHERE user_type = 1
+          AND POSITION(#{keyword} IN user_cn_name)
+        UNION
+        SELECT
+            user_id,
+            company_name AS userAccountName
+        FROM user
+        LEFT JOIN company ON user_company_id = company_id
+        WHERE user_type = 2
+          AND POSITION(#{keyword} IN company_name)
+    </select>
+    <!--管理端 用户列表 -->
+    <select id="manageList" resultType="map">
+        SELECT
+        user.user_id,
+        user.user_name,
+        user.user_nickname,
+        user.user_cn_name,
+        user.user_mobile,
+        user.user_certificate_type,
+        user.user_certificate_number,
+        user.user_id_card_font_img,
+        user.user_id_card_back_img,
+        user.user_status,
+        user.user_create_time,
+        user.user_register_from,
+        dict.dict_value
+        FROM
+        user
+        left join (select * from dict where dict_type = '业务来源')dict on user.user_register_from = dict.dict_key
+        <where>
+            user.user_type = 1
+            <if test="startTime!=null">
+                and user.user_create_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and user.user_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="source!=null and source!=''">
+                and user.user_register_from=#{source}
+            </if>
+            <if test="type!=null and type!=''">
+                and user.user_certificate_type=#{type}
+            </if>
+            <if test="status!=null and status!=''">
+                and user.user_status=#{status}
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                POSITION(#{keyword} IN user_name) OR
+                POSITION(#{keyword} IN user_mobile) OR
+                POSITION(#{keyword} IN user_cn_name) OR
+                POSITION(#{keyword} IN user_certificate_number)
+                )
+            </if>
+        </where>
+        ORDER BY user_create_time DESC
+    </select>
+
+    <select id="getResource" resultType="map">
+        SELECT
+        resource_id as resourceId,
+        resource_name as resourceName
+        FROM
+        resource
+        LEFT JOIN role_resource on role_resource.role_resource_resource_id = resource.resource_id
+        LEFT JOIN user_role on role_resource.role_resource_role_id = user_role.user_role_role_id
+        <where>
+            user_role.user_role_user_id = #{userId}
+        </where>
+    </select>
+
+    <select id="getUserMemberList" resultType="map">
+        SELECT
+        u.user_id AS userId,
+        u.user_name AS userName,
+        u.user_cn_name AS userCnName,
+        u.user_mobile AS userMobile,
+        u.user_status AS userStatus,
+        u.user_create_time AS userCreateTime,
+        us.user_name AS userCreateName
+        FROM user u
+        LEFT JOIN user us on u.user_create_user_id = us.user_id
+        <where>
+            u.user_is_delete = 0
+            <if test="userId != null">
+                and u.user_id = #{userId}
+            </if>
+            <if test="userCompanyId != null">
+                and u.user_company_id = #{userCompanyId}
+            </if>
+            <if test="userType != null">
+                and u.user_type = #{userType}
+            </if>
+            <if test="startTime != null">
+                and u.user_create_time <![CDATA[>=]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+                and u.user_create_time <![CDATA[<=]]> Date_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="status != null and status !='' ">
+                and u.user_status = #{status}
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                POSITION(#{keyword} IN u.user_name) OR
+                POSITION(#{keyword} IN u.user_mobile) OR
+                POSITION(#{keyword} IN u.user_cn_name)
+                )
+            </if>
+        </where>
+        ORDER BY u.user_create_time DESC
+    </select>
+</mapper>

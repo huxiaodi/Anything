@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dllg.ebpay.dao.custom.CompanyCuMapper">
+
+    <!--管理端 企业列表 -->
+    <select id="manageList" resultType="map">
+        SELECT
+            user.user_id,
+            user.user_name,
+            user.user_nickname,
+            user.user_cn_name,
+            user.user_mobile,
+            user.user_certificate_type,
+            user.user_certificate_number,
+            user.user_id_card_back_img,
+            user.user_status,
+            user.user_create_time,
+            user.user_register_from,
+            company.company_id,
+            company.company_name,
+            company.company_contact,
+            company.company_principal_id_code,
+            company.company_unified_social_img,
+            company.company_license_no_img,
+            company.company_tax_no_img,
+            company.company_organization_code_img,
+            company.company_is_three_in_one,
+            company.company_unified_social_credit_ldentifier,
+            company.company_license_no,
+        dict.dict_value
+        FROM company
+          LEFT JOIN user ON company.company_Id=user.user_company_id
+        left join (select * from  dict where dict_type = '业务来源')dict on user.user_register_from = dict.dict_key
+        <where>
+            <if test="startTime!=null">
+                and user.user_create_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and user.user_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="source!=null and source!=''">
+                and user.user_register_from=#{source}
+            </if>
+            <if test="type!=null and type!=''">
+                and user.user_certificate_type=#{type}
+            </if>
+            <if test="status!=null and status!=''">
+                and user.user_status=#{status}
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                  POSITION(#{keyword} IN user_name) OR
+                  POSITION(#{keyword} IN user_mobile) OR
+                  POSITION(#{keyword} IN company_name) OR
+                  POSITION(#{keyword} IN company_contact) OR
+                  POSITION(#{keyword} IN user_certificate_number) OR
+                  POSITION(#{keyword} IN company_principal_id_code)
+                )
+            </if>
+        </where>
+        ORDER BY user_create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,549 @@
+/* 清除不知名样式； */
+.page-title a{
+  text-decoration: none!important;
+  color: #409EFF!important;
+}
+.page-title a:hover{
+  text-decoration: none!important;
+  color: #409EFF;
+}
+header.el-header {
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+main.el-main {
+  height: auto;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+/* element样式调整 */
+
+/* 未登录页面 */
+
+.login .login-box .el-dialog {
+  width: 365px;
+  height: 405px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 35px 0;
+}
+
+/* 登录 */
+
+.el-dialog-title {
+  display: inline-block;
+  width: 100%;
+  font-size: 20px;
+  border-bottom: 2px dashed #aaa;
+  padding-left: 25px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.login .login-box .el-dialog__header {
+  padding: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+}
+
+.login .login-box .el-dialog__body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.login-box .loginForm .el-form-item {
+  width: 100%;
+  padding: 0 25px;
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.login-box .loginForm .el-form-item .el-input {
+  height: 40px;
+  display: inline-block;
+}
+
+.login-additional {
+  margin-top: 25px;
+  padding: 0 25px;
+  margin-bottom: 20px;
+}
+
+/* 注册页弹出框 */
+
+.register .el-dialog {
+  width: 500px;
+  height: 470px;
+  box-sizing: border-box;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  padding: 35px 0;
+}
+
+.register .el-dialog__header {
+  padding: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+}
+
+.register .el-dialog__body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.register-dialog-content {
+  width: 450px;
+  height: 240px;
+  margin: 20px auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+/* 注册页tab标签内容大小 */
+
+.register .el-tabs__nav-scroll {
+  width: 100% !important;
+}
+
+.register #tab-1, .register #tab-2 {
+  width: 100%;
+  height: 40px;
+  font-size: 150%;
+}
+
+/* 注册页tab标签设置 */
+
+.register #registerTab .el-tabs__nav {
+  width: 50%;
+  text-align: center;
+}
+
+.register .el-tabs__active-bar.is-top {
+  display: none;
+}
+
+.register #registerTab .el-tabs__nav-scroll {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.register .el-tabs__nav>.el-tabs__item.is-top.is-active {
+  background-color: #0099ff;
+  color: #fff;
+}
+
+.register .el-tabs__nav>.el-tabs__item.is-top {
+  background-color: #ddd;
+}
+
+.register .text-center .el-form-item .el-form-item__label {
+  width: 100% !important;
+  text-align: center;
+}
+
+.register .text-center .el-form-item {
+  margin-bottom: 0;
+}
+
+.el-tabs__item.is-top .re-tit-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#tab-2.el-tabs__item.is-top .re-tit-icon {
+  background-image: url(../img/re-tit-a2.png);
+}
+
+#tab-2.el-tabs__item.is-top.is-active .re-tit-icon {
+  background-image: url(../img/re-tit-a.png);
+}
+
+#tab-1.el-tabs__item.is-top .re-tit-icon {
+  background-image: url(../img/re-tit-b2.png);
+}
+
+#tab-1.el-tabs__item.is-top.is-active .re-tit-icon {
+  background-image: url(../img/re-tit-b.png);
+}
+
+/* 添加class名在表单控件最外层 */
+.often-input-list .el-input{
+  width: auto;
+}
+.often-input-list > div.el-row{
+width: 800px!important;
+margin: 0 auto!important;
+}
+.often-input-list .el-col.el-col-12 {
+  margin-bottom: 0px;
+  font-size: 14px;
+  padding-right: 40px;
+  position: relative;
+}
+
+.often-input-list .el-col.el-col-12 .el-form-item {
+  margin-bottom: 15px;
+}
+.often-input-list .el-col.el-col-12 .el-input input.el-input__inner {
+  height: 30px;
+  width: 200px;
+}
+/* 单列表单样式 */
+.one-column{
+  width: 440px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+.one-column .el-input input.el-input__inner{
+  height: 30px;
+  width: 300px;
+}
+.one-column input.el-input__inner {
+  height: 30px !important;
+}
+.one-column-address.el-select {
+  width: 97px;
+}
+.one-column-address .el-input.el-input--suffix .el-input__inner{
+  width: 97px;
+  margin: 0;
+}
+.column-verification-input .el-input__inner{
+  width: 180px!important;
+}
+.column-verification-btn{
+  height: 30px;
+  width: 100px;
+  padding: 0;
+  margin: 0;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+/* 错误提示修改间距 */
+.el-form-item__error {
+  margin: 0;
+  padding: 0;
+  padding-top: 0px;
+  white-space: nowrap;
+}
+/* 验证码输入框 */
+/* 验证码s输入 */
+.verification-input input.el-input__inner {
+  height: 30px !important;
+  width: 100px !important;
+}
+/* 获取验证码按钮 */
+.verification-btn {
+  height: 30px;
+  width: 80px;
+  padding: 0;
+  margin: 0;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
+  left: 260px;
+  top: 5px;
+}
+/* 地址输入框 */
+.address-input input.el-input__inner {
+  height: 30px !important;
+}
+.address-input .el-form-item__content .el-select {
+  width: 130px;
+}
+.address-input .el-form-item__content > .el-input {
+  width: 200px;
+}
+/* 上传框 */
+.upload-box {
+  text-align: center;
+}
+.upload-box .el-form-item__label {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center;
+}
+.upload-box .el-form-item {
+  margin-bottom: 10px;
+}
+.upload-box .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-box .avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 150px;
+  height: 150px;
+  line-height: 150px !important;
+  text-align: center;
+}
+
+.upload-box .avatar {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+/* 身份证图片大小*/
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+/* 页面样式设置 */
+
+/* 公用样式修改 */
+
+body, html {
+  height: 100%;
+}
+
+.header a:not(.md-button):not(.md-bottom-bar-item):hover, header a:not(.md-button):not(.md-bottom-bar-item):hover {
+  text-decoration: none !important;
+}
+#app {
+  background-color: #efefef;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+.page1180 {
+  width: 1180px;
+  margin: 10px auto;
+  padding: 0 0 20px;
+  background-color: #fff;
+  height: auto;
+  overflow: hidden;
+}
+.gradient-btn-hover{
+  background: -webkit-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -o-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -moz-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  height: 30px;
+  border: 0px;
+  padding-top: 0!important;
+  line-height: 30px;
+}
+.gradient-btn-hover:hover{
+  background: #2094d1 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+/* 渐变按钮 */
+.gradient-btn:hover {
+  background: -webkit-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -o-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -moz-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: linear-gradient(to left, #6f86d6, #26bdeb) !important;
+}
+/* 注册页 */
+/* 注册企业信息样式 */
+.form-title {
+  width: 95px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-left: 20px solid #0099ff;
+  font-size: 14px;
+  color: #000;
+}
+/* 我的E宝+账户中心 */
+.number-color {
+  color: #ff7626;
+  text-align: left;
+  font-size: 18px !important;
+  font-weight: bold;
+}
+.page1180-home {
+  width: 1180px;
+  margin: 10px auto;
+  height: auto;
+  overflow: hidden;
+}
+.userItem {
+  height: 200px;
+  float: left;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+/* 用户头像信息 */
+.user-title {
+  width: 230px;
+  padding-top: 15px;
+  margin-right: 10px;
+  text-align: center;
+}
+.user-balance {
+  width: 530px;
+  margin-right: 10px;
+  padding-top: 35px;
+  padding-left: 60px;
+}
+/* 用户余额 */
+.user-balance-item {
+  float: left;
+  width: 140px;
+  margin-right: 5px;
+}
+/* 用户支出收入 */
+.user-bill {
+  width: 400px;
+  padding-top: 20px;
+  text-align: center;
+}
+.user-bill-item {
+  width: 200px;
+  float: left;
+  height: auto;
+  overflow: hidden;
+  color: #999;
+}
+.user-bill-item-number {
+  color: #00acd6;
+  font-size: 18px;
+  margin: 15px 0 8px;
+}
+/* 用户表单 */
+.user-form {
+  width: 1180px;
+  background-color: #fff;
+  height: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 15px 20px;
+  margin-bottom: 10px;
+}
+.user-form-title {
+  padding: 20px 0 10px;
+  height: auto;
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+}
+.user-form .el-table * {
+  border: 0 !important;
+}
+
+/* 账户中心 */
+.accountItem{
+  height: 260px;
+  padding-top: 15px;
+  background-color: #fff;
+  float: left;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+.account-title{
+  width: 230px;
+  margin-right: 10px;
+  text-align: center;
+}
+.userInfo{
+  margin-bottom: 6px;
+}
+.account-information{
+  width: 940px;
+  padding: 0 15px;
+  position: relative;
+}
+/* 证件信息按钮 */
+.certificates-btn{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+  color: #4285F4;
+}
+.management-content .el-button-group .el-button.el-button--primary:first-child{
+  width: 322px;
+}
+.management-content .el-button-group button{
+  font-size: 14px!important;
+}
+/* 表单页面 */
+.page-title{
+  overflow: hidden;
+  padding: 20px 0;
+  margin: 0 60px;
+  border-bottom: 1px solid #ddd;
+}
+.page-content{
+  overflow: hidden;
+  padding: 25px 40px;
+  min-height: 500px;
+}
+/* 搜索表单 */
+.searchForm input.el-input__inner{
+  height: 30px;
+  font-size: 12px!important;
+}
+.searchForm .el-range-editor--medium{
+  height: 30px;
+}
+.searchForm .el-range-editor--medium .el-range-input{
+  font-size: 12px;
+}
+.searchForm button{
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  width: 100px;
+}
+.searchForm .el-form-item--medium .el-form-item__content, .el-form-item--medium .el-form-item__label{
+  line-height: 30px;
+}
+.page-content .el-table * {
+  border: 0 !important;
+}
+/* 用户头像 */
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload img{
+  display: inline-block;
+  position: absolute;
+  overflow: hidden;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  left: 5px;
+  top: 5px;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.el-upload__input {
+  display: none !important;
+}

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dllg.ebpay.dao.custom.AccountSubCuMapper">
+    <select id="getAccountSub" resultType="com.dllg.ebpay.model.dto.AccountSubDto" parameterType="java.lang.String">
+
+        SELECT asb.*,u.user_name as createUser, u.user_cn_name , u.user_type ,u.user_mobile ,u.user_certificate_number ,co.company_name ,co.company_license_no,co.company_contact_tel,co.company_is_three_in_one ,co.company_unified_social_credit_ldentifier, a.account_type
+        ,account_sub_pwd_status
+        FROM account_sub asb
+        LEFT JOIN account a ON a.account_id = asb.account_sub_account_id
+        LEFT JOIN user u on u.user_id = asb.account_sub_create_user_id
+        LEFT JOIN company co on co.company_id = u.user_company_id
+        WHERE asb.account_sub_relation_id = #{relationId}
+    </select>
+    <select id="getAccountList" resultType="com.dllg.ebpay.model.dto.UserAccountInfoDto">
+        SELECT
+            account_fund_summary_account_no AS FundSummaryAcctNo,
+            account_sub_no AS SubAcctNo,
+            account_type
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        WHERE account_sub_relation_id = #{relationId}   AND account_sub_is_delete = 0
+    </select>
+
+    <select id="getAccountByNo" resultType="com.dllg.ebpay.model.dto.UserAccountInfoDto">
+        SELECT
+            account_fund_summary_account_no AS FundSummaryAcctNo,
+            account_sub_no AS SubAcctNo,
+            account_type
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        WHERE account_sub_no = #{accountNo}
+    </select>
+
+    <select id="getAccountById" resultType="com.dllg.ebpay.model.dto.UserAccountInfoDto">
+        SELECT
+            account_fund_summary_account_no AS FundSummaryAcctNo,
+            account_sub_no AS SubAcctNo,
+            account_sub_id AS subAcctId,
+            account_type AS accountType,
+            IF(account_sub_relation_id_type = 1,user_cn_name,company_name) AS userAccountName,
+            IF(account_sub_relation_id_type = 1,user_id, company_id) AS userId
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        LEFT JOIN user ON user_id = account_sub_relation_id
+        LEFT JOIN company ON  company_id = account_sub_relation_id
+        WHERE account_sub_id = #{accountId}
+    </select>
+
+    <select id="getAccountInfoByNo" resultType="com.dllg.ebpay.model.dto.UserAccountInfoDto">
+        SELECT
+            account_fund_summary_account_no AS FundSummaryAcctNo,
+            account_sub_no AS SubAcctNo,
+            account_sub_id AS subAcctId,
+            account_type AS accountType,
+            IF(account_sub_relation_id_type = 1, user_cn_name,company_name) AS userAccountName,
+            IF(account_sub_relation_id_type = 1, user_id, company_id) AS userId
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        LEFT JOIN user ON user_id = account_sub_relation_id
+        LEFT JOIN company ON  company_id = account_sub_relation_id
+        WHERE account_sub_no = #{accountNo}
+    </select>
+
+
+    <select id="getInSubAcct" resultType="com.dllg.ebpay.model.dto.UserAccountInfoDto">
+        SELECT
+             account_sub_no AS SubAcctNo,
+             account_type,
+            user_cn_name  userAccountName
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        LEFT JOIN user ON user_id = account_sub_relation_id
+        WHERE account_sub_relation_id_type = 1 AND account_sub_is_delete = 0
+          AND account_sub_no != #{outSubAcctNo}
+          AND POSITION(#{keyword} IN account_sub_no)
+          AND account_type = (
+            SELECT account_type
+            FROM account
+            WHERE account_id = (
+                SELECT account_id
+                FROM account_sub
+                WHERE account_sub_no = #{outSubAcctNo}
+            )
+        )
+        UNION
+        SELECT
+            account_sub_no AS SubAcctNo,
+            account_type,
+            company_name  userAccountName
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        LEFT JOIN company ON account_sub_relation_id = company_id
+        WHERE account_sub_relation_id_type = 2  AND account_sub_is_delete = 0
+          AND account_sub_no != #{outSubAcctNo}
+          AND POSITION(#{keyword} IN account_sub_no)
+          AND account_type = (
+            SELECT account_type
+            FROM account
+            WHERE account_id = (
+                SELECT account_id
+                FROM account_sub
+                WHERE account_sub_no = #{outSubAcctNo}
+            )
+        )
+    </select>
+
+
+    <select id="getInSubAcctInfo" parameterType="com.dllg.ebpay.model.dto.UserAccountInfoDto" resultType="com.dllg.ebpay.model.dto.UserAccountInfoDto">
+        SELECT
+            account_sub_no AS SubAcctNo,
+            account_type,
+            user_cn_name  userAccountName
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        LEFT JOIN user ON user_id = account_sub_relation_id
+        WHERE account_sub_relation_id_type = 1 AND account_sub_is_delete = 0
+
+        <if test="SubAcctNo != null and SubAcctNo != ''">
+          AND account_sub_no = #{SubAcctNo}
+          AND account_type = (
+                                SELECT account_type
+                                FROM account
+                                WHERE account_id = (
+                                                        SELECT account_id
+                                                        FROM account_sub
+                                                        WHERE account_sub_no = #{SubAcctNo}
+                                                    )
+          )
+        </if>
+        <if test="userAccountName != null and userAccountName != ''">
+            AND POSITION(#{userAccountName} IN user_cn_name)
+        </if>
+        UNION
+        SELECT
+            account_sub_no AS SubAcctNo,
+            account_type,
+            company_name  userAccountName
+        FROM account_sub
+        LEFT JOIN account ON account_id = account_sub_account_id
+        LEFT JOIN company ON account_sub_relation_id = company_id
+        WHERE account_sub_relation_id_type = 2  AND account_sub_is_delete = 0
+
+        <if test="SubAcctNo != null and SubAcctNo != ''" >
+            AND account_sub_no = #{SubAcctNo}
+            AND account_type = (
+                                    SELECT account_type
+                                    FROM account
+                                    WHERE account_id = (
+                                                            SELECT account_id
+                                                            FROM account_sub
+                                                            WHERE account_sub_no = #{SubAcctNo}
+                                                        )
+            )
+        </if>
+        <if test="userAccountName != null and userAccountName != ''">
+            AND POSITION(#{userAccountName} IN company_name)
+        </if>
+    </select>
+
+    <!--管理端 账户管理列表 -->
+    <select id="manageList" resultType="map">
+        SELECT
+        company.company_id,
+        account_sub.account_sub_id,
+        account_sub.account_sub_account_opening_date,
+        account_sub.account_sub_name,
+        account_sub.account_sub_no,
+        account_sub.account_sub_avail_balance,
+        account_sub.account_sub_ash_balance,
+        account_sub.account_sub_status,
+        account_sub.account_sub_relation_id_type,
+        account.account_type,
+          IF(account_sub.account_sub_relation_id_type=1,user.user_cn_name,company.company_name) AS owner,
+          user.user_mobile,
+          count(1) as bank_card_cnt
+
+
+        FROM account_sub
+        INNER JOIN account ON account.account_id=account_sub.account_sub_account_id
+        LEFT JOIN user ON user.user_id=account_sub.account_sub_update_user_id
+        LEFT JOIN company ON company.company_id=account_sub.account_sub_relation_id AND account_sub.account_sub_relation_id_type=2
+        LEFT JOIN bank_card ON bank_card.bank_card_account_sub_id=account_sub.account_sub_id AND bank_card.bank_card_status = 2
+        <where>
+            <if test="startTime!=null">
+                and account_sub.account_sub_account_opening_date <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and account_sub.account_sub_account_opening_date <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="status == '0'.toString ">
+                and account_sub.account_sub_status=#{status}
+            </if>
+            <if test="status == '1'.toString ">
+                and account_sub.account_sub_status=#{status}
+                and ((account_sub_relation_id_type = 2 and company.company_id is not null) or (account_sub_relation_id_type = 1))
+            </if>
+            <if test="status == '2'.toString ">
+                and account_sub_relation_id_type = 2 and company.company_id is null
+            </if>
+            <if test="type!=null and type!=''">
+                and account_sub.account_sub_relation_id_type=#{type}
+            </if>
+            <if test="accountType!=null and accountType!=''">
+                and account.account_type=#{accountType}
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                  POSITION(#{keyword} IN account_sub.account_sub_name) OR
+                  POSITION(#{keyword} IN account_sub.account_sub_no) OR
+                  POSITION(#{keyword} IN account_sub.account_sub_ash_balance) OR
+                  POSITION(#{keyword} IN user.user_cn_name) OR
+                  POSITION(#{keyword} IN company.company_name) OR
+                  POSITION(#{keyword} IN user.user_mobile)
+                )
+            </if>
+        </where>
+        group by account_sub.account_sub_id
+    </select>
+
+    <select id="getPhone" resultType="java.lang.String">
+        SELECT
+            IF(account_sub_relation_id_type = 1,user_mobile,company_contact_tel) AS phone
+        FROM account_sub
+        LEFT JOIN user ON user_id = account_sub_relation_id
+        LEFT JOIN company ON  company_id = account_sub_relation_id
+        WHERE account_sub_id = #{subAcctId}
+    </select>
+</mapper>

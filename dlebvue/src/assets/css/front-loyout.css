@@ -1,0 +1,112 @@
+/* 页设置 */
+
+
+
+.front-loyout .el-upload {
+  margin: auto auto;
+}
+
+.front-loyout>.el-header {
+  padding: 0;
+  height: auto !important;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* 页面背景设置 */
+
+.front-loyout a {
+  color: #009eff;
+  text-decoration: none;
+}
+
+.front-loyout a:hover {
+  color: #009eff;
+  text-decoration: none;
+}
+
+.front-loyout {
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+}
+
+.front-loyout .el-dialog {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.front-loyout .el-main {
+  padding: 10px 30px;
+  min-height: 100%;
+  margin: 10px auto;
+  padding: 0;
+  min-width: 1200px;
+  ;
+  box-shadow: none;
+  text-align: inherit;
+}
+
+/* 页面内容头部定位*/
+
+.front-loyout .el-main div .page-title {
+  font-size: 14px;
+  font-weight: bold;
+  width: 95%;
+  height: 50px !important;
+  line-height: 50px !important;
+  border-bottom: #ddd 1px solid;
+  margin: 0 auto 10px !important;
+}
+/*  */
+.front-loyout .el-menu--horizontal>.el-menu-item.is-active {
+  background-color: #fff !important;
+  border-bottom: 2px solid rgb(64, 158, 255) !important;
+  color: rgb(64, 158, 255) !important;
+}
+
+.front-loyout .page-title {
+  text-align: inherit;
+}
+
+/* 表单宽度 */
+
+.front-loyout .register .el-form .el-row {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.front-loyout .el-main .content-page {
+  width: 95%;
+  margin: 0 auto;
+  min-height: 480px;
+  background-color: #fff;
+  padding-bottom: 20px;
+}
+
+.front-loyout .gradient-bluebtn {
+  background: -webkit-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -o-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -moz-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: linear-gradient(to left, #6f86d6, #26bdeb) !important;
+}
+
+.front-loyout .gradient-bluebtn:hover {
+  opacity: 0.7;
+}
+
+.front-loyout .el-button.el-button--primary.is-plain:hover {
+  background: -webkit-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -o-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: -moz-linear-gradient(to left, #6f86d6, #26bdeb) !important;
+  background: linear-gradient(to left, #6f86d6, #26bdeb) !important;
+}
+
+.front-loyout .number-color {
+  color: #ff7626;
+  text-align: left;
+  font-size: 18px !important;
+}
+.fade-input{
+  width: auto!important;
+}
