@@ -35,7 +35,7 @@
         </Async>
     </Appenders>
     <Loggers>
-        <logger name="com.dllg" level="debug">
+        <logger name="com.test" level="debug">
             <AppenderRef ref="RollingRandomAccessFile" />
             <AppenderRef ref="ASYNC_error" />
         </logger>

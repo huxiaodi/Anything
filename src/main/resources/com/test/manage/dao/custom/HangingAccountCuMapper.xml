@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.HangingAccountCuMapper">
+
+    <select id="getHangingAccountList" parameterType ="com.test.manage.model.form.HangingAccountListFrom" resultType = "com.test.manage.model.dto.AccountSubTradeDto" >
+        select ast.* , asub.account_sub_no,asub.account_sub_name, us.user_name accountSubTradeAdjustUserName from account_sub_trade ast
+        LEFT JOIN account_sub asub on asub.account_sub_id = ast.account_sub_trade_in_account_sub_id
+        LEFT JOIN user us on us.user_id = ast.account_sub_trade_adjust_user_id
+        where
+        CASE
+            WHEN ast.account_sub_trade_type = 7 THEN
+            ( ast.account_sub_trade_type = 7  )
+            WHEN ast.account_sub_trade_type = 3 THEN
+            (ast.account_sub_trade_type = 3 and ast.account_sub_trade_tran_status = 0 )
+        END
+        <if test="startTime !=null">
+            and ast.account_sub_trade_tran_date <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test="endTime !=null">
+            and ast.account_sub_trade_tran_date <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+        </if>
+        <if test="tranStatus !=null">
+            and ast.account_sub_trade_tran_status = #{tranStatus}
+        </if>
+        <if test="type !=null">
+            and ast.account_sub_trade_type = #{type}
+        </if>
+        <if test="accountSubId!=null and accountSubId!=''">
+            and ast.account_sub_trade_account_sub_id=#{accountSubId}
+        </if>
+        <if test="keyword !=null and keyword!=''">
+            and (
+            POSITION(#{keyword} IN ast.account_sub_trade_no) OR
+            POSITION(#{keyword} IN ast.account_sub_trade_tran_amt) OR
+            POSITION(#{keyword} IN ast.account_sub_trade_bank_name) OR
+            POSITION(#{keyword} IN asub.account_sub_no) OR
+            POSITION(#{keyword} IN us.user_name) OR
+            POSITION(#{keyword} IN ast.account_sub_trade_remark)
+            )
+        </if>
+        order by ast.account_sub_trade_create_time desc
+    </select>
+
+    <select id="getHangingAccountSub"  resultType = "java.util.Map" >
+      SELECT DISTINCT
+	    accountSubId,
+	    accountSubName
+      FROM
+	  (
+        SELECT
+            asub.account_sub_id accountSubId,
+            asub.account_sub_name accountSubName
+        FROM
+            account_sub_trade ast
+            JOIN account_sub asub ON asub.account_sub_id = ast.account_sub_trade_in_account_sub_id
+        WHERE
+            ast.account_sub_trade_type in (3,7)
+            AND ast.account_sub_trade_is_delete = 0
+        ORDER BY
+            ast.account_sub_trade_create_time DESC
+	  )  a
+    </select>
+
+    <select id="getAllAccountSub"  resultType="com.test.manage.model.dto.UserAccountInfoDto">
+        SELECT
+          account_sub_no SubAcctNo,
+          account_sub_id subAcctId,
+          account_type,
+          account_sub_name  userAccountName
+        FROM
+          account_sub
+          LEFT JOIN account ON account_id = account_sub_account_id
+        WHERE
+             account_sub_is_delete = 0 AND account_type = 1
+    </select>
+
+
+
+    <select id="getHangingTradeDetailById" parameterType="String" resultType="com.test.manage.model.dto.AccountSubTradeDto">
+        SELECT
+            ast.*,
+            asub.account_sub_no,
+            asub.account_sub_name,
+            bt.business_trade_business_no,
+            accSub.account_sub_name AS accountSubTradeInAccountSubName
+        FROM
+            account_sub_trade ast
+            LEFT JOIN account_sub asub ON asub.account_sub_id = ast.account_sub_trade_account_sub_id
+            LEFT JOIN business_trade bt ON bt.business_trade_account_sub_trade_id = ast.account_sub_trade_id
+            LEFT JOIN account_sub accSub on ast.account_sub_trade_in_account_sub_id = accSub.account_sub_id
+        WHERE
+            ast.account_sub_trade_id = #{accountSubTradeId}
+    </select>
+
+
+
+</mapper>

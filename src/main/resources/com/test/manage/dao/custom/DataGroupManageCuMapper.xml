@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.DataGroupManageCuMapper">
+
+    <!--列表 -->
+    <select id="manageList" resultType="map">
+        SELECT
+        team_id teamId,
+        team_company_id teamCompanyId,
+        team_name teamName,
+        team_type teamType,
+        team_remark teamRemark,
+        team_create_time teamCreateTime,
+        team_create_user_id teamCreateUserId,
+        team_create_user teamCreateUser,
+        team_update_time teamUpdateTime,
+        team_update_user_id teamUpdateUserId,
+        team_update_user teamUpdateUser
+        FROM
+        team
+        <where>
+            <if test="startTime!=null">
+                and team_create_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and team_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                POSITION(#{keyword} IN team_name) OR
+                POSITION(#{keyword} IN team_create_user_id)
+                )
+            </if>
+                and team_is_delete= 0
+        </where>
+        ORDER BY team_create_time DESC
+    </select>
+
+    <!--添加组信息-->
+    <insert id="addGroup" parameterType="com.test.manage.model.generator.Team">
+
+        insert into team (
+        team_id,
+        team_company_id,
+        team_name,
+        team_type,
+        team_remark,
+        team_create_time,
+        team_create_user_id,
+        team_create_user,
+        team_update_time,
+        team_update_user_id,
+        team_update_user
+       )
+        values (
+        #{teamId},
+        #{teamCompanyId},
+        #{teamName},
+        #{teamType},
+        #{teamRemark},
+        #{teamCreateTime},
+        #{teamCreateUserId},
+        #{teamCreateUser},
+        #{teamUpdateTime},
+        #{teamUpdateUserId},
+        #{teamUpdateUser}
+       )
+    </insert>
+
+    <!--更新组信息-->
+    <update id="updateGroup" parameterType="com.test.manage.model.generator.Team">
+        update team
+        set
+        team_company_id = #{teamCompanyId},
+        team_name = #{teamName},
+        team_type = #{teamType},
+        team_remark = #{teamRemark},
+        team_update_user_id = #{teamUpdateUserId},
+        team_update_user = #{teamUpdateUser},
+        team_update_time = #{teamUpdateTime}
+
+        where team_id = #{teamId};
+    </update>
+
+    <!--添加关联信息-->
+    <insert id="addTeamDict">
+
+        insert into team_dict(team_dict_team_id,
+                               team_dict_dict_id,
+                               team_dict_create_time,
+                               team_dict_create_user_id)
+        values
+        <foreach collection="list" item="li" separator=",">
+            (#{li.teamDictTeamId},
+             #{li.teamDictDictId},
+             #{li.teamDictCreateTime},
+             #{li.teamDictCreateUserId})
+        </foreach>
+
+    </insert>
+
+    <!--删除关联信息-->
+    <delete id="deleteTeamDict" parameterType="java.util.List">
+        delete from team_dict where team_dict_team_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item.teamDictTeamId}
+        </foreach>
+    </delete>
+
+    <!--获得当前组-->
+    <select id="getGroup" resultType="map">
+        SELECT
+        team_id teamId,
+        team_company_id teamCompanyId,
+        team_name teamName,
+        team_type teamType,
+        team_remark teamRemark,
+        team_create_time teamCreateTime,
+        team_create_user_id teamCreateUserId,
+        team_update_time teamUpdateTime,
+        team_update_user_id teamUpdateUserId
+        FROM
+        team
+        <where>
+              and team_id = #{teamId}
+        </where>
+    </select>
+
+    <!--获得当前关联信息-->
+    <select id="getTeamDict" resultType="map">
+        SELECT
+        team_dict_team_id teamDictTeamId,
+        team_dict_dict_id teamDictDictId,
+        team_dict_create_time teamDictCreateTime,
+        team_dict_create_user_id teamDictCreateUserId
+        FROM
+        team_dict
+        <where>
+            and team_dict_team_id = #{teamId}
+        </where>
+    </select>
+
+    <!--删除组-->
+    <update id="deletes"  parameterType="com.test.manage.model.generator.Team">
+            update team
+            set team_is_delete= 1
+            where team_id = #{teamId}
+    </update>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.ApplicationTradeCuMapper">
+
+
+
+
+
+    <!--查询付款申请列表-->
+    <select id="getPayApplicationList" parameterType="com.test.manage.model.form.PayApplicationForm" resultType="Map">
+
+        SELECT
+        atr.application_trade_id,
+        atr.application_trade_create_time,
+        atr.application_trade_application_no,
+        atr.application_trade_account_sub_no,
+        ast.account_sub_trade_bank_no,
+        atr.application_trade_proposer,
+        atr.application_trade_trasaction_object,
+        atr.application_trade_tran_amt,
+        atr.application_trade_trasaction_from,
+        atr.application_trade_business_type,
+        atr.application_trade_application_status,
+        atr.application_trade_tran_free_amt,
+        atr.application_trade_remark
+        FROM
+        application_trade atr
+        LEFT JOIN account_sub_trade ast ON ast.account_sub_trade_id = atr.application_trade_account_sub_trade_id
+        LEFT JOIN account_sub asu ON asu.account_sub_id = atr.application_trade_account_sub_id
+        <where>
+            atr.application_trade_is_delete = 0 and asu.account_sub_relation_id = #{relationId}
+            <if test="applicationTradeTrasactionFrom != null and applicationTradeTrasactionFrom != ''">
+                AND atr.application_trade_trasaction_from = #{applicationTradeTrasactionFrom}
+            </if>
+            <if test="applicationTradeTrasactionObject != null and applicationTradeTrasactionObject != ''">
+                AND atr.application_trade_trasaction_object = #{applicationTradeTrasactionObject}
+            </if>
+            <if test="applicationStatus != null">
+                AND atr.application_trade_application_status = #{applicationStatus}
+            </if>
+            <if test="startTime!=null">
+                and atr.application_trade_create_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and atr.application_trade_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                AND (
+                    POSITION(#{keyword} IN atr.application_trade_application_no) OR
+                    POSITION(#{keyword} IN atr.application_trade_account_sub_no) OR
+                    POSITION(#{keyword} IN atr.application_trade_trasaction_object) OR
+                    POSITION(#{keyword} IN atr.application_trade_tran_amt) OR
+                    POSITION(#{keyword} IN atr.application_trade_trasaction_from) OR
+                    POSITION(#{keyword} IN atr.application_trade_tran_free_amt) OR
+                    POSITION(#{keyword} IN ast.account_sub_trade_bank_no) OR
+                    POSITION(#{keyword} IN atr.application_trade_remark)
+                )
+            </if>
+            order by  atr.application_trade_create_time desc
+        </where>
+
+    </select>
+
+    <select id="getObjecSource" parameterType="String" resultType="String">
+       SELECT DISTINCT
+            apt.application_trade_trasaction_object
+        FROM
+            application_trade apt
+            LEFT JOIN account_sub asu ON apt.application_trade_account_sub_id = asu.account_sub_id
+        WHERE
+            asu.account_sub_relation_id = #{relationId}
+    </select>
+
+
+
+
+</mapper>

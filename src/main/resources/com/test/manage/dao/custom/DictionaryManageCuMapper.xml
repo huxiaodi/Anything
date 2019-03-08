@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.DictionaryManageCuMapper">
+
+    <!--列表 -->
+    <select id="manageList" resultType="map">
+        SELECT
+        dict_id dictId,
+        dict_key dictKey,
+        dict_value dictValue,
+        dict_desc dictDesc,
+        dict_type dictType,
+        dict_create_user_id dictCreateUserId,
+        dict_create_time dictCreateTime,
+        dict_update_user_id dictUpdateUserId,
+        dict_update_time dictUpdateTime
+        FROM
+        dict
+        <where>
+            <if test="startTime!=null">
+                and dict_create_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and dict_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="type!=null and type!=''">
+                and dict_type=#{type}
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                POSITION(#{keyword} IN dict_key) OR
+                POSITION(#{keyword} IN dict_value) OR
+                POSITION(#{keyword} IN dict_desc) OR
+                POSITION(#{keyword} IN dict_create_user_id)
+                )
+            </if>
+        </where>
+        ORDER BY dict_create_time DESC
+    </select>
+
+
+    <insert id="add" parameterType="com.test.manage.model.generator.Dict">
+
+        insert into dict (
+        dict_id,
+        dict_key,
+        dict_value,
+        dict_desc,
+        dict_type,
+        dict_create_user_id,
+        dict_create_time
+       )
+        values (
+        #{dictId},
+        #{dictKey},
+        #{dictValue},
+        #{dictDesc},
+        #{dictType},
+        #{dictCreateUserId},
+        #{dictCreateTime}
+       )
+    </insert>
+
+    <update id="update" parameterType="com.test.manage.model.generator.Dict">
+        update dict
+        set
+        dict_key = #{dictKey},
+        dict_value = #{dictValue},
+        dict_desc = #{dictDesc},
+        dict_type = #{dictType},
+        dict_update_user_id = #{dictUpdateUserId},
+        dict_update_time = #{dictUpdateTime}
+        where dict_id = #{dictId};
+    </update>
+
+
+    <delete id="deletes" parameterType="java.util.List">
+        delete from dict where dict_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

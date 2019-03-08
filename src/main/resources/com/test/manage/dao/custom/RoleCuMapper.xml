@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.RoleCuMapper">
+    <resultMap id="BaseResultMap" type="com.test.manage.model.generator.Role">
+        <id column="role_id" jdbcType="CHAR" property="roleId"/>
+        <result column="parent_role_id" jdbcType="CHAR" property="parentRoleId"/>
+        <result column="role_company_id" jdbcType="CHAR" property="roleCompanyId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="role_en_name" jdbcType="VARCHAR" property="roleEnName"/>
+        <result column="role_type" jdbcType="INTEGER" property="roleType"/>
+        <result column="role_index" jdbcType="INTEGER" property="roleIndex"/>
+        <result column="role_create_time" jdbcType="TIMESTAMP" property="roleCreateTime"/>
+        <result column="role_create_user_id" jdbcType="CHAR" property="roleCreateUserId"/>
+        <result column="role_update_time" jdbcType="TIMESTAMP" property="roleUpdateTime"/>
+        <result column="role_update_user_id" jdbcType="CHAR" property="roleUpdateUserId"/>
+        <result column="role_is_delete" jdbcType="BIT" property="roleIsDelete"/>
+    </resultMap>
+
+    <select id="manageList" resultType="map">
+        SELECT
+        role.role_id as roleId,
+        role.role_name as roleName,
+        role.role_en_name as roleEnName,
+        role.role_index as roleIndex,
+        role.role_create_time as roleCreateTime,
+        user.user_cn_name as userCnName
+        FROM role
+        LEFT JOIN user
+        ON role.role_create_user_id = user.user_id
+        WHERE
+        role.role_is_delete=0 and role.role_type = 2
+        <if test="startTime != null">
+            AND role.role_create_time <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND role.role_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+        </if>
+        <if test="keyword!=null and keyword!=''">
+            AND (
+            POSITION(#{keyword} IN role.role_name)
+            )
+        </if>
+        ORDER BY role.role_create_time DESC
+    </select>
+
+    <select id="manageListFront" resultType="map">
+        SELECT
+        role.role_id as roleId,
+        role.role_name as roleName,
+        role.role_en_name as roleEnName,
+        role.role_index as roleIndex,
+        role.role_create_time as roleCreateTime,
+        user.user_cn_name as userCnName
+        FROM role
+        LEFT JOIN user
+        ON role.role_create_user_id = user.user_id
+        WHERE
+        role.role_is_delete=0 and role.role_type = 1 and role_company_id = #{roleCompanyId}
+        <if test="startTime != null">
+            AND role.role_create_time <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND role.role_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+        </if>
+        <if test="keyword!=null and keyword!=''">
+            AND (
+            POSITION(#{keyword} IN role.role_name)
+            )
+        </if>
+        ORDER BY role.role_create_time DESC
+    </select>
+    <select id="getRoleByUserId" resultMap="BaseResultMap">
+        SELECT
+        role.role_id,role.role_name
+        FROM role
+        LEFT JOIN user_role ON role.role_id = user_role.user_role_role_id
+        WHERE role.role_is_delete = 0 AND user_role.user_role_user_id = #{userId}
+    </select>
+
+    <select id="allRoleResources" resultType="map">
+        SELECT
+        parent_resource_id as parentResourceId,
+        resource_id as resourceId,
+        resource_name as resourceName,
+        resource_index as resourceIndex,
+        resource_type as resourceType
+        FROM resource
+        WHERE resource_is_delete=0 and resource_type = 0
+        ORDER BY resource_index
+    </select>
+    <select id="frontRoleResources" resultType="map">
+        SELECT
+        parent_resource_id as parentResourceId,
+        resource_id as resourceId,
+        resource_name as resourceName,
+        resource_index as resourceIndex,
+        resource_type as resourceType
+        FROM resource
+        WHERE resource_is_delete=0 and resource_type = 1
+        ORDER BY resource_index
+    </select>
+</mapper>

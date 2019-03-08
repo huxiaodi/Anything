@@ -398,7 +398,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.dllg.Application</mainClass>
+                    <mainClass>com.test.Application</mainClass>
                     <executable>true</executable>
                     <excludeDevtools>false</excludeDevtools>
                     <fork>true</fork>

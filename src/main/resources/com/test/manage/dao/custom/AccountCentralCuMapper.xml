@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.AccountCentralCuMapper">
+
+
+    <!--查询账户中心信息(个人)-->
+    <select id="getAccountCentralInfo" resultType="com.test.manage.model.generator.User">
+         select * from user where user_id = #{userId}
+    </select>
+
+    <!--查询账户中心信息(企业)-->
+    <select id="getAccountCentralEnterpriseInfo" resultType="com.test.manage.model.generator.Company">
+        select c.* FROM USER u LEFT JOIN company c ON c.company_id = u.user_company_id where u.user_id = #{userId}
+    </select>
+
+
+    <!--查询账户中心银行卡-->
+    <select id="getAccountCentralCard" resultType="com.test.manage.model.generator.User">
+
+    </select>
+
+    <!--查询账户信息-->
+    <select id="getAccountList" resultType="com.test.manage.model.generator.AccountSub">
+
+        select * FROM account_sub where account_sub_relation_id = #{relationId}
+    </select>
+
+
+
+
+</mapper>
