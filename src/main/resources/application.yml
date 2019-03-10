@@ -10,7 +10,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #url: jdbc:mysql://192.168.1.26:3306/dleb?useSSL=false
-    url: jdbc:mysql://wuxiqiatu.f3322.net:3306/dleb?useSSL=false
+    url: jdbc:mysql://wuxiqiatu.f3322.net:3306/anytest?useSSL=false
     username: root
     password: KxU08WZP6Rwi+Ux7fMeUqMU27ojzMdkaicuxkmWeXbiVRX2az/WtAvfep3EavFetTC1hV6Ssve4PzGt//XPZmw==
     #password: xdYI1IjV2lAGWUaQIAqV44pwAmrimydkM2zL3MrNMoPbRtsMB5FN2mR2k5F+OvZnTPtCq7gJEMzt6n8+ueBO8w==
