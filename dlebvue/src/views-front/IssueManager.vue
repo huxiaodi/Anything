@@ -2,65 +2,42 @@
   <div class="page1180">
     <div class="page-title">
       <div style="float:left;font-weight: bold;">
-        资金流水
-      </div>
-      <div style="float:right">
-        <span style="cursor:pointer;color:#409EFF" type="text" @click="moreQuery">更多查询条件</span>
+        发布管理
       </div>
     </div>
   <el-row class="page-content">
     <el-form class="searchForm" ref="searchForm" :model="searchForm" :inline="true" size="medium" style="margin-top: 10px">
-      <el-form-item label="子账户:" prop="no">
-        <el-select style="width:150px;" @change="getData" v-model="searchForm.no">
-          <el-option v-for="item in optionsSubAccount" :key="item.accountSubId" :label="item.accountSubNo" :value="item.accountSubNo">
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="财务类型:" prop="tradeType">
+      <el-form-item label="是否指定:" prop="tradeType">
         <el-select style="width:120px;" @change="getData" v-model="searchForm.tradeType" placeholder="全部">
           <el-option v-for="item in optionsTradeType" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="交易状态:" prop="status">
+      <el-form-item label="物流状态:" prop="status">
         <el-select style="width:120px;" @change="getData" v-model="searchForm.status" placeholder="全部">
           <el-option v-for="item in optionsTradeStatus" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="交易时间:" prop="searchTimes">
+      <el-form-item label="发布时间:" prop="searchTimes">
         <el-date-picker style="width:300px!important;" @change="getData" v-model="searchForm.searchTimes" type="daterange" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
-
-      <!-- 隐藏内容 -->
-      <el-row style="display:inline-block" name="fade" class="fade-input" v-if="moreQueryVisible">
-        <el-form-item size="medium" label="金额范围:" prop="startAmt">
-            <el-input style="width:100px;" v-model="searchForm.startAmt" @blur="setStartAmt">
-              <i slot="suffix">元</i>
-            </el-input>
-            <span>-</span>
-            <el-input style="width:100px;" v-model="searchForm.endAmt" @blur="setEndAmt">
-              <i slot="suffix">元</i>
-            </el-input>
-        </el-form-item>
-        <el-form-item size="medium" label="交易对象:" prop="accountName">
-          <el-input  style="width:100px;" v-model="searchForm.accountName"></el-input>
-        </el-form-item>
-        <el-form-item size="medium" label="关键字:" prop="keyword">
+      <el-form-item size="medium" label="关键字:" prop="keyword">
+        <el-tooltip class="item" effect="dark" content="货物名称，接单方名称，起始地，目的地，金额，总量，体积" placement="top">
           <el-input style="width:100px;" v-model="searchForm.keyword"></el-input>
-        </el-form-item>
-
-      </el-row>
+        </el-tooltip>
+      </el-form-item>
       <div style="display:inline-block">
         <el-button size="medium" type="primary" @click="getData" :loading="this.isShowLoadingIcon" v-show="_btn('zijinliushui_query')">搜索</el-button>
         <el-button size="medium" type="primary" @click="searchReset('searchForm')" v-show="_btn('zijinliushui_reset')">重置</el-button>
+        <el-button size="medium" type="primary" @click="issue" v-show="_btn('zijinliushui_reset')">发布</el-button>
       </div>
     </el-form>
     <div style="margin-top:15px;">
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="全部" name="全部"></el-tab-pane>
-        <el-tab-pane label="收入" name="收入"></el-tab-pane>
-        <el-tab-pane label="支出" name="支出"></el-tab-pane>
+        <el-tab-pane label="待发布" name="待发布"></el-tab-pane>
+        <el-tab-pane label="已发布" name="已发布"></el-tab-pane>
       </el-tabs>
     </div>
     <el-table ref="myTable" stripe border :data="tableList" style="width: 1180px!important;font-size:12px!important;" highlight-current-row>
@@ -211,7 +188,7 @@ export default {
         this.searchForm.startTime = '';
         this.searchForm.endTime = '';
       }
-      api.post('/trade/record/list', this.searchForm).then(response => {
+      api.post('/order/getOrderList', this.searchForm).then(response => {
         if (response.data.code === 1) {
           let list = response.data.data.list;
           list.forEach((item) => {
@@ -368,12 +345,17 @@ export default {
           params: row
         })
       }
+    },
+    issue(){
+      this.$router.push({
+        name: '添加银行卡',
+        params: {}
+      })
     }
   },
   mounted() {
     this.searchForm.tradeType = this.$route.params.tradeType;
     this.setOMDate();
-    this.getSubAccount();
     this.getData();
   }
 }

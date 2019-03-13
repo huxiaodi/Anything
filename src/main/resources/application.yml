@@ -2,7 +2,7 @@ druid-public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIEopNjvUKeGp5M+aKc+yY/a/PDYKI
 
 
 server:
-  port: 8092
+  port: 8099
 
 spring:
   profiles:
@@ -80,34 +80,14 @@ logging:
   pattern:
     file:
 
-
 awesome:
   jwt:
     issuer: awesomeApp
     base64EncodedSecretKey: awesomeSecretKey
   ebpay:
-#    mrchCode: 3281   #qiatu
-#    masterId: 2000903938  #qiatu
-    uid: N95420
-    mrchCode: 3284  #dleb
-    masterId: 2000904398   #dleb
-    smsAccount: dllg,1538
-    smsPwd: dllgadmin
-    smsSignature: 【德邻陆港】
     staticUrl: http://staticstest.qiatuchina.com
     staticPath: /qiatu/static
     projectPath: ebpay
-    fundSummaryAcctNo: 15000092454462
-    tradeCallbackUrl: http://pa2.qiatuchina.com:8380/callback/pa/trade/inspection
-    setPasswordBackUrl: http://pa2.qiatuchina.com:8380/accountSub/accountSubController/returnBack
-    businessCallBackUrl: http://pa2.qiatuchina.com:8380/api/pay/paymentCallBack
-    transferReturnUrl: http://localhost:8091/FrontHome
-    paymentDisposeReturnUrl: http://localhost:8091/Payment
-    frontUrl: https://my-uat1.orangebank.com.cn/corporbank/nonpartyVerify.do
-    topupUrl: https://my-uat1.orangebank.com.cn/khpayment/khPayment_sfj.do
-    returnbackForBusiness: http://pa2.qiatuchina.com:8380/pay/returnbackForBusiness
-    returnback: http://pa2.qiatuchina.com:8380/pay/returnback
-    reimburseBackUrl: http://pa2.qiatuchina.com:8380/refund/reimburseBack
 pagehelper:
   helper-dialect: mysql
   offsetAsPageNum: true

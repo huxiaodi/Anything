@@ -558,7 +558,7 @@
                   let data = response.data.data;
                   localStorage.setItem('menus', JSON.stringify(data.frontMenu));
                   localStorage.setItem('buttonRight', JSON.stringify(data.frontButton));
-                  this.$router.push('/FrontHome')
+                  this.$router.push('/AccountCentral')
                 })
               } else {
                 Message.MessageError(response.data.msg)

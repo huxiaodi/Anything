@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <classPathEntry
-            location="C:/Users/hugo/.m2/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar"/>
+            location="C:/Users/hudi/.m2/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar"/>
 
     <context id="MySqlTables" targetRuntime="MyBatis3">
         <property name="javaFileEncoding" value="UTF-8"/>
@@ -40,7 +40,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="area" domainObjectName="Area">
+        <!--<table tableName="area" domainObjectName="Area">
         </table>
         <table tableName="company" domainObjectName="Company">
         </table>
@@ -57,8 +57,8 @@
         <table tableName="sequence" domainObjectName="Sequence">
         </table>
         <table tableName="user" domainObjectName="User">
-        </table>
-        <table tableName="user_role" domainObjectName="userRole">
+        </table>-->
+        <table tableName="goods_order" domainObjectName="Order">
         </table>
 
     </context>

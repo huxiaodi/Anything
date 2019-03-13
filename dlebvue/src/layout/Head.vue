@@ -28,62 +28,27 @@
               <el-menu-item-group>
                 <el-menu-item v-if="routerIsAlive[3].meta.show" index="/personalMemberList">个人会员管理</el-menu-item>
                 <el-menu-item v-if="routerIsAlive[7].meta.show" index="/BusinessMemberList">企业会员管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[31].meta.show" index="/MemberLog">会员登录日志</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-menu-item v-if="routerIsAlive[13].meta.show" index="/AccountManageList">
               <i class="el-icon-menu"></i>
-              <span slot="title">账户管理</span>
+              <span slot="title">货物管理</span>
             </el-menu-item>
             <el-menu-item v-if="routerIsAlive[10].meta.show" index="/TransactionManageList">
               <i class="el-icon-menu"></i>
-              <span slot="title">交易管理</span>
+              <span slot="title">公告信息</span>
             </el-menu-item>
-            <el-menu-item v-if="routerIsAlive[12].meta.show" index="/BusinessManageList">
-              <i class="el-icon-menu"></i>
-              <span slot="title">业务管理</span>
-            </el-menu-item>
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span slot="title">总账户管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item v-if="routerIsAlive[30].meta.show" index="/AccountManagement">总账户管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[25].meta.show" index="/LedgerAccountList">挂账账户</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[28].meta.show" index="/FeeAccountList">手续费账户</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
             <el-submenu index="3">
               <template slot="title">
                 <i class="el-icon-setting"></i>
                 <span slot="title">系统设置</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item v-if="routerIsAlive[15].meta.show" index="/DataGroupManageList">数据组管理</el-menu-item>
                 <el-menu-item v-if="routerIsAlive[17].meta.show" index="/RoleManageList">角色管理</el-menu-item>
                 <el-menu-item v-if="routerIsAlive[19].meta.show" index="/UserMemberList">用户管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[32].meta.show" index="/UserMemberLog">系统用户登录日志</el-menu-item>
                 <el-menu-item v-if="routerIsAlive[29].meta.show" index="/Resource">资源管理</el-menu-item>
                 <el-menu-item v-if="routerIsAlive[22].meta.show" index="/PersonalCenter">个人中心</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[33].meta.show" index="/InvoiceManage">发票管理</el-menu-item>
-                <el-submenu index="5">
-                  <template slot="title">密码设置</template>
-                  <el-menu-item v-if="routerIsAlive[23].meta.show && showInfo" index="/PasswordSetting">密码设置</el-menu-item>
-                  <el-menu-item v-if="routerIsAlive[24].meta.show" index="/PasswordEdit">密码修改</el-menu-item>
-                </el-submenu>
-
-                <el-submenu index="6">
-                  <template slot="title">财务贴息</template>
-                  <el-menu-item v-if="routerIsAlive[34].meta.show && showInfo" index="/InterestDict">利率字典</el-menu-item>
-                  <el-menu-item v-if="routerIsAlive[35].meta.show && showInfo" index="/KindDict">品种字典</el-menu-item>
-                  <el-menu-item v-if="routerIsAlive[36].meta.show && showInfo" index="/CustomerDict">客户字典</el-menu-item>
-                  <el-menu-item v-if="routerIsAlive[37].meta.show && showInfo" index="/FreeDayDict">免息天数字典</el-menu-item>
-                  <el-menu-item v-if="routerIsAlive[38].meta.show && showInfo" index="/InterestManager">贴息计算</el-menu-item>
-                </el-submenu>
-
               </el-menu-item-group>
-              <el-menu-item v-if="routerIsAlive[21].meta.show" index="/DictionaryManageList">字典管理</el-menu-item>
             </el-submenu>
           </el-menu>
         </div>

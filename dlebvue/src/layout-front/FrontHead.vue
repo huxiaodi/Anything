@@ -30,23 +30,10 @@
           <img src="../assets/img/logo.png" alt="">
         </router-link>
       </el-col>
-      <el-col :span="20" v-if="user.userType !== 1">
-        <el-menu class="el-menu-demo" :default-active="defaultActive" mode="horizontal" router>
-            <el-submenu :index="index+''" :key="menu.resourceId" v-for="(menu, index) in menus">
-              <template slot="title">{{menu.resourceName}}</template>
-              <el-menu-item v-for="children in menu.children" :key="children.resourceId" :index="children.resourceValue">{{children.resourceName}}</el-menu-item>
-            </el-submenu>
-        </el-menu>
-      </el-col>
-      <el-col :span="20" v-if="user.userType === 1">
-        <el-menu class="el-menu-demo" :default-active="defaultActive" mode="horizontal" router>
-          <el-menu-item index="/FrontHome">我的e宝</el-menu-item>
-          <el-menu-item index="/FeeDetailList">资金流水</el-menu-item>
-          <el-menu-item index="/BusinessQuery">业务流水</el-menu-item>
-          <el-menu-item index="/TransferFee">转账付款</el-menu-item>
-          <el-menu-item index="/AccountCentral">账户中心</el-menu-item>
-        </el-menu>
-      </el-col>
+      <el-menu class="el-menu-demo" :default-active="defaultActive" mode="horizontal" router>
+        <el-menu-item index="/AccountCentral">我的信息</el-menu-item>
+        <el-menu-item index="/IssueManager">物流发布管理</el-menu-item>
+      </el-menu>
     </el-row>
   </div>
 </template>
