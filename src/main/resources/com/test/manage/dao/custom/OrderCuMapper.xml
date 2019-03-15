@@ -29,6 +29,12 @@
             <if test="orderStatus!=null and orderStatus!=''">
                 and go.order_status=#{orderStatus}
             </if>
+            <if test="orderIsIssue!=null and orderIsIssue">
+                and go.order_issue_time &lt; CURRENT_TIMESTAMP
+            </if>
+            <if test="orderIsIssue!=null and !orderIsIssue">
+                and go.order_issue_time &gt; CURRENT_TIMESTAMP
+            </if>
             <if test="keyword!=null and keyword!=''">
                 and (
                 POSITION(#{keyword} IN go.order_goods_name) OR

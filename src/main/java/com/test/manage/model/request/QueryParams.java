@@ -17,11 +17,12 @@ public class QueryParams extends Page {
     private Integer tradeType; //交易类型
     private String type;
 
-    private String userId;
-
     private String status; //状态
     private String keyword;
+
+    private String userId;
     private Boolean orderAssign;
     private Integer orderStatus;
+    private Boolean orderIsIssue; // 是否发布
 
 }

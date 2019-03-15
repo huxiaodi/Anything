@@ -53,6 +53,8 @@ import ChangePassword from '@/views-front/ChangePassword'
 import ChangeMobile from '@/views-front/ChangeMobile'
 import BankCard from '@/views-front/BankCard'
 import IssueGoods from '@/views-front/IssueGoods'
+import IssueGoodsDetail from '@/views-front/IssueGoodsDetail'
+import IssueGoodsModify from '@/views-front/IssueGoodsModify'
 import BusinessQuery from '@/views-front/BusinessQuery'
 import BusinessDetail from '@/views-front/BusinessDetail'
 import TransactionDetail from '@/views-front/TransactionDetail'
@@ -91,7 +93,9 @@ export const FrontViews = [
   {path: '/FrontHome', component: FrontHome, name: '我的e宝', meta: {keepAlive: true, cname: FrontHome.name}},
   {path: '/AccountCentral', component: AccountCentral, name: '账户中心', meta: {keepAlive: true, cname: AccountCentral.name}},
   {path: '/BankCard', component: BankCard, name: '银行卡管理', meta: {keepAlive: true, cname: BankCard.name}},
-  {path: '/IssueGoods', component: IssueGoods, name: '添加银行卡', meta: {keepAlive: true, cname: BankCard.name}},
+  {path: '/IssueGoods', component: IssueGoods, name: '发布', meta: {keepAlive: true, cname: IssueGoods.name}},
+  {path: '/IssueGoodsDetail/:id', component: IssueGoodsDetail, name: '发布详情', meta: {keepAlive: true, cname: IssueGoodsDetail.name}},
+  {path: '/IssueGoodsModify/:id', component: IssueGoodsModify, name: '发布修改', meta: {keepAlive: true, cname: IssueGoodsModify.name}},
   {path: '/BusinessQuery', component: BusinessQuery, name: '业务查询', meta: {keepAlive: true, cname: BusinessQuery.name}},
   {path: '/BusinessDetail', component: BusinessDetail, name: '业务详情', meta: {keepAlive: true, cname: BusinessDetail.name}},
   {path: '/TransactionDetail', component: TransactionDetail, name: '交易详情', meta: {keepAlive: true, cname: TransactionDetail.name}},

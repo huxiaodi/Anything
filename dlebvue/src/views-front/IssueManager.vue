@@ -7,14 +7,14 @@
     </div>
   <el-row class="page-content">
     <el-form class="searchForm" ref="searchForm" :model="searchForm" :inline="true" size="medium" style="margin-top: 10px">
-      <el-form-item label="是否指定:" prop="tradeType">
-        <el-select style="width:120px;" @change="getData" v-model="searchForm.tradeType" placeholder="全部">
+      <el-form-item label="是否指定:" prop="orderAssign">
+        <el-select style="width:120px;" @change="getData" v-model="searchForm.orderAssign" placeholder="全部">
           <el-option v-for="item in optionsTradeType" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="物流状态:" prop="status">
-        <el-select style="width:120px;" @change="getData" v-model="searchForm.status" placeholder="全部">
+      <el-form-item label="物流状态:" prop="orderStatus">
+        <el-select style="width:120px;" @change="getData" v-model="searchForm.orderStatus" placeholder="全部">
           <el-option v-for="item in optionsTradeStatus" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -36,37 +36,60 @@
     <div style="margin-top:15px;">
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="全部" name="全部"></el-tab-pane>
-        <el-tab-pane label="待发布" name="待发布"></el-tab-pane>
         <el-tab-pane label="已发布" name="已发布"></el-tab-pane>
+        <el-tab-pane label="待发布" name="待发布"></el-tab-pane>
       </el-tabs>
     </div>
     <el-table ref="myTable" stripe border :data="tableList" style="width: 1180px!important;font-size:12px!important;" highlight-current-row>
-      <el-table-column prop="account_sub_trade_tran_date" align="center" label="交易时间" width="150px"></el-table-column>
-      <!-- <el-table-column prop="account_sub_no" align="center" label="子账户" width="140px"></el-table-column> -->
-      <el-table-column prop="account_sub_trade_typeC" align="center" label="类型" width="80px"></el-table-column>
-      <el-table-column prop="account_sub_name" align="center" label="交易对象" show-overflow-tooltip width="210px"></el-table-column>
-      <el-table-column prop="account_sub_trade_no" align="center" label="流水单号" width="220px">
+      <el-table-column prop="orderIssueTime" align="center" label="操作" width="150px">
         <template slot-scope="scope">
-              <a style="cursor:pointer;" @click="viewDetails(scope.row)">
-                {{scope.row.account_sub_trade_bank_no}}</a>
-            </template>
+          <a @click="delete(scope.row)" >删除</a>
+          <a @click="modify(scope.row)" >修改</a>
+        </template>
       </el-table-column>
-      <el-table-column prop="business_trade_business_no" align="center" label="订单号" width="140px" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="payAmount" align="center"  label="支出" width="100px">
+      <el-table-column prop="orderIssueTime" align="center" label="发布时间" width="150px"></el-table-column>
+      <el-table-column prop="orderNo" align="center" label="订单号" width="150px">
         <template slot-scope="scope">
-              <div style="color: red">
-                {{scope.row.payAmount}}
-              </div>
-            </template>
+          <a style="cursor:pointer;" @click="viewDetails(scope.row)">
+            {{scope.row.orderNo}}</a>
+        </template>
       </el-table-column>
-      <el-table-column prop="incomeAmount" align="center" label="收入" width="100px">
+      <el-table-column prop="userName" align="center" label="发布人"  width="150px"></el-table-column>
+      <el-table-column prop="orderStatus" align="center" label="物流状态" width="100px">
         <template slot-scope="scope">
-              <div style="color:green;">
-                {{scope.row.incomeAmount}}
-              </div>
-            </template>
+          <span v-if="scope.row.orderStatus === 1"> 待接单</span>
+          <span v-else-if="scope.row.orderStatus === 2"> 已接单</span>
+          <span v-else-if="scope.row.orderStatus === 3"> 已提货</span>
+          <span v-else-if="scope.row.orderStatus === 4"> 已发货</span>
+          <span v-else-if="scope.row.orderStatus === 5"> 已签收</span>
+          <span v-else> {{scope.row.orderStatus}}</span>
+        </template>
       </el-table-column>
-      <el-table-column prop="account_sub_trade_tran_statusC" align="center" label="交易状态" width="80px"></el-table-column>
+      <el-table-column prop="orderGoodsName" align="center" label="货物名称" show-overflow-tooltip width="150px"></el-table-column>
+      <el-table-column prop="orderMoney" align="center" label="金额" width="50px"></el-table-column>
+      <el-table-column prop="orderPickupTime" align="center" label="预计提货日期" width="140px" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="orderAssign" align="center" label="是否指定" width="100px">
+        <template slot-scope="scope">
+          <span v-if="scope.row.orderAssign"> 是</span>
+          <span v-else>否</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="companyName" align="center" label="接单方" width="220px"></el-table-column>
+      <el-table-column prop="orderFinalPickupTime" align="center" label="实际提货时间"width="140px" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="orderLogisticsNo" align="center" label="物流单号" width="150px"></el-table-column>
+      <el-table-column prop="orderGoodsWeight" align="center"  label="重量" width="80px"></el-table-column>
+      <el-table-column prop="orderGoodsCube" align="center" label="体积" width="80px"></el-table-column>
+      <el-table-column prop="orderPickupProvince" align="center" label="起始地" width="150px" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <span>{{scope.row.orderPickupProvince}}/{{scope.row.orderPickupCity}}/{{scope.row.orderPickupDistrict}}/{{scope.row.orderPickupAddress}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="orderReceiveProvince" align="center" label="目的地" width="150px" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <span>{{scope.row.orderReceiveProvince}}/{{scope.row.orderReceiveCity}}/{{scope.row.orderReceiveDistrict}}/{{scope.row.orderReceiveAddress}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="orderRemark" align="center" label="备注" width="100px" show-overflow-tooltip></el-table-column>
     </el-table>
     <el-pagination :total="pageSettings.total" :current-page="pageSettings.pageNum" :page-size="pageSettings.pageSize" :page-sizes="pageSettings.pageSizes" @size-change="sizeChange" @current-change="currentChange" :layout="pageSettings.layout" align="right">
     </el-pagination>
@@ -95,15 +118,11 @@ export default {
   data() {
     return {
       searchForm: {
-        no: '',
         searchTimes: null,
-        tradeType: '',
-        accountName: '',
-        startAmt: '',
-        endAmt: '',
         keyword: '',
-        income: '',
-        status: ''
+        orderIsIssue: '',
+        orderAssign: '',
+        orderStatus: ''
       },
       pickerOptions: {
         shortcuts: [{
@@ -132,47 +151,37 @@ export default {
           }
         }]
       },
-      moreQueryVisible: false,
       tableList: [],
-      optionsSubAccount: [],
-      // 财务类型
+      // 是否指定
       optionsTradeType: [{
         value: '',
         label: '全部'
       }, {
-        value: '1',
-        label: '会员交易'
+        value: true,
+        label: '是'
       }, {
-        value: '4',
-        label: '提现'
-      }, {
-        value: '3',
-        label: '充值'
-      }, {
-        value: '2',
-        label: '转账'
+        value: false,
+        label: '否'
       }],
+      // 物流状态
       optionsTradeStatus: [{
         value: null,
         label: '全部'
       }, {
-        value: '0',
-        label: '成功'
+        value: 1,
+        label: '待接单'
       }, {
-        value: '1',
-        label: '失败'
+        value: 2,
+        label: '已接单'
       }, {
-        value: '2',
-        label: '待确认'
+        value: 3,
+        label: '已提货'
       }, {
-        value: '5',
-        label: '待处理'
+        value: 4,
+        label: '已发货'
       }, {
-        value: '6',
-        label: '处理中'
-      }, {
-        value: '10',
-        label: '退单'
+        value: 5,
+        label: '已签收'
       }],
       activeName: '全部'
     }
@@ -192,63 +201,13 @@ export default {
         if (response.data.code === 1) {
           let list = response.data.data.list;
           list.forEach((item) => {
-            // 支出还是收入
-            if (item.account_sub_trade_tran_payment_type === 1) {
-              // 支出
-              item.payAmount = item.account_sub_trade_tran_amt;
-            } else if (item.account_sub_trade_tran_payment_type === 2) {
-              // 收入
-              item.incomeAmount = item.account_sub_trade_tran_amt;
-            }
-            // 类型
-            if (item.account_sub_trade_type === '1') {
-              item.account_sub_trade_typeC = '会员交易';
-            } else if (item.account_sub_trade_type === '2') {
-              item.account_sub_trade_typeC = '转账';
-            } else if (item.account_sub_trade_type === '3') {
-              item.account_sub_trade_typeC = '充值';
-            } else if (item.account_sub_trade_type === '4') {
-              item.account_sub_trade_typeC = '提现';
-            } else if (item.account_sub_trade_type === '5') {
-              item.account_sub_trade_typeC = '服务费';
-            } else if (item.account_sub_trade_type === '6') {
-              item.account_sub_trade_typeC = '退款';
-            } else if (item.account_sub_trade_type === '7') {
-              item.account_sub_trade_typeC = '充值';
-            }
-            // 交易状态
-            if (item.account_sub_trade_tran_status === 0) {
-              item.account_sub_trade_tran_statusC = '成功';
-            } else if (item.account_sub_trade_tran_status === 1) {
-              item.account_sub_trade_tran_statusC = '失败';
-            } else if (item.account_sub_trade_tran_status === 2) {
-              item.account_sub_trade_tran_statusC = '待确认';
-            } else if (item.account_sub_trade_tran_status === 5) {
-              item.account_sub_trade_tran_statusC = '待处理';
-            } else if (item.account_sub_trade_tran_status === 6) {
-              item.account_sub_trade_tran_statusC = '处理中';
-            }else if (item.account_sub_trade_tran_status === 8) {
-              item.account_sub_trade_tran_statusC = '成功';
-            } else if (item.account_sub_trade_tran_status === -1) {
-              item.account_sub_trade_tran_statusC = '无效';
-            } else if (item.account_sub_trade_tran_status === 10) {
-              item.account_sub_trade_tran_statusC = '提现退单';
-            }
+
           })
           this.tableList = list;
           this.pageSettings.total = response.data.data.total
         }
       }).finally(() => {
         this.isShowLoadingIcon = false;
-      })
-    },
-    getSubAccount() {
-      api.get('/accountSub/accountSubController/getAccountSubs').then(response => {
-        if (response.data.code === 1) {
-          this.optionsSubAccount = response.data.data;
-        } else {
-          Message.MessageError(response.data.msg)
-        }
       })
     },
     // 设置列表时间查询条件默认为最近30天
@@ -266,91 +225,44 @@ export default {
       end.setMilliseconds(0);
       this.searchForm.searchTimes = [start, end];
     },
-    // 金额只能输入正整数
-    setStartAmt() {
-      // 正整数
-      const intReg = /^[0-9]*$/;
-      if (!intReg.test(this.searchForm.startAmt)) {
-        this.searchForm.startAmt = 0
-      }
-    },
-    setEndAmt() {
-      // 正整数
-      const intReg = /^[0-9]*$/;
-      if (!intReg.test(this.searchForm.endAmt)) {
-        this.searchForm.endAmt = 0
-      }
-      // 金额范围支持只输入一个，当只输入上限值时，下限值默认为0
-      if (!this.searchForm.startAmt) {
-        if (this.searchForm.endAmt > 0) {
-          this.searchForm.startAmt = 0
-        }
-      }
-    },
     // 重置
     searchReset(formName) {
       this.$refs[formName].resetFields();
-      this.searchForm.endAmt = '';
+      this.setOMDate();
       // 查询条件重置之后重新查询列表
       this.getData();
     },
-    // 控制更多查询条件是否显示
-    moreQuery() {
-      if (this.moreQueryVisible) {
-        this.moreQueryVisible = false
-      } else {
-        this.moreQueryVisible = true
-      }
-    },
     handleClick(tab, event) {
       if (tab.index === '1') {
-        // 收入
-        this.searchForm.income = true;
+        // 已发布
+        this.searchForm.orderIsIssue = true;
       } else if (tab.index === '2') {
-        // 支出
-        this.searchForm.income = false;
+        // 待发布
+        this.searchForm.orderIsIssue = false;
       } else {
         // 全部
-        this.searchForm.income = '';
+        this.searchForm.orderIsIssue = '';
       }
       this.getData();
     },
-    // 点击流水单号查看详情页面
+    // 点击单号查看详情页面
     viewDetails(row) {
-      row.pageType = "FeeDetailList";
-      // 1-会员交易，2-转账，3-充值，4-提现，5-服务费，6-退款
-      if (row.account_sub_trade_typeC.indexOf('交易') !== -1) {
-        this.$router.push({
-          name: '交易详情',
-          params: row
-        });
-      } else if (row.account_sub_trade_typeC === '充值') {
-        this.$router.push({
-          name: '充值详情',
-          params: row
-        })
-      } else if (row.account_sub_trade_typeC === '提现') {
-        this.$router.push({
-          name: '提现详情',
-          params: row
-        })
-      } else if (row.account_sub_trade_typeC === '转账') {
-        this.$router.push({
-          name: '交易详情',
-          params: row
-        })
-      } else {
-        this.$router.push({
-          name: '交易详情',
-          params: row
-        })
-      }
+      this.$router.push({
+        name: '发布详情',
+        params: {id:row.orderId}
+      })
     },
     issue(){
       this.$router.push({
-        name: '添加银行卡',
+        name: '发布',
         params: {}
       })
+    },
+    modify(row){
+
+    },
+    delete(row){
+
     }
   },
   mounted() {
