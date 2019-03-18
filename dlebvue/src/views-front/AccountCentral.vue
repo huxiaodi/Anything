@@ -3,30 +3,12 @@
   <!--企业基本信息-->
   <div>
     <div class="accountItem account-title">
-        <el-upload
-          class="avatar-uploader"
-          action="/api/account/userAccount/getUploadInfo"
-          :show-file-list="false"
-          :with-credentials="true"
-          :headers="uploadToken"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload">
-            <img  v-if="user.userHeadImg"  :src="user.userHeadImg" class="avatarUpload">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
         <p style="font-weight: bold;font-size: 18px;margin:6px 0 0;">{{people.userName}}</p>
-        <div style="padding:8px 0 20px 0;">欢迎使用德邻e宝</div>
-        <div class="userInfo">
-          <router-link :to="`/ChangePassword/${people.userType==1?people.userMobile:enterprise.companyContactTel}`" v-show="_btn('zhanghuzhongxin_changePassword')"><i class="el-icon-edit">修改登录密码</i></router-link>
-        </div>
-        <div class="userInfo" v-if="people.userType==2">
-          <router-link :to="`/ChangeMobile/${people.userType==1?people.userMobile:enterprise.companyContactTel}`" v-show="_btn('zhanghuzhongxin_changeMobile')"><i class="el-icon-edit">更换联系人</i></router-link>
-        </div>
     </div>
     <!-- 用户 -->
     <div class="accountItem account-information">
       <!-- 企业信息 -->
-      <div v-if="people.userType==2">
+      <div v-if="people.userType==2 || people.userType==3">
         <!-- 头部标题 -->
         <div class="user-form-title">
           <div class="" style="float:left;font-size:18px;
@@ -323,9 +305,14 @@ export default {
   methods: {
     //获取基本信息
     getData() {
-      api.post('/accountCentral/getAccountCentralInfo', {
-        userType: ''
-      }).then(response => { });
+      api.get('/user/getUserInfo').then(response => {
+        if(response.data.code === 1){
+          this.enterprise =response.data.data.company;
+          this.people = response.data.data.personal;
+        } else {
+          Message.MessageError(response.data.msg);
+        }
+      });
     },
 
     bankGo(){
@@ -337,7 +324,7 @@ export default {
   },
 
   mounted() {
-    // this.getData();
+    this.getData();
   }
 }
 </script>

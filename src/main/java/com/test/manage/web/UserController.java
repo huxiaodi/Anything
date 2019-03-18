@@ -18,7 +18,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.test.framework.utils.ApiResultUtil.error;
 import static com.test.framework.utils.ApiResultUtil.success;
@@ -290,4 +292,13 @@ public class UserController {
     public ApiResult checkAdjustPsw(){
         return success(userService.checkAdjustPsw(auth.getCurrentUser().getUserId()));
     }
+
+    @GetMapping("/getUserInfo")
+    public ApiResult getUserInfo(){
+        Map<String ,Object> map = new HashMap<>();
+        map.put("personal",userService.getPersonalInformation(auth.getCurrentUser().getUserId()));
+        map.put("company",userService.getCompanyInformation(auth.getCurrentUser().getUserCompanyId()));
+        return success(map);
+    }
+
 }

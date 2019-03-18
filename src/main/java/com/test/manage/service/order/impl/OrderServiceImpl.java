@@ -146,6 +146,8 @@ public class OrderServiceImpl implements OrderService {
             }
             if (status == 3){ // 已提货
                 order.setOrderFinalPickupTime(new Date());
+            }else if (status == 4){
+                order.setOrderLogisticsNo(orderDto.getOrderLogisticsNo());
             }
         }
         order.setOrderStatus(status);
