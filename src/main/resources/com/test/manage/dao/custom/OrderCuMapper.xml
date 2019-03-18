@@ -2,26 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.manage.dao.custom.OrderCuMapper">
 
-    <!--管理端 企业列表 -->
     <select id="getOrderList" parameterType="com.test.manage.model.request.QueryParams" resultType="com.test.manage.model.dto.OrderDto">
         SELECT
         go.*,
         usp.user_name,
-        comr.company_name
+        comp.company_name issueCompanyName,
+        comr.company_name receiveCompanyName
         FROM
         goods_order go
-        LEFT JOIN USER usp ON usp.user_id = go.order_create_id
-        LEFT JOIN USER usr ON usr.user_id = go.order_receive_id
-        LEFT JOIN company comr ON comr.company_id = usr.user_company_id
+        LEFT JOIN USER usp ON usp.user_id = go.order_create_user_id
+        LEFT JOIN USER usr ON usr.user_id = go.order_receive_user_id
+        LEFT JOIN company comp ON comp.company_id = go.order_company_id
+        LEFT JOIN company comr ON comr.company_id = go.order_receive_company_id
         <where>
+            go.order_company_id = #{issueCompanyId}
             <if test="startTime!=null">
                 and go.order_issue_time <![CDATA[ >= ]]> #{startTime}
             </if>
             <if test="endTime!=null">
                 and go.order_issue_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
-            </if>
-            <if test="userId!=null and userId!=''">
-                and go.order_create_id=#{userId}
             </if>
             <if test="orderAssign!=null and orderAssign!=''">
                 and go.order_assign=#{orderAssign}
@@ -54,5 +53,77 @@
             </if>
         </where>
         ORDER BY go.order_issue_time DESC
+    </select>
+
+
+    <select id="getReceiveOrderList" parameterType="com.test.manage.model.request.QueryParams" resultType="com.test.manage.model.dto.OrderDto">
+        SELECT
+        go.*,
+        usp.user_name,
+        comp.company_name issueCompanyName,
+        comr.company_name receiveCompanyName
+        FROM
+        goods_order go
+        LEFT JOIN USER usp ON usp.user_id = go.order_create_user_id
+        LEFT JOIN USER usr ON usr.user_id = go.order_receive_user_id
+        LEFT JOIN company comp ON comp.company_id = go.order_company_id
+        LEFT JOIN company comr ON comr.company_id = go.order_receive_company_id
+        <where>
+            (go.order_receive_company_id  is null or  go.order_receive_company_id  = '' or  (go.order_receive_company_id = #{recevieCompanyId} ) )
+            and go.order_issue_time &lt; CURRENT_TIMESTAMP
+            <if test="startTime!=null">
+                and go.order_issue_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and go.order_issue_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="orderAssign!=null ">
+                and go.order_assign=#{orderAssign}
+            </if>
+            <if test="orderStatus!=null and orderStatus!=''">
+                and go.order_status=#{orderStatus}
+            </if>
+            <if test="orderIsIssue!=null and orderIsIssue">
+                and go.order_issue_time &lt; CURRENT_TIMESTAMP
+            </if>
+            <if test="orderIsIssue!=null and !orderIsIssue">
+                and go.order_issue_time &gt; CURRENT_TIMESTAMP
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                POSITION(#{keyword} IN go.order_goods_name) OR
+                POSITION(#{keyword} IN go.order_goods_weight) OR
+                POSITION(#{keyword} IN go.order_goods_cube) OR
+                POSITION(#{keyword} IN go.order_money) OR
+                POSITION(#{keyword} IN go.order_pickup_province) OR
+                POSITION(#{keyword} IN go.order_pickup_city) OR
+                POSITION(#{keyword} IN go.order_pickup_district) OR
+                POSITION(#{keyword} IN go.order_receive_province) OR
+                POSITION(#{keyword} IN go.order_receive_city) OR
+                POSITION(#{keyword} IN go.order_receive_district) OR
+                POSITION(#{keyword} IN go.order_pickup_address) OR
+                POSITION(#{keyword} IN go.order_receive_address) OR
+                POSITION(#{keyword} IN comp.company_name)
+                )
+            </if>
+        </where>
+        ORDER BY go.order_issue_time DESC
+    </select>
+
+    <select id="getOrderInfo" parameterType="String" resultType="com.test.manage.model.dto.OrderDto">
+        SELECT
+        go.*,
+        usp.user_name,
+        comp.company_name issueCompanyName,
+        comr.company_name receiveCompanyName
+        FROM
+        goods_order go
+        LEFT JOIN USER usp ON usp.user_id = go.order_create_user_id
+        LEFT JOIN USER usr ON usr.user_id = go.order_receive_user_id
+        LEFT JOIN company comp ON comp.company_id = go.order_company_id
+        LEFT JOIN company comr ON comr.company_id = go.order_receive_company_id
+        <where>
+          go.order_id = #{orderId}
+        </where>
     </select>
 </mapper>

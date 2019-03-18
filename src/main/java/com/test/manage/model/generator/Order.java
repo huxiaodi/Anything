@@ -24,17 +24,17 @@ public class Order {
 
     /**
      *   下单方id
-     *   goods_order.order_create_id
+     *   goods_order.order_company_id
      * @mbg.generated
      */
-    private String orderCreateId;
+    private String orderCompanyId;
 
     /**
      *   接单方id
-     *   goods_order.order_receive_id
+     *   goods_order.order_receive_company_id
      * @mbg.generated
      */
-    private String orderReceiveId;
+    private String orderReceiveCompanyId;
 
     /**
      *   0：不指定 1：指定
@@ -44,7 +44,7 @@ public class Order {
     private Boolean orderAssign;
 
     /**
-     *   1：已下单 2：已接单3：已提货 4：已签收
+     *   1：已下单 2：已接单3：已提货 4：已发货 5：已签收
      *   goods_order.order_status
      * @mbg.generated
      */
@@ -177,6 +177,20 @@ public class Order {
     private String orderRemark;
 
     /**
+     *   下单人id
+     *   goods_order.order_create_user_id
+     * @mbg.generated
+     */
+    private String orderCreateUserId;
+
+    /**
+     *   接单人Id
+     *   goods_order.order_receive_user_id
+     * @mbg.generated
+     */
+    private String orderReceiveUserId;
+
+    /**
      *   是否删除 0-否,1-是
      *   goods_order.order_is_delete
      * @mbg.generated
@@ -226,38 +240,38 @@ public class Order {
 
     /**
      * 下单方id
-     * @return the value of goods_order.order_create_id
+     * @return the value of goods_order.order_company_id
      * @mbg.generated
      */
-    public String getOrderCreateId() {
-        return orderCreateId;
+    public String getOrderCompanyId() {
+        return orderCompanyId;
     }
 
     /**
      * 下单方id
-     * @param orderCreateId the value for goods_order.order_create_id
+     * @param orderCompanyId the value for goods_order.order_company_id
      * @mbg.generated
      */
-    public void setOrderCreateId(String orderCreateId) {
-        this.orderCreateId = orderCreateId == null ? null : orderCreateId.trim();
+    public void setOrderCompanyId(String orderCompanyId) {
+        this.orderCompanyId = orderCompanyId == null ? null : orderCompanyId.trim();
     }
 
     /**
      * 接单方id
-     * @return the value of goods_order.order_receive_id
+     * @return the value of goods_order.order_receive_company_id
      * @mbg.generated
      */
-    public String getOrderReceiveId() {
-        return orderReceiveId;
+    public String getOrderReceiveCompanyId() {
+        return orderReceiveCompanyId;
     }
 
     /**
      * 接单方id
-     * @param orderReceiveId the value for goods_order.order_receive_id
+     * @param orderReceiveCompanyId the value for goods_order.order_receive_company_id
      * @mbg.generated
      */
-    public void setOrderReceiveId(String orderReceiveId) {
-        this.orderReceiveId = orderReceiveId == null ? null : orderReceiveId.trim();
+    public void setOrderReceiveCompanyId(String orderReceiveCompanyId) {
+        this.orderReceiveCompanyId = orderReceiveCompanyId == null ? null : orderReceiveCompanyId.trim();
     }
 
     /**
@@ -279,7 +293,7 @@ public class Order {
     }
 
     /**
-     * 1：已下单 2：已接单3：已提货 4：已签收
+     * 1：已下单 2：已接单3：已提货 4：已发货 5：已签收
      * @return the value of goods_order.order_status
      * @mbg.generated
      */
@@ -288,7 +302,7 @@ public class Order {
     }
 
     /**
-     * 1：已下单 2：已接单3：已提货 4：已签收
+     * 1：已下单 2：已接单3：已提货 4：已发货 5：已签收
      * @param orderStatus the value for goods_order.order_status
      * @mbg.generated
      */
@@ -618,6 +632,42 @@ public class Order {
      */
     public void setOrderRemark(String orderRemark) {
         this.orderRemark = orderRemark == null ? null : orderRemark.trim();
+    }
+
+    /**
+     * 下单人id
+     * @return the value of goods_order.order_create_user_id
+     * @mbg.generated
+     */
+    public String getOrderCreateUserId() {
+        return orderCreateUserId;
+    }
+
+    /**
+     * 下单人id
+     * @param orderCreateUserId the value for goods_order.order_create_user_id
+     * @mbg.generated
+     */
+    public void setOrderCreateUserId(String orderCreateUserId) {
+        this.orderCreateUserId = orderCreateUserId == null ? null : orderCreateUserId.trim();
+    }
+
+    /**
+     * 接单人Id
+     * @return the value of goods_order.order_receive_user_id
+     * @mbg.generated
+     */
+    public String getOrderReceiveUserId() {
+        return orderReceiveUserId;
+    }
+
+    /**
+     * 接单人Id
+     * @param orderReceiveUserId the value for goods_order.order_receive_user_id
+     * @mbg.generated
+     */
+    public void setOrderReceiveUserId(String orderReceiveUserId) {
+        this.orderReceiveUserId = orderReceiveUserId == null ? null : orderReceiveUserId.trim();
     }
 
     /**

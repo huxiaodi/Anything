@@ -20,7 +20,8 @@ public class QueryParams extends Page {
     private String status; //状态
     private String keyword;
 
-    private String userId;
+    private String issueCompanyId;
+    private String recevieCompanyId;
     private Boolean orderAssign;
     private Integer orderStatus;
     private Boolean orderIsIssue; // 是否发布

@@ -47,42 +47,20 @@ import InvoiceManageDetail from '@/views/InvoiceManageDetail'
 // 用户端页面导入
 import Login from '@/views-front/Login'
 import FrontLoyout from '@/layout-front/FrontLoyout'
-import FrontHome from '@/views-front/FrontHome'
 import AccountCentral from '@/views-front/AccountCentral'
 import ChangePassword from '@/views-front/ChangePassword'
 import ChangeMobile from '@/views-front/ChangeMobile'
-import BankCard from '@/views-front/BankCard'
 import IssueGoods from '@/views-front/IssueGoods'
 import IssueGoodsDetail from '@/views-front/IssueGoodsDetail'
 import IssueGoodsModify from '@/views-front/IssueGoodsModify'
-import BusinessQuery from '@/views-front/BusinessQuery'
-import BusinessDetail from '@/views-front/BusinessDetail'
-import TransactionDetail from '@/views-front/TransactionDetail'
 import IssueManager from '@/views-front/IssueManager'
-import RechargeDetail from '@/views-front/RechargeDetail'
-import WithdrawalsDetail from '@/views-front/WithdrawalsDetail'
-import TransferFee from '@/views-front/TransferFee'
-import SubAccount from '@/views-front/SubAccount'
-import SetPaymentCode from '@/views-front/SetPaymentCode'
+import OrderManager from '@/views-front/OrderManager'
 import ChangeCompanyInformation from '@/views-front/ChangeCompanyInformation'
 import ChangeCompanyInformationThree from '@/views-front/ChangeCompanyInformationThree'
 import ChangePersonalInformation from '@/views-front/ChangePersonalInformation'
-import PostTest from '@/views-front/PostTest'
-import ServiceAgreement from '@/views-front/ServiceAgreement'
-import Withdrawals from '@/views-front/Withdrawals'
-import UnBankCard from '@/views-front/UnBankCard'
 import Register from '@/views-front/Register'
-import Payment from '@/views-front/Payment'
-import UpTo from '@/views-front/UpTo'
-import orderPay from '@/views-front/orderPay'
-import ModifyAccountPhone from '@/views-front/ModifyAccountPhone'
 import roleManageListFront from '@/views-front/RoleManageListFront'
 import UserMemberListFont from '@/views-front/UserMemberListFont'
-import RefundApplication from '@/views-front/RefundApplication'
-import RefundDetail from '@/views-front/RefundDetail'
-import PayApply from '@/views-front/PayApply'
-import PayDetails from '@/views-front/PayDetails'
-import ApplicationPayment from '@/views-front/ApplicationPayment'
 
 
 import _ from "lodash";
@@ -90,38 +68,19 @@ import _ from "lodash";
 Vue.use(Router)
 
 export const FrontViews = [
-  {path: '/FrontHome', component: FrontHome, name: '我的e宝', meta: {keepAlive: true, cname: FrontHome.name}},
   {path: '/AccountCentral', component: AccountCentral, name: '账户中心', meta: {keepAlive: true, cname: AccountCentral.name}},
-  {path: '/BankCard', component: BankCard, name: '银行卡管理', meta: {keepAlive: true, cname: BankCard.name}},
   {path: '/IssueGoods', component: IssueGoods, name: '发布', meta: {keepAlive: true, cname: IssueGoods.name}},
   {path: '/IssueGoodsDetail/:id', component: IssueGoodsDetail, name: '发布详情', meta: {keepAlive: true, cname: IssueGoodsDetail.name}},
   {path: '/IssueGoodsModify/:id', component: IssueGoodsModify, name: '发布修改', meta: {keepAlive: true, cname: IssueGoodsModify.name}},
-  {path: '/BusinessQuery', component: BusinessQuery, name: '业务查询', meta: {keepAlive: true, cname: BusinessQuery.name}},
-  {path: '/BusinessDetail', component: BusinessDetail, name: '业务详情', meta: {keepAlive: true, cname: BusinessDetail.name}},
-  {path: '/TransactionDetail', component: TransactionDetail, name: '交易详情', meta: {keepAlive: true, cname: TransactionDetail.name}},
-  {path: '/TransferFee', component: TransferFee, name: '转账付款', meta: {keepAlive: true, cname: TransferFee.name}},
-  {path: '/SubAccount', component: SubAccount, name: '子账户管理', meta: {keepAlive: true, cname: SubAccount.name}},
   {path: '/ChangeCompanyInformation', component: ChangeCompanyInformation, name: '修改企业信息', meta: {keepAlive: true, cname: ChangeCompanyInformation.name}},
   {path: '/ChangeCompanyInformationThree', component: ChangeCompanyInformationThree, name: '修改三方企业信息', meta: {keepAlive: true, cname: ChangeCompanyInformationThree.name}},
   {path: '/ChangePersonalInformation', component: ChangePersonalInformation, name: '修改个人信息', meta: {keepAlive: true, cname: ChangePersonalInformation.name}},
-  {path: '/IssueManager', component: IssueManager, name: '资金流水', meta: {keepAlive: true, cname: IssueManager.name}},
-  {path: '/RechargeDetail', component: RechargeDetail, name: '充值详情', meta: {keepAlive: true, cname: RechargeDetail.name}},
-  {path: '/Withdrawals', component: Withdrawals, name: '提现', meta: {keepAlive: true, cname: Withdrawals.name}},
-  {path: '/WithdrawalsDetail', component: WithdrawalsDetail, name: '提现详情', meta: {keepAlive: true, cname: WithdrawalsDetail.name}},
-  {path: '/SetPaymentCode', component: SetPaymentCode, name: '支付密码', meta: {keepAlive: true, cname: SetPaymentCode.name}},
+  {path: '/IssueManager', component: IssueManager, name: '发布管理', meta: {keepAlive: true, cname: IssueManager.name}},
+  {path: '/OrderManager', component: OrderManager, name: '订单管理', meta: {keepAlive: true, cname: OrderManager.name}},
   {path: '/ChangePassword/:mobile', component: ChangePassword, name: '修改登录密码', meta: {keepAlive: true, cname: ChangePassword.name}},
   {path: '/ChangeMobile/:mobile', component: ChangeMobile, name: '更换联系人', meta: {keepAlive: true, cname: ChangeMobile.name}},
-  {path: '/UnBankCard', component: UnBankCard, name: '解绑银行卡', meta: {keepAlive: true, cname: UnBankCard.name}},
-  {path: '/UpTo', component: UpTo, name: '充值', meta: {keepAlive: true, cname: UpTo.name}},
-  {path: '/orderPay', component: orderPay, name: '三方平台充值', meta: {keepAlive: true, cname: orderPay.name}},
   {path: '/RoleManageListFront', component: roleManageListFront, name: '前台角色管理', meta: {keepAlive: true, cname: roleManageListFront.name}},
-  {path: '/ModifyAccountPhone', component: ModifyAccountPhone, name: '修改手机号', meta: {keepAlive: true, cname: ModifyAccountPhone.name}},
   {path: '/UserMemberListFont', component: UserMemberListFont, name: '用户管理前台', meta: {keepAlive: true, cname: UserMemberList.name, show: false}},
-  {path: '/RefundApplication', component: RefundApplication, name: '退款申请', meta: {keepAlive: true, cname: RefundApplication.name, show: false}},
-  {path: '/RefundDetail/:refundId', component: RefundDetail, name: '退款详情', meta: {keepAlive: true, cname: RefundDetail.name, show: false}},
-  {path: '/PayApply', component: PayApply, name: '付款申请', meta: {keepAlive: true, cname: RefundDetail.name, show: false}},
-  {path: '/PayDetails/:application_trade_id', component: PayDetails, name: '付款详情', meta: {keepAlive: true, cname: RefundDetail.name, show: false}},
-  {path: '/ApplicationPayment/:businessTradeId', component: ApplicationPayment, name: '支付申请付款', meta: {keepAlive: true, cname: ApplicationPayment.name, show: false}}
 ]
 
 export const AdminViews = [
@@ -175,7 +134,7 @@ const router = new Router({
       path: '/',
       name: 'FrontLoyout',
       component: FrontLoyout,
-      redirect: '/FrontHome',
+      redirect: '/AccountCentral',
       children: FrontViews
     },
     {
@@ -196,11 +155,6 @@ const router = new Router({
       component: AdminLogin
     },
     {
-      path: '/payment',
-      name: 'Payment',
-      component: Payment
-    },
-    {
       path: '/Register',
       name: 'Register',
       component: Register
@@ -211,18 +165,8 @@ const router = new Router({
       component: NotFound
     },
     {
-      path: '/PostTest',
-      name: 'PostTest',
-      component: PostTest
-    },
-    {
       path: '*',
       redirect: '/404'
-    },
-    {
-      path: '/ServiceAgreement',
-      name: 'ServiceAgreement',
-      component: ServiceAgreement
     }
   ]
 })

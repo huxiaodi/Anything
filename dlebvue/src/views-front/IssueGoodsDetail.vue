@@ -3,7 +3,17 @@
     <div class="page-title">
       <div style="float:left;">
         <router-link class="parent" to="/IssueManager">物流发布管理</router-link>
-        <i class="el-icon-arrow-right"></i> 物流详情
+        <i class="el-icon-arrow-right"></i>物流详情
+      </div>
+      <div style="margin-left: 34%">
+         运单号：{{formData.orderNo}}&nbsp;&nbsp;(
+          <span v-if="formData.orderStatus === 1"> 待接单</span>
+          <span v-else-if="formData.orderStatus === 2"> 已接单</span>
+          <span v-else-if="formData.orderStatus === 3"> 已提货</span>
+          <span v-else-if="formData.orderStatus === 4"> 已发货</span>
+          <span v-else-if="formData.orderStatus === 5"> 已签收</span>
+          <span v-else> {{formData.orderStatus}}</span>
+        )
       </div>
     </div>
     <div class="page-content">
@@ -69,14 +79,7 @@
             <el-col :span="12">
               <el-form-item label="起始地："
                             prop="startingPlaceCode">
-                <el-cascader
-                  style="width:220px;"
-                  disabled
-                  size="large"
-                  :options="regionData"
-                  v-model="formData.startingPlaceCode"
-                  @change="startingPlaceCodeChange">
-                </el-cascader>
+                <el-input :value="formData.orderPickupProvince+'/'+formData.orderPickupCity+'/'+formData.orderPickupDistrict" readonly style="width:220px;"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -91,14 +94,7 @@
             <el-col :span="12">
               <el-form-item label="目的地："
                             prop="endingPlaceCode">
-                <el-cascader
-                  style="width:220px;"
-                  disabled
-                  size="large"
-                  :options="regionData"
-                  v-model="formData.endingPlaceCode"
-                  @change="endingPlaceCodeChange">
-                </el-cascader>
+                <el-input :value="formData.orderReceiveProvince+'/'+formData.orderReceiveCity+'/'+formData.orderReceiveDistrict" readonly style="width:220px;"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -115,18 +111,36 @@
                 <el-checkbox disabled v-model="formData.orderAssign">{{assignInfo}}</el-checkbox>
               </el-form-item>
             </el-col>
-            <el-col :span="12">
+            <el-col v-if="userType === 2" :span="12">
               <el-form-item label="接单方：" >
-                <el-select :disabled="!formData.orderAssign" v-model="formData.orderReceiveId" clearable placeholder="请选择">
-                  <el-option
-                    disabled
-                    v-for="item in receiveUserList"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
+                <el-input v-model="formData.receiveCompanyName" placeholder="无" readonly style="width:220px;"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="userType === 3" :span="12">
+              <el-form-item label="发布方：" >
+                <el-input v-model="formData.issueCompanyName" placeholder="无" readonly style="width:220px;"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
 
+
+          <el-row>
+            <el-col :span="12">
+              <el-form-item
+                label="实际提货时间：" prop="orderFinalPickupTime">
+                <el-date-picker
+                  style="width:220px;"
+                  disabled
+                  v-model="formData.orderFinalPickupTime"
+                  type="datetime"
+                  placeholder="无"
+                >
+                </el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="物流单号：" >
+                <el-input v-model="formData.orderLogisticsNo" placeholder="无" readonly style="width:220px;"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -156,6 +170,7 @@
         id: '',
         loading: false,
         assignInfo: '否',
+        userType: '',
         formData: {
           orderGoodsName: '',
           orderGoodsWeight: '',
@@ -179,6 +194,16 @@
     },
     methods: {
       getData () {
+        api.get('/order/getOrderInfo?orderId='+this.id).then(response => {
+          if (response.data.code === 1) {
+            this.formData = response.data.data;
+          }else{
+            this.$message({
+              type: 'error',
+              message: response.data.msg
+            });
+          }
+        })
       },
       startingPlaceCodeChange (value) {
         this.formData.startingPlaceName = [ CodeToText[value[0]], CodeToText[value[1]], CodeToText[value[2]] ];
@@ -190,8 +215,8 @@
       }
     },
     mounted() {
-      this.id = this.$route.params.orderId;
-      console.log( this.id);
+      this.id = this.$route.params.id;
+      this.userType = JSON.parse(sessionStorage.getItem('dleb_user')).userType;
       this.getData()
     },
     watch: {

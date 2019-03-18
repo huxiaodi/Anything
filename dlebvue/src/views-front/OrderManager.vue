@@ -2,7 +2,7 @@
   <div class="page1180">
     <div class="page-title">
       <div style="float:left;font-weight: bold;">
-        发布管理
+        订单管理
       </div>
     </div>
   <el-row class="page-content">
@@ -19,46 +19,38 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="发布时间:" prop="searchTimes">
+      <el-form-item label="接单时间:" prop="searchTimes">
         <el-date-picker style="width:300px!important;" @change="getData" v-model="searchForm.searchTimes" type="daterange" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item size="medium" label="关键字:" prop="keyword">
-        <el-tooltip class="item" effect="dark" content="货物名称，接单方名称，起始地，目的地，金额，总量，体积" placement="top">
+        <el-tooltip class="item" effect="dark" content="货物名称，发布方，起始地，目的地，金额，总量，体积" placement="top">
           <el-input style="width:100px;" v-model="searchForm.keyword"></el-input>
         </el-tooltip>
       </el-form-item>
       <div style="display:inline-block">
         <el-button size="medium" type="primary" @click="getData" :loading="this.isShowLoadingIcon" v-show="_btn('zijinliushui_query')">搜索</el-button>
         <el-button size="medium" type="primary" @click="searchReset('searchForm')" v-show="_btn('zijinliushui_reset')">重置</el-button>
-        <el-button size="medium" type="primary" @click="issue" v-show="_btn('zijinliushui_reset')">发布</el-button>
       </div>
     </el-form>
-    <div style="margin-top:15px;">
-      <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-        <el-tab-pane label="全部" name="全部"></el-tab-pane>
-        <el-tab-pane label="已发布" name="已发布"></el-tab-pane>
-        <el-tab-pane label="待发布" name="待发布"></el-tab-pane>
-      </el-tabs>
-    </div>
-    <el-table ref="myTable" stripe border :data="tableList" style="width: 1180px!important;font-size:12px!important;" highlight-current-row>
+    <el-table ref="myTable" stripe border :data="tableList" style="width: 1180px!important;font-size:12px!important;margin-top:15px;" highlight-current-row>
       <el-table-column prop="orderIssueTime" align="center" label="操作" width="150px">
         <template slot-scope="scope">
-          <a @click="deletOrder(scope.row.orderId)" href="javascript:void(0)"  v-if="scope.row.orderStatus === 1" >删除</a>
-          <span style="color: rgba(0,0,0,0.25);" v-if="checkIssue(scope.row.orderIssueTime)" >(未发布)</span>
+          <a href="javascript:void(0)" v-if="scope.row.orderStatus === 1" @click="receiveOrder(scope.row)" >{{scope.row.orderAssign ? '待接单' : '待抢单'}}</a>
+          <a  v-if="scope.row.orderStatus === 1 && scope.row.orderAssign" @click="refuseOrder(scope.row)" >拒单</a>
+          <a v-if="scope.row.orderStatus > 1 && scope.row.orderStatus < 5" @click="trackOrderPre(scope.row)" >状态跟踪</a>
         </template>
       </el-table-column>
-      <el-table-column prop="orderIssueTime" align="center" label="发布时间" width="150px"></el-table-column>
+      <el-table-column prop="orderPickupTime" align="center" label="预计提货日期" width="140px" show-overflow-tooltip></el-table-column>
       <el-table-column prop="orderNo" align="center" label="订单号" width="150px">
         <template slot-scope="scope">
           <a style="cursor:pointer;" @click="viewDetails(scope.row)">
             {{scope.row.orderNo}}</a>
         </template>
       </el-table-column>
-      <el-table-column prop="orderGoodsName" align="center" label="货物名称" show-overflow-tooltip width="150px"></el-table-column>
-      <el-table-column prop="orderMoney" align="center" label="金额" width="50px"></el-table-column>
+      <el-table-column prop="issueCompanyName" align="center" label="发布方"  width="150px"></el-table-column>
       <el-table-column prop="orderStatus" align="center" label="物流状态" width="100px">
         <template slot-scope="scope">
-          <span v-if="scope.row.orderStatus === 1"> 待接单</span>
+          <span v-if="scope.row.orderStatus === 1"> {{scope.row.orderAssign ? '待接单' : '待抢单'}}</span>
           <span v-else-if="scope.row.orderStatus === 2"> 已接单</span>
           <span v-else-if="scope.row.orderStatus === 3"> 已提货</span>
           <span v-else-if="scope.row.orderStatus === 4"> 已发货</span>
@@ -67,15 +59,14 @@
           <span v-else> {{scope.row.orderStatus}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="orderAssign" align="center" label="是否指定" width="100px">
+      <el-table-column prop="orderGoodsName" align="center" label="货物名称" show-overflow-tooltip width="150px"></el-table-column>
+      <el-table-column prop="orderMoney" align="center" label="金额" width="50px"></el-table-column>
+     <el-table-column prop="orderAssign" align="center" label="是否指定" width="100px">
         <template slot-scope="scope">
           <span v-if="scope.row.orderAssign"> 是</span>
           <span v-else>否</span>
         </template>
       </el-table-column>
-      <el-table-column prop="receiveCompanyName" align="center" label="接单方" width="220px"></el-table-column>
-      <el-table-column prop="orderPickupTime" align="center" label="预计提货日期" width="140px" show-overflow-tooltip></el-table-column>
-
       <el-table-column prop="orderFinalPickupTime" align="center" label="实际提货时间"width="140px" show-overflow-tooltip></el-table-column>
       <el-table-column prop="orderLogisticsNo" align="center" label="物流单号" width="150px"></el-table-column>
       <el-table-column prop="orderGoodsWeight" align="center"  label="重量" width="80px"></el-table-column>
@@ -90,12 +81,36 @@
           <span>{{scope.row.orderReceiveProvince}}/{{scope.row.orderReceiveCity}}/{{scope.row.orderReceiveDistrict}}/{{scope.row.orderReceiveAddress}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="userName" align="center" label="发布人"  width="150px"></el-table-column>
       <el-table-column prop="orderRemark" align="center" label="备注" width="100px" show-overflow-tooltip></el-table-column>
     </el-table>
     <el-pagination :total="pageSettings.total" :current-page="pageSettings.pageNum" :page-size="pageSettings.pageSize" :page-sizes="pageSettings.pageSizes" @size-change="sizeChange" @current-change="currentChange" :layout="pageSettings.layout" align="right">
     </el-pagination>
   </el-row>
+
+
+    <el-dialog title="状态变更" :visible.sync="dialogFormVisible" width="33%"  >
+      <el-form :model="formData" style="margin-left: 20%;" ref="formDataForm" :rules="formDataRules">
+        <el-form-item label="变更前状态："  prop="beforeStatus" >
+          <el-select style="width:120px;" v-model="formData.beforeStatus" disabled>
+            <el-option v-for="item in optionsTradeStatus" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="变更后状态："  prop="afterStatus">
+          <el-select style="width:120px;" v-model="formData.afterStatus" disabled>
+            <el-option v-for="item in optionsTradeStatus" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item v-if="formData.afterStatus === 4"  label="物流单号：" label-width="110px"  prop="orderLogisticsNo">
+          <el-input v-model="formData.orderLogisticsNo" style="width:120px;"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="trackOrder">确 定</el-button>
+      </div>
+    </el-dialog>
 
 
 </div>
@@ -104,10 +119,6 @@
 <script>
 import api from '../api/fetch'
 import * as Message from '../utils/messageUtil'
-import { MessageBox } from 'element-ui';
-var moment = require('moment');
-moment().format();
-
 import {
   pageMixin
 } from '../common/mixin.js'
@@ -130,8 +141,10 @@ export default {
         orderAssign: '',
         orderStatus: ''
       },
-      isIssueInfo: '未发布',
-      currentTime: '',
+      formData: {
+
+      },
+      dialogFormVisible: false,
       pickerOptions: {
         shortcuts: [{
           text: '最近一周',
@@ -177,7 +190,7 @@ export default {
         label: '全部'
       }, {
         value: 1,
-        label: '待接单'
+        label: '待接单/待抢单'
       }, {
         value: 2,
         label: '已接单'
@@ -190,11 +203,29 @@ export default {
       }, {
         value: 5,
         label: '已签收'
-      }, {
-        value: 6,
-        label: '已拒单'
       }],
-      activeName: '全部'
+      activeName: '全部',
+      formDataRules: {
+        orderLogisticsNo: [
+          {
+            required: true,
+            message: '请填物流单号',
+            trigger: 'blur'
+          }
+        ],
+        afterStatus: [
+          {
+            required: true,
+            message: '变跟前状态有误',
+            trigger: 'change'
+          }
+        ],
+        beforeStatus: [{
+          required: true,
+          message: '变跟后状态有误',
+          trigger: 'change'
+        }]
+      }
     }
   },
   methods: {
@@ -208,7 +239,7 @@ export default {
         this.searchForm.startTime = '';
         this.searchForm.endTime = '';
       }
-      api.post('/order/getOrderList', this.searchForm).then(response => {
+      api.post('/order/getReceiveOrderList', this.searchForm).then(response => {
         if (response.data.code === 1) {
           this.tableList = response.data.data.list;
           this.pageSettings.total = response.data.data.total
@@ -220,7 +251,6 @@ export default {
     // 重置
     searchReset(formName) {
       this.$refs[formName].resetFields();
-      this.setOMDate();
       // 查询条件重置之后重新查询列表
       this.getData();
     },
@@ -250,40 +280,45 @@ export default {
         params: {}
       })
     },
-    modify(row){
-
+    receiveOrder (value){
+      this.modifyOrder(2,value);
     },
-    deletOrder(value){
-      this.$confirm('是否删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-        center: true
-      }).then(() => {
-        api.post('/order/deleteIssueOrder?orderId='+value).then(response => {
-          if (response.data.code === 1) {
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            });
-          }else{
-            this.$message({
-              type: 'error',
-              message: response.data.msg
-            });
-          }
-          this.getData();
-        })
+    refuseOrder(value){
+      this.modifyOrder(6,value)
+    },
+    trackOrderPre(value){
+      this.formData = value;
+      this.formData['beforeStatus'] = this.formData.orderStatus;
+      this.formData['afterStatus'] = this.formData.orderStatus+1;
+      this.dialogFormVisible = true;
+    },
+    trackOrder(){
+      this.$refs['formDataForm'].validate((valid) => {
+        if (valid) {
+          this.modifyOrder(this.formData.afterStatus,this.formData)
+        }
       })
     },
-    checkIssue(value){
-      return moment().isBefore(value);
-
+    modifyOrder(status,value){
+      api.post('/order/modifyOrder?status='+status, value).then(response => {
+        if (response.data.code === 1) {
+          this.$message({
+            type: 'success',
+            message: '操作成功!'
+          });
+          this.dialogFormVisible = false;
+          this.getData();
+        }else{
+          this.$message({
+            type: 'error',
+            message: response.data.msg
+          });
+        }
+      })
     }
   },
   mounted() {
     this.searchForm.tradeType = this.$route.params.tradeType;
-    this.currentTime = new Date();
     this.getData();
   }
 }

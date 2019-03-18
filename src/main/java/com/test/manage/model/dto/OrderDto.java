@@ -11,5 +11,6 @@ import lombok.Data;
 @Data
 public class OrderDto extends Order {
     private String userName;
-    private String companyName;
+    private String issueCompanyName;
+    private String receiveCompanyName;
 }

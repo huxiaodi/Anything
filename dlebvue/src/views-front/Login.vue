@@ -543,6 +543,7 @@
                 let data = response.data.data;
                 this.$root.$data.user = data;
                 sessionStorage.setItem('dleb_token', data.userToken);
+                sessionStorage.setItem('userType', data.userType);
                 sessionStorage.setItem('dleb_user', JSON.stringify(data));
                 // 是否记住账号密码
                 if (this.isKeepLoginInfo) {

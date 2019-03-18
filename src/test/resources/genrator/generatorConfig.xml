@@ -58,8 +58,12 @@
         </table>
         <table tableName="user" domainObjectName="User">
         </table>-->
-        <table tableName="goods_order" domainObjectName="Order">
+       <!-- <table tableName="goods_order" domainObjectName="Order">
+        </table>-->
+        <table tableName="order_trace" domainObjectName="OrderTrace">
         </table>
+
+
 
     </context>
 

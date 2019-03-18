@@ -77,7 +77,6 @@ public class UserServiceImpl implements UserService {
             criteria.andUserNameEqualTo(userName).andUserTypeEqualTo(userType);
         } else {
             criteria.andUserNameEqualTo(userName).andUserTypeNotEqualTo(0);
-            ;
         }
         User user = userMapper.selectByExample(userExample).stream().findFirst().orElse(null);
         if (user == null) {
@@ -96,9 +95,10 @@ public class UserServiceImpl implements UserService {
         authUser.setUserCompanyId(user.getUserCompanyId());
         authUser.setUserHeadImg(user.getUserHeadImg());
         authUser.setUserCnName(user.getUserCnName());
-        if (user.getUserType().equals(2)) { // 企业用户
+        if (user.getUserType().equals(2) || user.getUserType().equals(3) ) { // 企业用户
             Company company = companyMapper.selectByPrimaryKey(user.getUserCompanyId());
             authUser.setUserCompanyName(company.getCompanyName());
+            authUser.setUserCompanyId(company.getCompanyId());
         } else if (user.getUserType().equals(1)) {//个人用户
         }
         String token = auth.createJWToken(authUser);

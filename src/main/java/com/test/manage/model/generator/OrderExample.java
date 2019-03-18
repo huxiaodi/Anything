@@ -309,143 +309,143 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdIsNull() {
-            addCriterion("order_create_id is null");
+        public Criteria andOrderCompanyIdIsNull() {
+            addCriterion("order_company_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdIsNotNull() {
-            addCriterion("order_create_id is not null");
+        public Criteria andOrderCompanyIdIsNotNull() {
+            addCriterion("order_company_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdEqualTo(String value) {
-            addCriterion("order_create_id =", value, "orderCreateId");
+        public Criteria andOrderCompanyIdEqualTo(String value) {
+            addCriterion("order_company_id =", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdNotEqualTo(String value) {
-            addCriterion("order_create_id <>", value, "orderCreateId");
+        public Criteria andOrderCompanyIdNotEqualTo(String value) {
+            addCriterion("order_company_id <>", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdGreaterThan(String value) {
-            addCriterion("order_create_id >", value, "orderCreateId");
+        public Criteria andOrderCompanyIdGreaterThan(String value) {
+            addCriterion("order_company_id >", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdGreaterThanOrEqualTo(String value) {
-            addCriterion("order_create_id >=", value, "orderCreateId");
+        public Criteria andOrderCompanyIdGreaterThanOrEqualTo(String value) {
+            addCriterion("order_company_id >=", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdLessThan(String value) {
-            addCriterion("order_create_id <", value, "orderCreateId");
+        public Criteria andOrderCompanyIdLessThan(String value) {
+            addCriterion("order_company_id <", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdLessThanOrEqualTo(String value) {
-            addCriterion("order_create_id <=", value, "orderCreateId");
+        public Criteria andOrderCompanyIdLessThanOrEqualTo(String value) {
+            addCriterion("order_company_id <=", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdLike(String value) {
-            addCriterion("order_create_id like", value, "orderCreateId");
+        public Criteria andOrderCompanyIdLike(String value) {
+            addCriterion("order_company_id like", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdNotLike(String value) {
-            addCriterion("order_create_id not like", value, "orderCreateId");
+        public Criteria andOrderCompanyIdNotLike(String value) {
+            addCriterion("order_company_id not like", value, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdIn(List<String> values) {
-            addCriterion("order_create_id in", values, "orderCreateId");
+        public Criteria andOrderCompanyIdIn(List<String> values) {
+            addCriterion("order_company_id in", values, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdNotIn(List<String> values) {
-            addCriterion("order_create_id not in", values, "orderCreateId");
+        public Criteria andOrderCompanyIdNotIn(List<String> values) {
+            addCriterion("order_company_id not in", values, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdBetween(String value1, String value2) {
-            addCriterion("order_create_id between", value1, value2, "orderCreateId");
+        public Criteria andOrderCompanyIdBetween(String value1, String value2) {
+            addCriterion("order_company_id between", value1, value2, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderCreateIdNotBetween(String value1, String value2) {
-            addCriterion("order_create_id not between", value1, value2, "orderCreateId");
+        public Criteria andOrderCompanyIdNotBetween(String value1, String value2) {
+            addCriterion("order_company_id not between", value1, value2, "orderCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdIsNull() {
-            addCriterion("order_receive_id is null");
+        public Criteria andOrderReceiveCompanyIdIsNull() {
+            addCriterion("order_receive_company_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdIsNotNull() {
-            addCriterion("order_receive_id is not null");
+        public Criteria andOrderReceiveCompanyIdIsNotNull() {
+            addCriterion("order_receive_company_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdEqualTo(String value) {
-            addCriterion("order_receive_id =", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdEqualTo(String value) {
+            addCriterion("order_receive_company_id =", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdNotEqualTo(String value) {
-            addCriterion("order_receive_id <>", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdNotEqualTo(String value) {
+            addCriterion("order_receive_company_id <>", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdGreaterThan(String value) {
-            addCriterion("order_receive_id >", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdGreaterThan(String value) {
+            addCriterion("order_receive_company_id >", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdGreaterThanOrEqualTo(String value) {
-            addCriterion("order_receive_id >=", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdGreaterThanOrEqualTo(String value) {
+            addCriterion("order_receive_company_id >=", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdLessThan(String value) {
-            addCriterion("order_receive_id <", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdLessThan(String value) {
+            addCriterion("order_receive_company_id <", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdLessThanOrEqualTo(String value) {
-            addCriterion("order_receive_id <=", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdLessThanOrEqualTo(String value) {
+            addCriterion("order_receive_company_id <=", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdLike(String value) {
-            addCriterion("order_receive_id like", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdLike(String value) {
+            addCriterion("order_receive_company_id like", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdNotLike(String value) {
-            addCriterion("order_receive_id not like", value, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdNotLike(String value) {
+            addCriterion("order_receive_company_id not like", value, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdIn(List<String> values) {
-            addCriterion("order_receive_id in", values, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdIn(List<String> values) {
+            addCriterion("order_receive_company_id in", values, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdNotIn(List<String> values) {
-            addCriterion("order_receive_id not in", values, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdNotIn(List<String> values) {
+            addCriterion("order_receive_company_id not in", values, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdBetween(String value1, String value2) {
-            addCriterion("order_receive_id between", value1, value2, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdBetween(String value1, String value2) {
+            addCriterion("order_receive_company_id between", value1, value2, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderReceiveIdNotBetween(String value1, String value2) {
-            addCriterion("order_receive_id not between", value1, value2, "orderReceiveId");
+        public Criteria andOrderReceiveCompanyIdNotBetween(String value1, String value2) {
+            addCriterion("order_receive_company_id not between", value1, value2, "orderReceiveCompanyId");
             return (Criteria) this;
         }
 
@@ -1756,6 +1756,146 @@ public class OrderExample {
 
         public Criteria andOrderRemarkNotBetween(String value1, String value2) {
             addCriterion("order_remark not between", value1, value2, "orderRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdIsNull() {
+            addCriterion("order_create_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdIsNotNull() {
+            addCriterion("order_create_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdEqualTo(String value) {
+            addCriterion("order_create_user_id =", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdNotEqualTo(String value) {
+            addCriterion("order_create_user_id <>", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdGreaterThan(String value) {
+            addCriterion("order_create_user_id >", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("order_create_user_id >=", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdLessThan(String value) {
+            addCriterion("order_create_user_id <", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdLessThanOrEqualTo(String value) {
+            addCriterion("order_create_user_id <=", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdLike(String value) {
+            addCriterion("order_create_user_id like", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdNotLike(String value) {
+            addCriterion("order_create_user_id not like", value, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdIn(List<String> values) {
+            addCriterion("order_create_user_id in", values, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdNotIn(List<String> values) {
+            addCriterion("order_create_user_id not in", values, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdBetween(String value1, String value2) {
+            addCriterion("order_create_user_id between", value1, value2, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderCreateUserIdNotBetween(String value1, String value2) {
+            addCriterion("order_create_user_id not between", value1, value2, "orderCreateUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdIsNull() {
+            addCriterion("order_receive_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdIsNotNull() {
+            addCriterion("order_receive_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdEqualTo(String value) {
+            addCriterion("order_receive_user_id =", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdNotEqualTo(String value) {
+            addCriterion("order_receive_user_id <>", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdGreaterThan(String value) {
+            addCriterion("order_receive_user_id >", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("order_receive_user_id >=", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdLessThan(String value) {
+            addCriterion("order_receive_user_id <", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdLessThanOrEqualTo(String value) {
+            addCriterion("order_receive_user_id <=", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdLike(String value) {
+            addCriterion("order_receive_user_id like", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdNotLike(String value) {
+            addCriterion("order_receive_user_id not like", value, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdIn(List<String> values) {
+            addCriterion("order_receive_user_id in", values, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdNotIn(List<String> values) {
+            addCriterion("order_receive_user_id not in", values, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdBetween(String value1, String value2) {
+            addCriterion("order_receive_user_id between", value1, value2, "orderReceiveUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderReceiveUserIdNotBetween(String value1, String value2) {
+            addCriterion("order_receive_user_id not between", value1, value2, "orderReceiveUserId");
             return (Criteria) this;
         }
 

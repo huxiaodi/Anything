@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface OrderCuMapper {
     List<OrderDto> getOrderList(QueryParams queryParams);
+    List<OrderDto> getReceiveOrderList(QueryParams queryParams);
+    OrderDto getOrderInfo(String orderId);
 }

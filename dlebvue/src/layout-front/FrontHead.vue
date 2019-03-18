@@ -3,7 +3,7 @@
     <div class="header-top-box">
       <ul class="header-top">
         <li class="header-name" style="margin:0;">
-          {{userType}}
+          {{userType === 2 ? '发布方' : (userType === 3 ? '接单方' : '未知用户')}}
         </li>
         <li>
           <router-link to="/AccountCentral">
@@ -32,7 +32,8 @@
       </el-col>
       <el-menu class="el-menu-demo" :default-active="defaultActive" mode="horizontal" router>
         <el-menu-item index="/AccountCentral">我的信息</el-menu-item>
-        <el-menu-item index="/IssueManager">物流发布管理</el-menu-item>
+        <el-menu-item v-if="userType === 2" index="/IssueManager">物流发布管理</el-menu-item>
+        <el-menu-item v-if="userType === 3" index="/OrderManager">订单管理</el-menu-item>
       </el-menu>
     </el-row>
   </div>
@@ -108,13 +109,7 @@
             break;
         }
         var user = sessionStorage.getItem('dleb_user');
-        var userType = JSON.parse(user).userType;
-        if (userType === 1) {
-          this.userType = '个人';
-        }
-        if (userType === 2) {
-          this.userType = '企业';
-        }
+        this.userType = JSON.parse(user).userType;
       }
     },
     created() {

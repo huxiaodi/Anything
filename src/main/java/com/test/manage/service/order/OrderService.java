@@ -16,4 +16,13 @@ public interface OrderService {
     void assignOrder(OrderForm orderForm);
 
     List<OrderDto> getOrderList(QueryParams queryParams);
+
+    List<OrderDto> getReceiveOrderList(QueryParams queryParams);
+
+    void deleteIssueOrder(String orderId);
+
+    OrderDto getOrderInfo(String orderId);
+
+   void modifyOrderStatus(OrderDto orderDto ,Integer status);
+
 }
