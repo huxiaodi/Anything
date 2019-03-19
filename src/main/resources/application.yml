@@ -87,7 +87,6 @@ awesome:
   ebpay:
     staticUrl: http://staticstest.qiatuchina.com
     staticPath: /qiatu/static
-    projectPath: ebpay
 pagehelper:
   helper-dialect: mysql
   offsetAsPageNum: true

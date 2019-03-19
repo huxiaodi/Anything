@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dllg</groupId>
-    <artifactId>ebpay</artifactId>
+    <groupId>com.test</groupId>
+    <artifactId>manager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ebpay</name>
+    <name>manager</name>
     <description></description>
 
     <parent>
@@ -285,7 +285,7 @@
     </repositories>
 
     <build>
-        <finalName>ebpay</finalName>
+        <finalName>manager</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
