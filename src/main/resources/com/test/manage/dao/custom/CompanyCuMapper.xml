@@ -26,20 +26,15 @@
             company.company_organization_code_img,
             company.company_is_three_in_one,
             company.company_unified_social_credit_ldentifier,
-            company.company_license_no,
-        dict.dict_value
+            company.company_license_no
         FROM company
           LEFT JOIN user ON company.company_Id=user.user_company_id
-        left join (select * from  dict where dict_type = '业务来源')dict on user.user_register_from = dict.dict_key
         <where>
             <if test="startTime!=null">
                 and user.user_create_time <![CDATA[ >= ]]> #{startTime}
             </if>
             <if test="endTime!=null">
                 and user.user_create_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
-            </if>
-            <if test="source!=null and source!=''">
-                and user.user_register_from=#{source}
             </if>
             <if test="type!=null and type!=''">
                 and user.user_certificate_type=#{type}

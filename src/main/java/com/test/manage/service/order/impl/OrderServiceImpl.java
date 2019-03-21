@@ -71,11 +71,18 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.insertSelective(order);
     }
 
+
     @Override
     public List<OrderDto> getOrderList(QueryParams queryParams) {
+        return orderCuMapper.getOrderList(queryParams);
+    }
+
+    @Override
+    public List<OrderDto> getIssueOrderList(QueryParams queryParams) {
         queryParams.setIssueCompanyId(auth.getCurrentUser().getUserCompanyId());
         return orderCuMapper.getOrderList(queryParams);
     }
+
 
     @Override
     public List<OrderDto> getReceiveOrderList(QueryParams queryParams) {
@@ -85,13 +92,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteIssueOrder(String orderId) {
-        if(2 != auth.getCurrentUser().getUserType()){
+        if(2 != auth.getCurrentUser().getUserType() || 0 != auth.getCurrentUser().getUserType()){
             throw new AnyException("当前用户类型不可删除订单");
         }
         Order order = orderMapper.selectByPrimaryKey(orderId);
         if(order != null){
-            if( !auth.getCurrentUser().getUserCompanyId().equals(order.getOrderCompanyId()) ){
-                throw new AnyException("非当前用户单据不可删除");
+            if(0 != auth.getCurrentUser().getUserType()){
+                if( !auth.getCurrentUser().getUserCompanyId().equals(order.getOrderCompanyId()) ){
+                    throw new AnyException("非当前用户单据不可删除");
+                }
             }
             if( 1 != order.getOrderStatus()){
                 throw new AnyException("当前单据状态不可删除，请刷新后查看");
@@ -186,7 +195,6 @@ public class OrderServiceImpl implements OrderService {
         } else {
             throw new AnyException("状态操作失败，请稍后尝试");
         }
-
         OrderTrace orderTrace =  new OrderTrace();
         orderTrace.setCreateTime(new Date());
         orderTrace.setOrderTraceContent(conent);

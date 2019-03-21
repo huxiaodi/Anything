@@ -18,8 +18,6 @@
   import LayoutHead from './Head.vue'
   import LayoutTabs from './Tabs.vue'
   import LayoutFooter from './Footer.vue'
-  import LayoutAside from './Aside.vue'
-  import _ from 'lodash'
 
   export default {
     name: 'Loyout',
@@ -33,7 +31,7 @@
         return this.$root.$data.documentClientHeight - 90
       }
     },
-    components: {LayoutAside, LayoutHead, LayoutTabs, LayoutFooter},
+    components: {LayoutHead, LayoutTabs, LayoutFooter},
     mounted() {
     }
   }

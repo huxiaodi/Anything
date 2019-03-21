@@ -20,21 +20,16 @@
                    background-color="#36404a"
                    text-color="#ccc"
                    active-text-color="#ffd04b" router>
-            <el-submenu index="1">
-              <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span>会员管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item v-if="routerIsAlive[3].meta.show" index="/personalMemberList">个人会员管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[7].meta.show" index="/BusinessMemberList">企业会员管理</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-menu-item v-if="routerIsAlive[13].meta.show" index="/AccountManageList">
+            <el-menu-item  index="/BusinessMemberList">
               <i class="el-icon-menu"></i>
-              <span slot="title">货物管理</span>
+              <span slot="title">会员管理</span>
             </el-menu-item>
-            <el-menu-item v-if="routerIsAlive[10].meta.show" index="/TransactionManageList">
+
+            <el-menu-item  index="/OrderManageList">
+              <i class="el-icon-menu"></i>
+              <span slot="title">物流管理</span>
+            </el-menu-item>
+            <el-menu-item  index="/AnnouncementManageList">
               <i class="el-icon-menu"></i>
               <span slot="title">公告信息</span>
             </el-menu-item>
@@ -44,10 +39,10 @@
                 <span slot="title">系统设置</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item v-if="routerIsAlive[17].meta.show" index="/RoleManageList">角色管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[19].meta.show" index="/UserMemberList">用户管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[29].meta.show" index="/Resource">资源管理</el-menu-item>
-                <el-menu-item v-if="routerIsAlive[22].meta.show" index="/PersonalCenter">个人中心</el-menu-item>
+                <el-menu-item index="/RoleManageList">角色管理</el-menu-item>
+                <el-menu-item index="/UserMemberList">用户管理</el-menu-item>
+                <el-menu-item index="/Resource">资源管理</el-menu-item>
+                <el-menu-item index="/PersonalCenter">个人中心</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>
@@ -74,8 +69,7 @@
         userName: this.$root.$data.user.userName,
         resourceList: [],
         routerIsAlive: [],
-        defaultActive: '',
-        showInfo:true
+        defaultActive: ''
     }
     },
     methods: {
@@ -114,9 +108,8 @@
         let path = this.$route.path
         console.log(path);
         let result = ''
-        let pathList = ['/personalMemberList', '/BusinessMemberList', '/AccountManageList', '/TransactionManageList', '/BusinessManageList', '/AccountManagement', '/LedgerAccountList',
-          '/FeeAccountList', '/DataGroupManageList', '/RoleManageList', '/UserMemberList', '/Resource', '/PersonalCenter', '/PasswordSetting', '/PasswordEdit', '/DictionaryManageList'
-        ]
+        let pathList = [ '/BusinessMemberList', '/OrderManageList', '/AnnouncementManageList',
+          '/RoleManageList', '/UserMemberList', '/Resource', '/PersonalCenter']
         _.forEach(pathList, function (value) {
           if (_.startsWith(path, value)) {
             result = value
@@ -124,15 +117,6 @@
           }
         });
         this.defaultActive = result
-      },
-      checkSet() {
-        api.get('admin/roleManage/checkUserPayPassword').then(response => {
-          if (response.data.code === 1) {
-            this.showInfo = true;
-          } else {
-            this.showInfo = false;
-          }
-        })
       }
     },
     created() {
@@ -140,12 +124,9 @@
 
       for(var i=0;i<this.routerIsAlive.length;i++){
           console.log(i+"::::"+this.routerIsAlive[i].name+  "  "+this.routerIsAlive[i].path +" "+this.routerIsAlive[i].meta.show);
-
-          //routerIsAlive[23].meta.show
       }
       this.getData()
       this.getDefaultActive();
-      this.checkSet();
     },
     watch: {
       '$route'(to, from) {

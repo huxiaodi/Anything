@@ -83,7 +83,7 @@
       </el-table-column>
       <el-table-column prop="orderRemark" align="center" label="备注" width="100px" show-overflow-tooltip></el-table-column>
     </el-table>
-    <el-pagination :total="pageSettings.total" :current-page="pageSettings.pageNum" :page-size="pageSettings.pageSize" :page-sizes="pageSettings.pageSizes" @size-change="sizeChange" @current-change="currentChange" :layout="pageSettings.layout" align="right">
+    <el-pagination :total="pageSettings.total" :current-page="pageSettings.pageNum" :page-size="pageSettings.pageSize" :page-sizes="pageSettings.pageSizes" @size-change="sizeChange" @current-change="currentChange" :layout="pageSettings.layout" align="center">
     </el-pagination>
   </el-row>
 
@@ -119,15 +119,9 @@
 <script>
 import api from '../api/fetch'
 import * as Message from '../utils/messageUtil'
-import {
-  pageMixin
-} from '../common/mixin.js'
-import {
-  parseTime
-} from '../utils/index'
-import {
-  exportModel
-} from '../common/export'
+import { pageMixin } from '../common/mixin.js'
+import { parseTime} from '../utils/index'
+import {exportModel} from '../common/export'
 
 export default {
   name: 'FeeDetailList',
@@ -136,6 +130,8 @@ export default {
     return {
       searchForm: {
         searchTimes: null,
+        pickStartTime: '',
+        pickEndTime: '',
         keyword: '',
         orderIsIssue: '',
         orderAssign: '',
@@ -233,11 +229,11 @@ export default {
     getData() {
       this.isShowLoadingIcon = true;
       if (this.searchForm.searchTimes !== null) {
-        this.searchForm.startTime = this.searchForm.searchTimes[0];
-        this.searchForm.endTime = this.searchForm.searchTimes[1];
+        this.searchForm.pickStartTime = this.searchForm.searchTimes[0];
+        this.searchForm.pickEndTime = this.searchForm.searchTimes[1];
       } else {
-        this.searchForm.startTime = '';
-        this.searchForm.endTime = '';
+        this.searchForm.pickStartTime = '';
+        this.searchForm.pickEndTime = '';
       }
       api.post('/order/getReceiveOrderList', this.searchForm).then(response => {
         if (response.data.code === 1) {

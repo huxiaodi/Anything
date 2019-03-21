@@ -308,6 +308,76 @@ public class CompanyExample {
             return (Criteria) this;
         }
 
+        public Criteria andCompanyUserNameIsNull() {
+            addCriterion("company_user_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameIsNotNull() {
+            addCriterion("company_user_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameEqualTo(String value) {
+            addCriterion("company_user_name =", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameNotEqualTo(String value) {
+            addCriterion("company_user_name <>", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameGreaterThan(String value) {
+            addCriterion("company_user_name >", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameGreaterThanOrEqualTo(String value) {
+            addCriterion("company_user_name >=", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameLessThan(String value) {
+            addCriterion("company_user_name <", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameLessThanOrEqualTo(String value) {
+            addCriterion("company_user_name <=", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameLike(String value) {
+            addCriterion("company_user_name like", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameNotLike(String value) {
+            addCriterion("company_user_name not like", value, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameIn(List<String> values) {
+            addCriterion("company_user_name in", values, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameNotIn(List<String> values) {
+            addCriterion("company_user_name not in", values, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameBetween(String value1, String value2) {
+            addCriterion("company_user_name between", value1, value2, "companyUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserNameNotBetween(String value1, String value2) {
+            addCriterion("company_user_name not between", value1, value2, "companyUserName");
+            return (Criteria) this;
+        }
+
         public Criteria andCompanyShortNameIsNull() {
             addCriterion("company_short_name is null");
             return (Criteria) this;

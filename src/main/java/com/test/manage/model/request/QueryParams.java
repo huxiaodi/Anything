@@ -20,6 +20,8 @@ public class QueryParams extends Page {
     private String status; //状态
     private String keyword;
 
+    private Date pickStartTime;
+    private Date pickEndTime;
     private String issueCompanyId;
     private String recevieCompanyId;
     private Boolean orderAssign;

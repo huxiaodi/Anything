@@ -16,7 +16,6 @@
             企业基本信息
           </div>
           <div class="" style="float:right">
-            <!--<el-button type="text" @click="changeInformation" style="padding: 0;display: inline"><i class="el-icon-edit-outline"></i>修改企业信息</el-button>-->
           </div>
         </div>
         <div class="account-content">
@@ -125,69 +124,6 @@
           </div>
         </div>
       </div>
-      <!-- 个人信息 -->
-      <div  v-if="people.userType==1">
-        <div class="certificates-btn" @click="certificatesShow=!certificatesShow" v-show="_btn('zhanghuzhongxin_idInformation')">
-          查看证件信息
-        </div>
-        <!-- 头部标题 -->
-        <div class="user-form-title">
-          <div class="" style="float:left;font-size:16px;
-            font-weight:bold;">
-            个人基本信息:
-          </div>
-          <div class="" style="float:right">
-            <el-button type="text" @click="changeInformation" style="padding: 0;display: inline"><i class="el-icon-edit-outline"></i>修改个人信息</el-button>
-          </div>
-        </div>
-        <div class="account-content personal">
-          <div class="account-content-item">
-            <!-- ------1--------- -->
-            <div class="account-content-item-tit">
-              个人姓名:
-            </div>
-            <div class="account-content-item-content">
-              {{people.userCnName}}
-            </div>
-          </div>
-          <div class="account-content-item">
-            <!-- ------1--------- -->
-            <div class="account-content-item-tit">
-              证件类型:
-            </div>
-            <div class="account-content-item-content">
-              {{people.userCertificateType==1 || people.userCertificateType=='身份证'?'身份证':''}}
-            </div>
-          </div>
-          <div class="account-content-item">
-            <!-- ------1--------- -->
-            <div class="account-content-item-tit">
-              联系人手机号:
-            </div>
-            <div class="account-content-item-content">
-              {{people.userMobile}}
-            </div>
-          </div>
-          <div class="account-content-item">
-            <!-- ------1--------- -->
-            <div class="account-content-item-tit">
-              身份证号:
-            </div>
-            <div class="account-content-item-content">
-              {{people.userCertificateNumber}}
-            </div>
-          </div>
-          <div class="account-content-item">
-            <!-- ------1--------- -->
-            <div class="account-content-item-tit">
-              邮箱:
-            </div>
-            <div class="account-content-item-content">
-              {{people.userEmail}}
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -242,15 +178,6 @@
           </div>
         </div>
         </div>
-
-      </div>
-      <div v-if="people.userType==1">
-        <div class="certificates-content-item">
-          <img v-bind:src="people.userIdCardFontImg">
-        </div>
-        <div class="certificates-content-item">
-          <img v-bind:src="people.userIdCardBackImg">
-        </div>
       </div>
     </div>
   </transition>
@@ -270,35 +197,8 @@ export default {
     return {
       certificatesShow:false,
       user: JSON.parse(sessionStorage.getItem('dleb_user')),
-      infoTitle: 4,
-      infoText: 8,
       people: {}, //个人信息
       enterprise: {}, //企业信息
-      uploadToken:{token: sessionStorage.getItem('dleb_token')},
-      balance: 0, //可用余额
-      balanceT: 0, //可提现
-
-      bankCards: {
-        show: ''
-      }, //银行卡列表
-      bankCardsList:[],
-      bankList:[],
-      selected:'-----------未绑卡-----------',
-
-      accountDataList: [{
-        accountId: '',
-        acctAvailBal: '',
-        cashAmt: ''
-      }],
-      dialogExplain: false,
-      isShow:false,
-      isHide:true,
-      balanceForm: {
-        acctAvailBal: '',
-        acctAvailBalSave:'',
-        cashAmt:'',
-        cashAmtSave:''
-      },
     }
   },
   //定义方法
@@ -313,13 +213,6 @@ export default {
           Message.MessageError(response.data.msg);
         }
       });
-    },
-
-    bankGo(){
-      this.$router.push({
-        name: '银行卡管理',
-        params: {}
-      })
     }
   },
 

@@ -52,7 +52,7 @@ public class OrderController extends BaseController {
     }
 
     /**
-     * 获取发布列表
+     * 获取单据列表
      * @param queryParams
      * @return
      */
@@ -71,6 +71,16 @@ public class OrderController extends BaseController {
         return success(new PageInfo<>(orderService.getReceiveOrderList(queryParams)));
     }
 
+    /**
+     * 获取发布方单据列表
+     * @param queryParams
+     * @return
+     */
+    @PostMapping("/getIssueOrderList")
+    public ApiResult getIssueOrderList(@RequestBody QueryParams queryParams){
+        return success(new PageInfo<>(orderService.getIssueOrderList(queryParams)));
+    }
+
     @PostMapping("/deleteIssueOrder")
     public ApiResult deleteIssueOrder(@RequestParam String orderId){
         orderService.deleteIssueOrder(orderId);
@@ -86,7 +96,7 @@ public class OrderController extends BaseController {
 
     @PostMapping("/modifyOrder")
     public ApiResult modifyOrder(@RequestBody OrderDto orderDto,@RequestParam Integer status){
-        orderService.modifyOrderStatus(orderDto,status);
+        orderService.modifyOrderStatus(orderDto, status);
         return success();
     }
 

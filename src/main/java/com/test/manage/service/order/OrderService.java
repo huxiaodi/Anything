@@ -17,6 +17,8 @@ public interface OrderService {
 
     List<OrderDto> getOrderList(QueryParams queryParams);
 
+    List<OrderDto> getIssueOrderList(QueryParams queryParams);
+
     List<OrderDto> getReceiveOrderList(QueryParams queryParams);
 
     void deleteIssueOrder(String orderId);

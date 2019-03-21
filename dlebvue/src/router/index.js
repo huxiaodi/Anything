@@ -5,45 +5,23 @@ import Loyout from '@/layout/Loyout'
 import NotFound from '@/views/404'
 import Home from '@/views/Home'
 import AdminLogin from '@/views/AdminLogin'
-import CompanyBindCard from '@/views/CompanyBindCard'
-import PersonalBindCard from '@/views/PersonalBindCard'
-import PersonalMemberList from '@/views/PersonalMemberList'
-import MemberInfoEdit from '@/views/MemberInfoEdit'
-import TransactionManageList from '@/views/TransactionManageList'
+import AnnouncementManageList from '@/views/AnnouncementManageList'
 import TransactionInfo from '@/views/TransactionInfo'
-import DictionaryManageList from '@/views/DictionaryManageList'
 import UserMemberList from '@/views/UserMemberList'
 import UserCreate from '@/views/UserCreate'
-import ReturnShortMessage from '@/views/ReturnShortMessage'
-import ReturnMoney from '@/views/ReturnMoney'
 import BusinessMemberList from '@/views/BusinessMemberList'
 import BusinessMemberEdit from '@/views/BusinessMemberEdit'
 import BusinessMemberDetails from '@/views/BusinessMemberDetails'
-import BusinessManageList from '@/views/BusinessManageList'
-import AccountManageList from '@/views/AccountManageList'
+import OrderManageList from '@/views/OrderManageList'
 import AccountDetails from '@/views/AccountDetails'
-import DataGroupManageList from '@/views/DataGroupManageList'
-import DataGroupManage from '@/views/DataGroupManage'
 import RoleManageList from '@/views/RoleManageList'
 import RoleAddEdit from '@/views/RoleAddEdit'
 import PersonalCenter from '@/views/PersonalCenter'
 import PasswordSetting from '@/views/PasswordSetting'
 import PasswordEdit from '@/views/PasswordEdit'
-import LedgerAccountList from '@/views/LedgerAccountList'
-import LedgerAccountAdjust from '@/views/LedgerAccountAdjust'
-import LedgerAccountDetails from '@/views/LedgerAccountDetails'
-import FeeAccountList from '@/views/FeeAccountList'
 import Resource from '@/views/Resource'
-import AccountManagement from '@/views/AccountManagement'
 import MemberLog from '@/views/MemberLog'
 import UserMemberLog from '@/views/UserMemberLog'
-import InterestDict from '@/views/InterestDict'
-import InterestManager from '@/views/InterestManager'
-import KindDict from '@/views/KindDict'
-import CustomerDict from '@/views/CustomerDict'
-import FreeDayDict from '@/views/FreeDayDict'
-import InvoiceManage from '@/views/InvoiceManage'
-import InvoiceManageDetail from '@/views/InvoiceManageDetail'
 // 用户端页面导入
 import Login from '@/views-front/Login'
 import FrontLoyout from '@/layout-front/FrontLoyout'
@@ -85,46 +63,23 @@ export const FrontViews = [
 
 export const AdminViews = [
   {path: '/home', component: Home, name: '首页', meta: {keepAlive: true, cname: Home.name}},
-  {path: '/companyBindCard', component: CompanyBindCard, name: '企业绑定银行卡', meta: {keepAlive: true, cname: CompanyBindCard.name, show: false}},
-  {path: '/personalBindCard', component: PersonalBindCard, name: '个人绑定银行卡', meta: {keepAlive: true, cname: PersonalBindCard.name, show: false}},
-  {path: '/personalMemberList', component: PersonalMemberList, name: '个人会员管理', meta: {keepAlive: true, cname: PersonalMemberList.name, show: false}},
-  {path: '/MemberInfoEdit/:id', component: MemberInfoEdit, name: '个人会员修改', meta: {keepAlive: true, cname: MemberInfoEdit.name, show: false}},
-  {path: '/returnShortMessage', component: ReturnShortMessage, name: '回填短信验证码', meta: {keepAlive: true, cname: ReturnShortMessage.name, show: false}},
-  {path: '/returnMoney', component: ReturnMoney, name: '回填小额鉴权金额', meta: {keepAlive: true, cname: ReturnMoney.name, show: false}},
-  {path: '/BusinessMemberList', component: BusinessMemberList, name: '企业会员管理', meta: {keepAlive: true, cname: BusinessMemberList.name, show: false}},
-  {path: '/BusinessMemberEdit', component: BusinessMemberEdit, name: '企业会员修改', meta: {keepAlive: true, cname: BusinessMemberEdit.name, show: false}},
-  {path: '/BusinessMemberDetails', component: BusinessMemberDetails, name: '企业会员详情', meta: {keepAlive: true, cname: BusinessMemberDetails.name, show: false}},
-  {path: '/TransactionManageList', component: TransactionManageList, name: '交易管理', meta: {keepAlive: true, cname: TransactionManageList.name, show: false}},
-  {path: '/TransactionInfo/:id', component: TransactionInfo, name: '交易管理详情', meta: {keepAlive: true, cname: TransactionInfo.name, show: false}},
-  {path: '/BusinessManageList', component: BusinessManageList, name: '业务管理', meta: {keepAlive: true, cname: BusinessManageList.name, show: false}},
-  {path: '/AccountManageList', component: AccountManageList, name: '账户管理', meta: {keepAlive: true, cname: AccountManageList.name, show: false}},
-  {path: '/AccountDetails/:id', component: AccountDetails, name: '账户详情', meta: {keepAlive: true, cname: AccountDetails.name, show: false}},
-  {path: '/DataGroupManageList', component: DataGroupManageList, name: '数据组管理', meta: {keepAlive: true, cname: DataGroupManageList.name, show: false}},
-  {path: '/DataGroupManage', component: DataGroupManage, name: '创建组', meta: {keepAlive: true, cname: DataGroupManage.name, show: false}},
+  {path: '/BusinessMemberList', component: BusinessMemberList, name: '会员管理', meta: {keepAlive: true, cname: BusinessMemberList.name, show: false}},
+  {path: '/BusinessMemberEdit', component: BusinessMemberEdit, name: '会员修改', meta: {keepAlive: true, cname: BusinessMemberEdit.name, show: false}},
+  {path: '/BusinessMemberDetails', component: BusinessMemberDetails, name: '会员详情', meta: {keepAlive: true, cname: BusinessMemberDetails.name, show: false}},
+  {path: '/AnnouncementManageList', component: AnnouncementManageList, name: '公告管理', meta: {keepAlive: true, cname: AnnouncementManageList.name, show: false}},
+  {path: '/TransactionInfo/:id', component: TransactionInfo, name: '公告详情', meta: {keepAlive: true, cname: TransactionInfo.name, show: false}},
+  {path: '/OrderManageList', component: OrderManageList, name: '物流管理', meta: {keepAlive: true, cname: OrderManageList.name, show: false}},
+  {path: '/AccountDetails/:id', component: AccountDetails, name: '物流详情', meta: {keepAlive: true, cname: AccountDetails.name, show: false}},
   {path: '/RoleManageList', component: RoleManageList, name: '角色管理', meta: {keepAlive: true, cname: RoleManageList.name, show: false}},
   {path: '/RoleAddEdit', component: RoleAddEdit, name: '新增角色', meta: {keepAlive: true, cname: RoleAddEdit.name, show: false}},
   {path: '/UserMemberList', component: UserMemberList, name: '用户管理', meta: {keepAlive: true, cname: UserMemberList.name, show: false}},
   {path: '/UserCreate', component: UserCreate, name: '创建用户', meta: {keepAlive: true, cname: UserCreate.name, show: false}},
-  {path: '/DictionaryManageList', component: DictionaryManageList, name: '字典管理', meta: {keepAlive: true, cname: DictionaryManageList.name, show: false}},
   {path: '/PersonalCenter', component: PersonalCenter, name: '个人中心', meta: {keepAlive: true, cname: PersonalCenter.name, show: false}},
   {path: '/PasswordSetting', component: PasswordSetting, name: '密码设置', meta: {keepAlive: true, cname: PasswordSetting.name, show: false}},
   {path: '/PasswordEdit', component: PasswordEdit, name: '密码修改', meta: {keepAlive: true, cname: PasswordEdit.name, show: false}},
-  {path: '/LedgerAccountList', component: LedgerAccountList, name: '挂账账户', meta: {keepAlive: true, cname: LedgerAccountList.name, show: false}},
-  {path: '/LedgerAccountAdjust', component: LedgerAccountAdjust, name: '子账户调账', meta: {keepAlive: true, cname: LedgerAccountAdjust.name, show: false}},
-  {path: '/LedgerAccountDetails/:id', component: LedgerAccountDetails, name: '挂账详情', meta: {keepAlive: true, cname: LedgerAccountDetails.name, show: false}},
-  {path: '/FeeAccountList', component: FeeAccountList, name: '手续费账户', meta: {keepAlive: true, cname: FeeAccountList.name, show: false}},
   {path: '/Resource', component: Resource, name: '资源管理', meta: {keepAlive: true, cname: Resource.name, show: false}},
-  {path: '/AccountManagement', component: AccountManagement, name: '总账户管理', meta: {keepAlive: true, cname: AccountManagement.name, show: false}},
   {path: '/MemberLog', component: MemberLog, name: '会员登录日志', meta: {keepAlive: true, cname: MemberLog.name, show: false}},
-  {path: '/UserMemberLog', component: UserMemberLog, name: '系统用户登录日志', meta: {keepAlive: true, cname: UserMemberLog.name, show: false}},
-  {path: '/InvoiceManage', component: InvoiceManage, name: '发票管理', meta: {keepAlive: true, cname: InvoiceManage.name, show: true}},
-  {path: '/InterestDict' , component: InterestDict, name: '利率字典', meta: {keepAlive: true, cname: InterestDict.name, show:false}},
-  {path: '/KindDict' , component: KindDict, name: '品种字典', meta: {keepAlive: true, cname: KindDict.name, show:false}},
-  {path: '/CustomerDict' , component: CustomerDict, name: '客户字典', meta: {keepAlive: true, cname: CustomerDict.name, show:false}},
-  {path: '/FreeDayDict' , component: FreeDayDict, name: '免息天数字典', meta: {keepAlive: true, cname: FreeDayDict.name, show:false}},
-  {path: '/InterestManager' , component: InterestManager, name: '贴息计算', meta: {keepAlive: true, cname: InterestManager.name, show:false}},
-  {path: '/InvoiceManageDetail/:id', component: InvoiceManageDetail, name: '发票管理详情', meta: {keepAlive: true, cname: InvoiceManageDetail.name, show: true}}
-
+  {path: '/UserMemberLog', component: UserMemberLog, name: '系统用户登录日志', meta: {keepAlive: true, cname: UserMemberLog.name, show: false}}
 ]
 
 const router = new Router({

@@ -93,7 +93,7 @@
       <el-table-column prop="userName" align="center" label="发布人"  width="150px"></el-table-column>
       <el-table-column prop="orderRemark" align="center" label="备注" width="100px" show-overflow-tooltip></el-table-column>
     </el-table>
-    <el-pagination :total="pageSettings.total" :current-page="pageSettings.pageNum" :page-size="pageSettings.pageSize" :page-sizes="pageSettings.pageSizes" @size-change="sizeChange" @current-change="currentChange" :layout="pageSettings.layout" align="right">
+    <el-pagination :total="pageSettings.total" :current-page="pageSettings.pageNum" :page-size="pageSettings.pageSize" :page-sizes="pageSettings.pageSizes" @size-change="sizeChange" @current-change="currentChange" :layout="pageSettings.layout" align="center">
     </el-pagination>
   </el-row>
 
@@ -208,7 +208,7 @@ export default {
         this.searchForm.startTime = '';
         this.searchForm.endTime = '';
       }
-      api.post('/order/getOrderList', this.searchForm).then(response => {
+      api.post('/order/getIssueOrderList', this.searchForm).then(response => {
         if (response.data.code === 1) {
           this.tableList = response.data.data.list;
           this.pageSettings.total = response.data.data.total

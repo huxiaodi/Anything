@@ -6,7 +6,9 @@
         SELECT
         go.*,
         usp.user_name,
+        comp.company_id issueCompanyId,
         comp.company_name issueCompanyName,
+        comr.company_id receiveCompanyId,
         comr.company_name receiveCompanyName
         FROM
         goods_order go
@@ -15,13 +17,29 @@
         LEFT JOIN company comp ON comp.company_id = go.order_company_id
         LEFT JOIN company comr ON comr.company_id = go.order_receive_company_id
         <where>
-            go.order_company_id = #{issueCompanyId}
+            <if test="issueCompanyId!=null and issueCompanyId != ''">
+                go.order_company_id = #{issueCompanyId}
+            </if>
+
+            <if test="recevieCompanyId!=null and recevieCompanyId != ''">
+                (go.order_receive_company_id  is null or  go.order_receive_company_id  = '' or  (go.order_receive_company_id = #{recevieCompanyId} ) )
+                and go.order_issue_time &lt; CURRENT_TIMESTAMP
+            </if>
+
             <if test="startTime!=null">
                 and go.order_issue_time <![CDATA[ >= ]]> #{startTime}
             </if>
             <if test="endTime!=null">
                 and go.order_issue_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
             </if>
+
+            <if test="pickStartTime!=null">
+                and go.order_pickup_time <![CDATA[ >= ]]> #{pickStartTime}
+            </if>
+            <if test="pickEndTime!=null">
+                and go.order_pickup_time <![CDATA[ <= ]]> DATE_ADD(#{pickEndTime},INTERVAL 1 DAY)
+            </if>
+
             <if test="orderAssign!=null and orderAssign!=''">
                 and go.order_assign=#{orderAssign}
             </if>
@@ -48,6 +66,8 @@
                 POSITION(#{keyword} IN go.order_receive_district) OR
                 POSITION(#{keyword} IN go.order_pickup_address) OR
                 POSITION(#{keyword} IN go.order_receive_address) OR
+                POSITION(#{keyword} IN comp.company_name) OR
+                POSITION(#{keyword} IN usp.user_name,) OR
                 POSITION(#{keyword} IN comr.company_name)
                 )
             </if>

@@ -60,9 +60,10 @@
         </table>-->
        <!-- <table tableName="goods_order" domainObjectName="Order">
         </table>-->
-        <table tableName="order_trace" domainObjectName="OrderTrace">
+        <!--<table tableName="order_trace" domainObjectName="OrderTrace">
+        </table>-->
+        <table tableName="company" domainObjectName="Company">
         </table>
-
 
 
     </context>

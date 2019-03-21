@@ -23,17 +23,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="注册来源:">
-        <el-select v-model="searchForm.source" placeholder="请选择" filterable clearable>
-          <el-option
-            v-for="item in optionsSource"
-            :key="item.dictKey"
-            :label="item.dictValue"
-            :value="item.dictKey">
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="证件类型:">
+      <el-form-item label="用户类型:">
         <el-select v-model="searchForm.type" placeholder="请选择" filterable clearable>
           <el-option
             v-for="item in optionsType"
@@ -44,7 +34,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="关键字:">
-        <el-tooltip class="item" effect="light" content="用户名、绑定手机号、企业名称、证件号码、联系人、纳税人识别号" placement="bottom-start">
+        <el-tooltip class="item" effect="light" content="用户名、绑定手机号、企业名称、联系人、联系人证件号" placement="bottom-start">
           <el-input v-model="searchForm.keyword" placeholder="关键字" clearable></el-input>
         </el-tooltip>
       </el-form-item>
@@ -78,17 +68,17 @@
       <el-table-column prop="user_mobile" label="绑定手机号" align="center" width="150px"></el-table-column>
       <el-table-column prop="company_name" label="企业名称" align="center" width="150px"
                        show-overflow-tooltip></el-table-column>
-      <el-table-column prop="user_certificate_typeC" label="证件类型" align="center" width="150px"></el-table-column>
-      <el-table-column prop="user_certificate_number" label="证件号码" align="center"
-                       show-overflow-tooltip width="180px"></el-table-column>
       <el-table-column prop="user_statusC" label="会员状态" align="center" width="150px"></el-table-column>
-      <el-table-column prop="dict_value" label="注册来源" align="center" width="150px"></el-table-column>
       <el-table-column prop="company_contact" label="联系人姓名" align="center" width="150px"></el-table-column>
-      <el-table-column prop="company_principal_id_code" label="纳税人识别号" align="center"
-                       show-overflow-tooltip width="180px"></el-table-column>
-      <el-table-column prop="user_id_card_back_img" align="center" width="150%" label="附件">
+      <el-table-column prop="company_contact" label="联系人证件号" align="center" width="150px"></el-table-column>
+      <el-table-column prop="company_contact" label="用户类型" align="center" width="150px">
         <template slot-scope="scope">
-          <a style="cursor:pointer;color: #409EFF;" @click="dialogImage(scope.row)">证件</a>
+          <template v-if="scope.row.company_type === 2">
+            下单方
+          </template>
+          <template v-if="scope.row.company_type === 3">
+            接单方
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -173,28 +163,15 @@
           value: '0',
           label: '禁用'
         }],
-        optionsSource: [{
-          value: '',
-          label: '全部'
-        }, {
-          value: '德邻e宝',
-          label: '德邻e宝'
-        }, {
-          value: '德邻畅途',
-          label: '德邻畅途'
-        }, {
-          value: '德邻云仓',
-          label: '德邻云仓'
-        }],
         optionsType: [{
           value: '',
           label: '全部'
         }, {
-          value: '68',
-          label: '营业执照'
+          value: '2',
+          label: '发布方'
         }, {
-          value: '5',
-          label: '统一信用代码'
+          value: '3',
+          label: '接单方'
         }],
         // 控制禁用弹出框显示不显示
         dialogVisible: false,
@@ -241,17 +218,6 @@
           this.isShowLoadingIcon = false;
         })
       },
-      // 获取查询条件中的下拉列表
-      getQueryInfo() {
-        // 注册来源
-        api.get('/dictManager/getBusinesTradeTypeDict').then(response => {
-          if (response.data.code === 1) {
-            this.optionsSource = response.data.data;
-          } else {
-            Message.MessageError(response.data.msg)
-          }
-        });
-      },
       // 设置合计
       getSummaries(param) {
         const {columns, data} = param;
@@ -284,7 +250,8 @@
       },
       // 点击用户名查看详情页面
       viewDetails(row) {
-        this.$router.push({name: '企业会员详情', params: row})
+        console.log(row.company_id);
+        this.$router.push({name: '会员详情', params: {'companyId':row.company_id}})
       },
       // 修改
       editUser() {
@@ -297,7 +264,7 @@
           return
         }
         // this.$router.push(`/BusinessMemberEdit/${this.multipleSelection[0].company_id}`)
-        this.$router.push({name: '企业会员修改', params: this.multipleSelection[0]})
+        this.$router.push({name: '会员修改', params: this.multipleSelection[0]})
       },
       // 启用
       enableUser() {
@@ -386,19 +353,6 @@
         this.dialogVisible = false;
         this.$refs[formName].resetFields();
       },
-      // 查看附件
-      dialogImage(row) {
-        this.dialogImgVisible = true;
-        // 统一社会信用照片
-        this.dialogImageUrlT = row.company_unified_social_img;
-        // 营业执照照片
-        this.dialogImageUrlY = row.company_license_no_img;
-        // 税务登记证照片
-        this.dialogImageUrlS = row.company_tax_no_img;
-        // 组织结构代码照片
-        this.dialogImageUrlZ = row.company_organization_code_img;
-        this.companyIsThreeInOne = row.company_is_three_in_one;
-      },
       show() {
         var homePage = this.$route.params.homePage;
         if (homePage !== undefined) {
@@ -409,9 +363,6 @@
       }
     },
     mounted() {
-      // this.setDate()
-      // this.show()
-      this.getQueryInfo();
       this.getData();
     }
   }

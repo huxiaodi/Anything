@@ -23,6 +23,13 @@ public class Company {
     private String companyName;
 
     /**
+     *   企业的注册登录用户名称
+     *   company.company_user_name
+     * @mbg.generated
+     */
+    private String companyUserName;
+
+    /**
      *   公司简称
      *   company.company_short_name
      * @mbg.generated
@@ -308,6 +315,24 @@ public class Company {
      */
     public void setCompanyName(String companyName) {
         this.companyName = companyName == null ? null : companyName.trim();
+    }
+
+    /**
+     * 企业的注册登录用户名称
+     * @return the value of company.company_user_name
+     * @mbg.generated
+     */
+    public String getCompanyUserName() {
+        return companyUserName;
+    }
+
+    /**
+     * 企业的注册登录用户名称
+     * @param companyUserName the value for company.company_user_name
+     * @mbg.generated
+     */
+    public void setCompanyUserName(String companyUserName) {
+        this.companyUserName = companyUserName == null ? null : companyUserName.trim();
     }
 
     /**
