@@ -52,7 +52,7 @@ public interface UserService {
     void upload(User user);
 
     // 新用户注册开户
-    ApiResult save(MultipartFile font, MultipartFile back, MultipartFile companyOrganizationCodeImg, MultipartFile companyLicenseNoImg, MultipartFile companyTaxNoImg, User user, Company company, String mobile) throws Exception;
+    ApiResult save(User user, Company company, String mobile) throws Exception;
 
     /**
      * 管理端 用户列表

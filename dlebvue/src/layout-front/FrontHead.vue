@@ -14,21 +14,12 @@
           <a href="javascript:" @click="signOut">退出</a>
         </li>
         <li>
-          <a href="javascript:">客服</a>
-        </li>
-        <li>
-          <a href="javascript:">积分商城</a>
-        </li>
-        <li>
           {{nowTime}}&nbsp; {{nowWeek}}
         </li>
       </ul>
     </div>
     <el-row class="header-main">
-      <el-col :span="4" id="logo">
-        <router-link to="/FrontHome">
-          <img src="../assets/img/logo.png" alt="">
-        </router-link>
+      <el-col :span="4">
       </el-col>
       <el-menu class="el-menu-demo" :default-active="defaultActive" mode="horizontal" router>
         <el-menu-item index="/AccountCentral">我的信息</el-menu-item>
@@ -61,7 +52,7 @@
       getDefaultActive() {
         let path = this.$route.path
         let result = ''
-        let pathList = ['/FrontHome', '/FeeDetailList', '/BusinessQuery', '/TransferFee', '/AccountCentral']
+        let pathList = ['/IssueManager', '/OrderManager', '/AccountCentral']
         _.forEach(pathList, function (value) {
           console.log(value)
           if (_.startsWith(path, value)) {
@@ -196,7 +187,8 @@ ul.header-top li {
   }
 
 .header-main  .el-menu.el-menu-demo {
-    text-align: right;
+    /*text-align: center;*/
+    margin-left: 450px;
   }
 
 .header-main  .el-menu.el-menu-demo.el-menu--horizontal {

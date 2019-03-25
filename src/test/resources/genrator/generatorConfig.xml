@@ -62,7 +62,9 @@
         </table>-->
         <!--<table tableName="order_trace" domainObjectName="OrderTrace">
         </table>-->
-        <table tableName="company" domainObjectName="Company">
+    <!--    <table tableName="company" domainObjectName="Company">
+        </table>-->
+        <table tableName="sys_notice" domainObjectName="Notice">
         </table>
 
 

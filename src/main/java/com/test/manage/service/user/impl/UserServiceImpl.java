@@ -108,68 +108,31 @@ public class UserServiceImpl implements UserService {
         redisUtils.expire(token, 15L, TimeUnit.MINUTES);
 
         authUser.setUserToken(token);
-        //添加登录日志----------------------------------
-        userLogService.addUser(authUser);
-
         return ApiResultUtil.success(authUser);
     }
 
 
 
     @Override
-    public ApiResult save(MultipartFile font, MultipartFile back, MultipartFile companyOrganizationCodeImg, MultipartFile companyLicenseNoImg, MultipartFile companyTaxNoImg, User user, Company company, String mobile) throws Exception {
+    public ApiResult save(User user, Company company, String mobile) throws Exception {
         String userId = CommonUtil.uuid();
         String companyId = CommonUtil.uuid();
-        String userIdConst = userId;
-        if (user.getUserType() == 1) {
-                // 存储身份证正反面图片
-                user.setUserIdCardFontImg(fileUploadUtils.upload(font, userId, FileUploadUtils.FOLDER_USER));
-                user.setUserIdCardBackImg(fileUploadUtils.upload(back, userId, FileUploadUtils.FOLDER_USER));
-                user.setUserId(userId);
-                user.setPassword(SecurityUtils.encrypt(user.getPassword()));
-                user.setUserStatus(1);
-                user.setUserMobile(mobile);
-                user.setUserCertificateType(user.getUserCertificateType());
-                user.setUserCreateTime(new Date());
-                user.setUserIsDelete(false);
-                user.setUserRegisterFrom("德邻E宝");
-                userMapper.insertSelective(user);
-                String accountSubBindRelationId = userId;
-                String accountSubBindFrom = "德邻E宝";
-                return success("注册成功");
-        } else {
-                if (company.getCompanyIsThreeInOne() == false) {
-                    company.setCompanyOrganizationCodeImg(fileUploadUtils.upload(companyOrganizationCodeImg, companyId, FileUploadUtils.FOLDER_USER));
-                    company.setCompanyLicenseNoImg(fileUploadUtils.upload(companyLicenseNoImg, companyId, FileUploadUtils.FOLDER_USER));
-                    company.setCompanyTaxNoImg(fileUploadUtils.upload(companyTaxNoImg, companyId, FileUploadUtils.FOLDER_USER));
-                    company.setCompanyUnifiedSocialCreditLdentifier("");
-                    user.setUserCertificateType("68");
-                } else {
-                    company.setCompanyUnifiedSocialImg(fileUploadUtils.upload(font, companyId, FileUploadUtils.FOLDER_USER));
-                    company.setCompanyOrganizationCode("");
-                    company.setCompanyTaxNo("");
-                    company.setCompanyLicenseNo("");
-                    user.setUserCertificateType("5");
-                }
-                user.setUserId(userId);
-                user.setPassword(SecurityUtils.encrypt(user.getPassword()));
-                user.setUserStatus(1);
-                user.setUserMobile(mobile);
-                user.setUserCreateTime(new Date());
-                user.setUserIsDelete(false);
-                user.setUserCompanyId(companyId);
-                userMapper.insertSelective(user);
-                company.setCompanyId(companyId);
-                company.setCompanyStatus(1);
-                company.setCompanyCreateTime(new Date());
-                company.setCompanyIsDelete(false);
-                user.setUserRegisterFrom("德邻E宝");
-                companyMapper.insertSelective(company);
-                String accountSubBindRelationId = companyId;
-                String accountSubBindFrom = "德邻E宝";
-                roleService.addFrontUserRole(user);
-                return success("注册成功");
-        }
+        user.setUserId(userId);
+        user.setPassword(SecurityUtils.encrypt(user.getPassword()));
+        user.setUserStatus(1);
+        user.setUserMobile(mobile);
+        user.setUserCreateTime(new Date());
+        user.setUserIsDelete(false);
+        user.setUserCompanyId(companyId);
+        userMapper.insertSelective(user);
+        company.setCompanyId(companyId);
+        company.setCompanyStatus(1);
+        company.setCompanyCreateTime(new Date());
+        company.setCompanyIsDelete(false);
+        user.setUserRegisterFrom("网页注册");
+        companyMapper.insertSelective(company);
+        roleService.addFrontUserRole(user);
+        return success("注册成功");
     }
 
 

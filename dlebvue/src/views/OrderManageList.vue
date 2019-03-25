@@ -52,7 +52,7 @@
       <el-table-column prop="orderIssueTime" align="center" label="发布时间" width="150px" show-overflow-tooltip></el-table-column>
       <el-table-column prop="orderNo" align="center" label="订单号" width="200px">
         <template slot-scope="scope">
-          <a style="cursor:pointer;" @click="viewDetails(scope.row)">
+          <a style="cursor:pointer;" @click="viewDetails(scope.row.orderId)">
             {{scope.row.orderNo}}</a>
         </template>
       </el-table-column>
@@ -210,7 +210,7 @@
         })
       },
       viewDetails(id) {
-        this.$router.push({name: '会员详情', params: {'companyId':id}})
+        this.$router.push({name: '物流详情', params: {'id':id}})
       },
       // 获取选中的数据
       handleSelectionChange(val) {

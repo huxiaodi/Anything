@@ -7,18 +7,24 @@ import com.test.framework.exception.AnyException;
 import com.test.framework.model.ApiResult;
 import com.test.framework.model.AuthUser;
 import com.test.framework.security.Auth;
+import com.test.manage.dao.generator.CompanyMapper;
 import com.test.manage.dao.generator.OrderMapper;
 import com.test.manage.dao.generator.OrderTraceMapper;
+import com.test.manage.dao.generator.UserMapper;
 import com.test.manage.model.dto.OrderDto;
 import com.test.manage.model.form.OrderForm;
+import com.test.manage.model.generator.CompanyExample;
 import com.test.manage.model.generator.Order;
 import com.test.manage.model.generator.OrderTrace;
+import com.test.manage.model.generator.UserExample;
 import com.test.manage.model.request.QueryParams;
 import com.test.manage.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Description：
@@ -32,10 +38,13 @@ public class OrderController extends BaseController {
     @Autowired
     private OrderTraceMapper orderTraceMapper;
     @Autowired
+    private CompanyMapper companyMapper;
+    @Autowired
     private OrderService orderService;
     @Autowired
     private OrderMapper orderMapper;
-
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private Auth auth;
 
@@ -99,6 +108,17 @@ public class OrderController extends BaseController {
         orderService.modifyOrderStatus(orderDto, status);
         return success();
     }
+
+    @GetMapping("/getReceiveUserList")
+    public ApiResult getReceiveUserList(){
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUserTypeEqualTo(3).andUserIsDeleteEqualTo(false);
+        List<String> companyIds = userMapper.selectByExample(userExample).stream().map(item -> item.getUserCompanyId()).collect(Collectors.toList());
+        CompanyExample companyExample = new CompanyExample();
+        companyExample.createCriteria().andCompanyIdIn(companyIds);
+        return success(companyMapper.selectByExample(companyExample));
+    }
+
 
 
 

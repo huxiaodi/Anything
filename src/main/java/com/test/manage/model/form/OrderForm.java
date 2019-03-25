@@ -26,7 +26,7 @@ public class OrderForm {
     private Date orderPickupTime; // 提货时间
     private Date orderIssueTime; // 发布时间
     private Boolean orderAssign; // 是否指定
-    private String orderReceiveId; // 指定放id
+    private String orderReceiveCompanyId; // 指定放id
     private String orderRemark; // 备注
 
 }

@@ -2,9 +2,6 @@
   <div id="header">
     <header>
       <div class="admin-logo">
-        <img src="../assets/img/logo.png" alt="">
-        <i @click="isshow = !isshow" style="float:right;line-height:60px;cursor: pointer;font-size:18px;
-        " class="el-icon-tickets"></i>
       </div>
       <div class="admin-header-user">
         <span>{{userName}} 欢迎登录</span>
@@ -29,7 +26,7 @@
               <i class="el-icon-menu"></i>
               <span slot="title">物流管理</span>
             </el-menu-item>
-            <el-menu-item  index="/AnnouncementManageList">
+            <el-menu-item  index="/NoticeManageList">
               <i class="el-icon-menu"></i>
               <span slot="title">公告信息</span>
             </el-menu-item>
@@ -39,9 +36,7 @@
                 <span slot="title">系统设置</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/RoleManageList">角色管理</el-menu-item>
                 <el-menu-item index="/UserMemberList">用户管理</el-menu-item>
-                <el-menu-item index="/Resource">资源管理</el-menu-item>
                 <el-menu-item index="/PersonalCenter">个人中心</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
@@ -108,8 +103,8 @@
         let path = this.$route.path
         console.log(path);
         let result = ''
-        let pathList = [ '/BusinessMemberList', '/OrderManageList', '/AnnouncementManageList',
-          '/RoleManageList', '/UserMemberList', '/Resource', '/PersonalCenter']
+        let pathList = [ '/BusinessMemberList', '/OrderManageList', '/NoticeManageList',
+           '/UserMemberList',  '/PersonalCenter']
         _.forEach(pathList, function (value) {
           if (_.startsWith(path, value)) {
             result = value
@@ -149,7 +144,8 @@
   }
 
   header .admin-logo {
-    width: 210px;
+    background-color: rgb(54, 64, 74);
+    width: 208px;
     height: 100%;
     float: left;
     box-sizing: border-box;

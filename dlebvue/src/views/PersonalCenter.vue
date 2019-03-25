@@ -32,13 +32,6 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :xs="24" :sm="20" :offset="4">
-            <el-form-item label="隶属分组:">
-              <div style="text-align: left">{{userInfo.teamNames}}</div>
-            </el-form-item>
-          </el-col>
-        </el-row>
         <div class="admin-input-form-btns">
         <el-button type="primary" size="medium" @click="resetPassword">重置密码</el-button>
         </div>
@@ -67,15 +60,6 @@
             <el-form-item label="手机号:">
               <el-input v-model="form.mobile" readonly></el-input>
           </el-form-item>
-            <el-form-item label="验证码:"
-            class="admin-input-verification" prop="verification">
-              <el-input v-model="form.verification"></el-input>
-              <el-button type="primary" style="width: 102px;" @click="getVerificationCode"
-                         :disabled="sendMsgDisabled">
-                <span v-if="sendMsgDisabled">{{time+'秒后再次获取'}}</span>
-                <span v-if="!sendMsgDisabled">获取验证码</span>
-              </el-button>
-            </el-form-item>
             <div class="admin-input-form-btns">
               <el-button type="primary" style="margin-right:30px;" @click="confirmPassword">确定</el-button>
               <el-button type="primary" @click="canclePassword">取消</el-button>

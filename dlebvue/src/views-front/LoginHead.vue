@@ -4,9 +4,6 @@
       <div class="header-top-box">
         <ul class="header-top">
           <li class="header-name" style="margin:0;">
-            <router-link to="/login" >
-              德邻e宝共享支付中心
-            </router-link>
           </li>
           <li>
             <router-link to="/login">登录</router-link>
@@ -15,30 +12,9 @@
             <router-link to="/register">注册</router-link>
           </li>
           <li>
-            <a href="javascript:">客服</a>
-          </li>
-          <li>
             {{nowTime}}&nbsp; {{nowWeek}}
           </li>
         </ul>
-      </div>
-
-      <div class="header-menu">
-          <div class="menu-logo">
-            <router-link to="/login" >
-              <img src="../assets/img/logo.png" alt="">
-            </router-link>
-
-          </div>
-          <div class="menu-list">
-            <a style="cursor:pointer;text-decoration:none;" a href="http://www.dllg56.com" target="_blank">德邻畅途</a>
-            <a style="cursor:pointer;text-decoration:none;" a href="http://eb.ansteel.cn/" target="_blank">鞍钢电商</a>
-            <a style="cursor:pointer;text-decoration:none;" a href="http://www.dllg56.com/market"
-               target="_blank">货车商城</a>
-             <a style="cursor:pointer;text-decoration:none;" a href="http://www.dllg56.com/our-services?type=cloudRepo"
-                target="_blank">德邻云仓</a>
-          </div>
-
       </div>
     </div>
 

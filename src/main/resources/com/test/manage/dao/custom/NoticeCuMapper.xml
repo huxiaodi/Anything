@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.manage.dao.custom.NoticeCuMapper">
+
+    <select id="getNoticeListAll" parameterType="com.test.manage.model.request.QueryParams" resultType="com.test.manage.model.dto.NoticeDto">
+        SELECT
+        sn.*,
+        us.user_name sysNoticeCreateUserName
+        FROM
+        sys_notice sn
+        LEFT JOIN USER us ON us.user_id = sn.sys_notice_create_user_id
+        <where>
+            sn.sys_notice_is_delete = 0
+            <if test="startTime!=null">
+                and sn.sys_notice_issue_time <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime!=null">
+                and sn.sys_notice_end_time <![CDATA[ <= ]]> DATE_ADD(#{endTime},INTERVAL 1 DAY)
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and (
+                POSITION(#{keyword} IN sn.sys_notice_title) OR
+                POSITION(#{keyword} IN sn.sys_notice_content) OR
+                POSITION(#{keyword} IN us.user_name sysNoticeCreateUserName)
+                )
+            </if>
+        </where>
+        ORDER BY sn.sys_notice_issue_time DESC
+    </select>
+
+    <select id="getNoticeList"  resultType="com.test.manage.model.generator.Notice">
+        SELECT
+        sn.*
+        FROM
+        sys_notice sn
+        <where>
+            sn.sys_notice_is_delete = 0 and sn.sys_notice_issue_time  &lt; CURRENT_TIMESTAMP
+            and ( sys_notice_end_time is null or sys_notice_end_time &gt; CURRENT_TIMESTAMP)
+        </where>
+        ORDER BY sn.sys_notice_issue_time DESC
+    </select>
+
+
+</mapper>

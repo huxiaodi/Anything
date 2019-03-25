@@ -92,7 +92,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteIssueOrder(String orderId) {
-        if(2 != auth.getCurrentUser().getUserType() || 0 != auth.getCurrentUser().getUserType()){
+        System.out.println(auth.getCurrentUser().getUserType());
+        if(2 != auth.getCurrentUser().getUserType() && 0 != auth.getCurrentUser().getUserType()){
             throw new AnyException("当前用户类型不可删除订单");
         }
         Order order = orderMapper.selectByPrimaryKey(orderId);
@@ -119,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
             throw new AnyException("未找到单据");
         }
         String currentComId = auth.getCurrentUser().getUserCompanyId();
-        if(orderDto.getOrderStatus() > 1 && orderDto.getOrderReceiveCompanyId() != null ){
+        if(orderDto.getOrderStatus() > 1 && orderDto.getOrderReceiveCompanyId() != null && auth.getCurrentUser().getUserType() != 0){
             if( !orderDto.getOrderCompanyId().equals(currentComId) && !orderDto.getOrderReceiveCompanyId().equals(currentComId) ){
                 throw new AnyException("单据与用户不匹配，查询失败");
             }

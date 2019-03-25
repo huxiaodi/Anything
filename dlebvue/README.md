@@ -1,4 +1,4 @@
-# 德邻e宝 前端
+# 前端
 
 http://localhost:8091
 

@@ -16,49 +16,13 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="企业法人名称:" prop="companyPrincipalName">
-            <el-input type="text" v-model="companyForm.companyPrincipalName"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="法人身份证:" prop="companyPrincipalIdCode">
-            <el-input type="text" v-model="companyForm.companyPrincipalIdCode"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="法人手机号:" prop="companyPrincipalTel">
-            <el-input type="text" v-model="companyForm.companyPrincipalTel"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="公司电话:" prop="companyTel">
-            <el-input type="text" v-model="companyForm.companyTel"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
           <el-form-item label="企业名称:" prop="companyName">
             <el-input type="text" v-model="companyForm.companyName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="对公账户开户行:" prop="companyToPublicBank">
-            <el-input type="text" v-model="companyForm.companyToPublicBank"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
           <el-form-item label="企业简称:" prop="companyShortName">
             <el-input type="text" v-model="companyForm.companyShortName"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="对公账户账号:" prop="companyToPublicAccountBank">
-            <el-input type="text" v-model="companyForm.companyToPublicAccountBank"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -69,29 +33,12 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="纳税人识别号:" prop="companyTaxpayerRegistrationNumber">
-            <el-input type="text" v-model="companyForm.companyTaxpayerRegistrationNumber"></el-input>
+          <el-form-item label="联系人身份证号码:" prop="companyPrincipalIdCode">
+            <el-input type="text" v-model="companyForm.companyPrincipalIdCode"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="联系人身份证号码:" prop="companyContactIdCard">
-            <el-input type="text" v-model="companyForm.companyContactIdCard"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="公司传真:" prop="companyFax">
-            <el-input type="text" v-model="companyForm.companyFax"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="注册资金:" prop="companyRegistedCapital">
-            <el-input type="text" v-model="companyForm.companyRegistedCapital"></el-input>
-          </el-form-item>
-        </el-col>
         <el-col :span="12">
           <el-form-item label="公司邮箱:" prop="companyEmail">
             <el-input type="text" v-model="companyForm.companyEmail"></el-input>
@@ -129,38 +76,10 @@
             </el-select>
             <el-input style="width: 38%;" v-model="companyForm.companyAddress" placeholder="详细地址"></el-input>
           </el-col>
-
         </el-form-item>
       </el-row>
-      <!-- 三证合一是 -->
-      <el-row style="margin-bottom:20px;" v-if="this.companyForm.companyIsThreeInOne">
-        <el-col :xs="20" :sm="8" align="center"
-        style="box-sizing:border-box;padding:0 20px;text-align:center!important;">
-          <el-form-item label="统一社会信用照片" class="avatar-uploader">
-          </el-form-item>
-          <img :src="this.companyForm.companyUnifiedSocialImg">
-        </el-col>
-      </el-row>
-      <!-- 三证合一否 -->
-      <el-row style="margin-bottom:20px;" v-if="!this.companyForm.companyIsThreeInOne">
-        <el-col :xs="20" :sm="8" align="center" style="box-sizing:border-box;padding:0 20px;text-align:center!important;">
-          <el-form-item label="营业执照照片">
-          </el-form-item>
-          <img :src="this.companyForm.companyLicenseNoImg">
-        </el-col>
-        <el-col :xs="20" :sm="8" align="center" style="box-sizing:border-box;padding:0 20px;text-align:center!important;">
-          <el-form-item label="组织结构代码照片">
-          </el-form-item>
-          <img :src="this.companyForm.companyOrganizationCodeImg">
-        </el-col>
-        <el-col :xs="20" :sm="8" align="center" style="box-sizing:border-box;padding:0 20px;text-align:center!important;">
-          <el-form-item label="税务登记证照片">
-          </el-form-item>
-          <img :src="this.companyForm.companyTaxNoImg">
-        </el-col>
-      </el-row>
       <div class="admin-input-form-btns">
-        <el-button type="primary" @click="submitForm('passwordSettingForm')">提交</el-button>
+        <el-button type="primary" @click="submitForm('companyForm')">提交</el-button>
       </div>
     </el-form>
   </div>
@@ -232,35 +151,15 @@
           companyUnifiedSocialImg: ''
         },
         companyRules: {
-          companyPrincipalName: [
-            {required: true, message: '法人名称不能为空', trigger: 'blur'}
-          ],
           companyPrincipalIdCode: [
-            {required: true, message: '法人身份证号不能为空', trigger: 'blur'},
+            {required: true, message: '联系人身份证号不能为空', trigger: 'blur'},
             {pattern: cardReg, message: '请输入正确的身份证号'}
-          ],
-          companyPrincipalTel: [
-            {required: true, message: '法人手机号不能为空', trigger: 'blur'},
-            {pattern: mobileReg, message: '请输入正确的手机号'}
           ],
           companyName: [
             {required: true, message: '企业名称不能为空', trigger: 'blur'}
           ],
-          companyToPublicBank: [
-            {required: true, message: '对公账户开户行不能为空', trigger: 'blur'}
-          ],
-          companyToPublicAccountBank: [
-            {required: true, message: '对公账户账号不能为空', trigger: 'blur'}
-          ],
           companyContact: [
             {required: true, message: '联系人不能为空', trigger: 'blur'}
-          ],
-          companyTaxpayerRegistrationNumber: [
-            {required: true, message: '纳税人识别号不能为空', trigger: 'blur'}
-          ],
-          companyContactIdCard: [
-            {required: true, message: '联系人身份证号不能为空', trigger: 'blur'},
-            {pattern: cardReg, message: '请输入正确的身份证号'}
           ]
         }
       }

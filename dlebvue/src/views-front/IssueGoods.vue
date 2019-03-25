@@ -113,12 +113,12 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="接单方：" >
-                <el-select :disabled="!formData.orderAssign" v-model="formData.orderReceiveId" clearable placeholder="请选择">
+                <el-select :disabled="!formData.orderAssign" v-model="formData.orderReceiveCompanyId" clearable placeholder="请选择">
                   <el-option
                     v-for="item in receiveUserList"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                    :key="item.companyId"
+                    :label="item.companyName"
+                    :value="item.companyId">
                   </el-option>
                 </el-select>
 
@@ -169,7 +169,7 @@
           orderIssueTime: '',
           orderMoney: '',
           orderAssign: false,
-          orderReceiveId: ''
+          orderReceiveCompanyId: ''
         },
         regionData: regionData,
         receiveUserList: [],
@@ -238,6 +238,14 @@
     },
     methods: {
       getData () {
+        api.get('/order/getReceiveUserList').then((response) => {
+          this.loading = false;
+          if(response.data.code === 1){
+            this.receiveUserList = response.data.data;
+          } else {
+            Message.MessageError(response.data.msg);
+          }
+        });
       },
       submitData() {
         this.$refs['formDataForm'].validate((valid) => {
@@ -276,7 +284,7 @@
           this.assignInfo = '是';
         } else {
           this.assignInfo = '否';
-          this.formData.orderReceiveId = '';
+          this.formData.orderReceiveCompanyId = '';
         }
       }
     }

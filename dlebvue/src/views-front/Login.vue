@@ -3,11 +3,6 @@
     <div class="header" style="z-index: 99;position: absolute">
       <div class="header-top-box">
         <ul class="header-top">
-          <li class="header-name" style="margin:0;">
-            <router-link to="/login">
-              德邻e宝共享支付中心
-            </router-link>
-          </li>
           <li>
             <span @click="login" style="cursor:pointer">登录</span>
           </li>
@@ -15,30 +10,9 @@
             <router-link to="/register">注册</router-link>
           </li>
           <li>
-            <a href="javascript:">客服</a>
-          </li>
-          <li>
             {{nowTime}}&nbsp; {{nowWeek}}
           </li>
         </ul>
-      </div>
-
-      <div class="header-menu">
-        <div class="menu-logo">
-          <router-link to="/login">
-            <img src="../assets/img/logo.png" alt="">
-          </router-link>
-
-        </div>
-        <div class="menu-list">
-          <a style="cursor:pointer;text-decoration:none;" a href="http://www.dllg56.com" target="_blank">德邻畅途</a>
-          <a style="cursor:pointer;text-decoration:none;" a href="http://eb.ansteel.cn/" target="_blank">鞍钢电商</a>
-          <a style="cursor:pointer;text-decoration:none;" a href="http://www.dllg56.com/market"
-             target="_blank">货车商城</a>
-          <a style="cursor:pointer;text-decoration:none;" a href="http://www.dllg56.com/our-services?type=cloudRepo"
-             target="_blank">德邻云仓</a>
-        </div>
-
       </div>
     </div>
     <div class="login">
@@ -237,22 +211,19 @@
           <div class="login-foot-item left">
             <img src="../assets/img/icon-1.png" alt="">
             <div class="login-foot-text">
-              <span class="login-foot-text-title">转账付款</span>
-              <span class="login-foot-text-content">转到德邻e宝账户，瞬间到账</span>
+              <span class="login-foot-text-title">信息管理</span>
             </div>
           </div>
           <div class="login-foot-item">
             <img src="../assets/img/icon-2.png" alt="">
             <div class="login-foot-text">
-              <span class="login-foot-text-title">提现</span>
-              <span class="login-foot-text-content">便捷的体现方式，将为你带来T+0的收款体验</span>
+              <span class="login-foot-text-title">物流发布</span>
             </div>
           </div>
           <div class="login-foot-item right">
             <img src="../assets/img/icon-3.png" alt="">
             <div class="login-foot-text">
-              <span class="login-foot-text-title">双网同步</span>
-              <span class="login-foot-text-content">PC端·APP端口数据同步，支付便捷</span>
+              <span class="login-foot-text-title">评价系统</span>
             </div>
           </div>
         </div>
@@ -647,7 +618,6 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6)
   }
 
-  /* e宝无限文字 */
 
   .button-box .e-title {
     position: absolute;
@@ -934,7 +904,6 @@
   /* 页眉部分 */
   .header {
     width: 100%;
-    height: 100px;
     line-height: 30px;
     background-color: #fff;
     font-size: 14px;

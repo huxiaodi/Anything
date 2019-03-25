@@ -2,11 +2,13 @@ package com.test.manage.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.google.j2objc.annotations.AutoreleasePool;
 import com.test.manage.model.generator.Company;
 import com.test.manage.model.generator.Resource;
 import com.test.manage.model.generator.User;
 import com.test.manage.model.request.LoginRequest;
 import com.test.manage.model.request.UserRequest;
+import com.test.manage.service.notice.NoticeService;
 import com.test.manage.service.user.UserService;
 import com.test.framework.model.ApiResult;
 import com.test.framework.model.AuthUser;
@@ -33,6 +35,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private FileUploadUtils fileUploadUtils;
+    @Autowired
+    private NoticeService noticeService;
     @Autowired
     private Auth auth;
 
@@ -149,95 +153,7 @@ public class UserController {
         return userService.changePassword(userRequest);
     }
 
-    /**
-     * 更改统一信用照片
-     *
-     * @param font
-     * @param companyId
-     */
-    @PostMapping("/upload")
-    public void upload(MultipartFile font, String companyId) {
-        String userHead = fileUploadUtils.upload(font, companyId, FileUploadUtils.FOLDER_USER);
-        Company company = new Company();
-        company.setCompanyId(companyId);
-        company.setCompanyUnifiedSocialImg(userHead);
-        userService.upload(company);
-    }
 
-    /**
-     * 更改组织机构代码证
-     *
-     * @param organization
-     * @param companyId
-     */
-    @PostMapping("/uploadOrganization")
-    public void uploadOrganization(MultipartFile organization, String companyId) {
-        String userHead = fileUploadUtils.upload(organization, companyId, FileUploadUtils.FOLDER_USER);
-        Company company = new Company();
-        company.setCompanyId(companyId);
-        company.setCompanyOrganizationCodeImg(userHead);
-        userService.upload(company);
-    }
-
-    /**
-     * 更改营业执照
-     *
-     * @param license
-     * @param companyId
-     */
-    @PostMapping("/uploadLicense")
-    public void uploadLicense(MultipartFile license, String companyId) {
-        String userHead = fileUploadUtils.upload(license, companyId, FileUploadUtils.FOLDER_USER);
-        Company company = new Company();
-        company.setCompanyId(companyId);
-        company.setCompanyLicenseNoImg(userHead);
-        userService.upload(company);
-    }
-
-    /**
-     * 更改税务登记证
-     *
-     * @param tax
-     * @param companyId
-     */
-    @PostMapping("/uploadTax")
-    public void uploadTax(MultipartFile tax, String companyId) {
-        String userHead = fileUploadUtils.upload(tax, companyId, FileUploadUtils.FOLDER_USER);
-        Company company = new Company();
-        company.setCompanyId(companyId);
-        company.setCompanyTaxNoImg(userHead);
-        userService.upload(company);
-    }
-
-    /**
-     * 更改证件照（正面）
-     *
-     * @param font
-     * @param userId
-     */
-    @PostMapping("/uploadFont")
-    public void uploadFont(MultipartFile font, String userId) {
-        String userHead = fileUploadUtils.upload(font, userId, FileUploadUtils.FOLDER_USER);
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserIdCardFontImg(userHead);
-        userService.upload(user);
-    }
-
-    /**
-     * 更改证件照（反面）
-     *
-     * @param back
-     * @param userId
-     */
-    @PostMapping("/uploadBack")
-    public void uploadBack(MultipartFile back, String userId) {
-        String userHead = fileUploadUtils.upload(back, userId, FileUploadUtils.FOLDER_USER);
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserIdCardBackImg(userHead);
-        userService.upload(user);
-    }
 
     /**
      * 用户注册
@@ -256,10 +172,10 @@ public class UserController {
         // 0-后台用户,1-个人,2-企业
         if (userType == 1) {
             mobile = user.getUserMobile();
-        } else if (userType == 2) {
+        } else if (userType == 2 || userType == 3) {
             mobile = company.getCompanyContactTel();
         }
-        return userService.save(font, back, companyOrganizationCodeImg, companyLicenseNoImg, companyTaxNoImg, user, company, mobile);
+        return userService.save(user, company, mobile);
     }
 
     /**
@@ -298,6 +214,7 @@ public class UserController {
         Map<String ,Object> map = new HashMap<>();
         map.put("personal",userService.getPersonalInformation(auth.getCurrentUser().getUserId()));
         map.put("company",userService.getCompanyInformation(auth.getCurrentUser().getUserCompanyId()));
+        map.put("notices",noticeService.getNoticeList());
         return success(map);
     }
 
