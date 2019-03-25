@@ -208,7 +208,6 @@
           </div>
         </div>
         <div class="login-bottom">
-          Copyright (c) 2017 Copyright Holder All Rights Reserved.
         </div>
       </div>
 
