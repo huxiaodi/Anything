@@ -4,9 +4,6 @@ import com.test.framework.enums.ApiCodeEnum;
 import com.test.framework.exception.AnyException;
 import io.swagger.annotations.ApiModelProperty;
 
-/**
- * Created by hugo on 2017/10/15.
- */
 public class ApiResult<T> {
 
     @ApiModelProperty(value = "标识码，1：成功，其他：错误",required = true)

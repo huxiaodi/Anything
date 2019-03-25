@@ -70,49 +70,13 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
-    @Override
-    public ApiResult setUserPayPassword(User user) {
-        try {
-            user.setUserPayPassword(SecurityUtils.encrypt(user.getUserPayPassword()));
-            userMapper.updateByPrimaryKeySelective(user);
-            return success("设置成功");
-        } catch (Exception e) {
-            return error("设置失败" + e);
-        }
-    }
 
-    @Override
-    public ApiResult checkUserPayPassword(RoleParams roleParams) {
-        User user = userMapper.selectByPrimaryKey(roleParams.getUserId());
-        if (!roleParams.getOldPassword().equals(user.getUserPayPassword())) {
-            return error("原密码错误");
-        } else {
-            return success("");
-        }
-    }
 
-    @Override
-    public ApiResult changeUserPayPassword(RoleParams roleParams) {
-        try {
-            User user = new User();
-            user.setUserId(roleParams.getUserId());
-            user.setUserPayPassword(SecurityUtils.encrypt(roleParams.getUserPayPassword()));
-            userMapper.updateByPrimaryKeySelective(user);
-            return success("修改成功");
-        } catch (Exception e) {
-            return error("修改失败" + e);
-        }
-    }
 
-    @Override
-    public boolean checkSet(String userId) {
-        User user1 = userMapper.selectByPrimaryKey(userId);
-        if ("".equals(user1.getUserPayPassword())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+
+
+
 
     @Override
     public List<Map<String, Object>> manageList(RolePageParams rolePageParams) {

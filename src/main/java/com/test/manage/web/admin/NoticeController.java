@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @Description：
- * @Author:hudi
- * @Date: Created in 16:57 2019/3/21
- */
 @RequestMapping("/notice")
 @RestController
 public class NoticeController extends BaseController {

@@ -1,8 +1,5 @@
 package com.test.framework.enums;
 
-/**
- * Created by hugo on 2017/10/15.
- */
 public enum ApiCodeEnum {
     // 自定义
     SUCCESS(1, "成功"),

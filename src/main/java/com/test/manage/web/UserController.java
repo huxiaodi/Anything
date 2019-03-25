@@ -13,7 +13,6 @@ import com.test.manage.service.user.UserService;
 import com.test.framework.model.ApiResult;
 import com.test.framework.model.AuthUser;
 import com.test.framework.security.Auth;
-import com.test.framework.utils.FileUploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -33,8 +32,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private FileUploadUtils fileUploadUtils;
     @Autowired
     private NoticeService noticeService;
     @Autowired
@@ -200,14 +197,6 @@ public class UserController {
         userService.changePersonalInformation(user);
     }
 
-    /**
-     *
-     * @return
-     */
-    @GetMapping("/checkAdjustPsw")
-    public ApiResult checkAdjustPsw(){
-        return success(userService.checkAdjustPsw(auth.getCurrentUser().getUserId()));
-    }
 
     @GetMapping("/getUserInfo")
     public ApiResult getUserInfo(){

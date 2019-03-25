@@ -1,8 +1,5 @@
 package com.test.framework.model;
 
-/**
- * Created by hugo on 2017/11/19.
- */
 public class AuthUser {
     private String userToken;//会员号
     private String userId;//用户ID

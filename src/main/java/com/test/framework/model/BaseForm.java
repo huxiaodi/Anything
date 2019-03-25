@@ -1,8 +1,5 @@
 package com.test.framework.model;
 
-/**
- * Created by hugo on 2016/5/5.
- */
 public class BaseForm {
     //当前页
     private int pageNum;

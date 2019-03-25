@@ -40,13 +40,9 @@
         </javaClientGenerator>
 
 
-        <!--<table tableName="area" domainObjectName="Area">
+        <table tableName="area" domainObjectName="Area">
         </table>
         <table tableName="company" domainObjectName="Company">
-        </table>
-        <table tableName="dict" domainObjectName="Dict">
-        </table>
-        <table tableName="json_data" domainObjectName="JsonData">
         </table>
         <table tableName="resource" domainObjectName="Resource">
         </table>
@@ -54,16 +50,12 @@
         </table>
         <table tableName="role_resource" domainObjectName="RoleResource">
         </table>
-        <table tableName="sequence" domainObjectName="Sequence">
-        </table>
         <table tableName="user" domainObjectName="User">
-        </table>-->
-       <!-- <table tableName="goods_order" domainObjectName="Order">
-        </table>-->
-        <!--<table tableName="order_trace" domainObjectName="OrderTrace">
-        </table>-->
-    <!--    <table tableName="company" domainObjectName="Company">
-        </table>-->
+        </table>
+        <table tableName="goods_order" domainObjectName="Order">
+        </table>
+        <table tableName="order_trace" domainObjectName="OrderTrace">
+        </table>
         <table tableName="sys_notice" domainObjectName="Notice">
         </table>
 

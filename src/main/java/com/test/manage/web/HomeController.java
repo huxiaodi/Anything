@@ -11,7 +11,6 @@ import com.test.manage.model.generator.*;
 import com.test.manage.service.home.HomeService;
 import com.test.framework.controller.BaseController;
 import com.test.framework.model.ApiResult;
-import com.test.framework.utils.FileUploadUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,6 @@ public class HomeController extends BaseController {
 
     @Autowired
     private HomeService homeService;
-    @Autowired
-    private FileUploadUtils fileUploadUtils;
     @Autowired
     private EbpayProperties ebpayProperties;
 
@@ -56,7 +53,7 @@ public class HomeController extends BaseController {
 
     @PostMapping("/upload")
     public void upload(MultipartFile font, String userId) {
-        String userHead = fileUploadUtils.upload(font, userId, FileUploadUtils.FOLDER_USER);
+        String userHead = "";
         User user = new User();
         user.setUserHeadImg(userHead);
         user.setUserId(userId);

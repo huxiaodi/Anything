@@ -50,7 +50,7 @@ public class Resource {
     private String resourceIcon;
 
     /**
-     *   资源类型0-后台,1-前台
+     *   资源类型
      *   resource.resource_type
      * @mbg.generated
      */
@@ -219,7 +219,7 @@ public class Resource {
     }
 
     /**
-     * 资源类型0-后台,1-前台
+     * 资源类型
      * @return the value of resource.resource_type
      * @mbg.generated
      */
@@ -228,7 +228,7 @@ public class Resource {
     }
 
     /**
-     * 资源类型0-后台,1-前台
+     * 资源类型
      * @param resourceType the value for resource.resource_type
      * @mbg.generated
      */

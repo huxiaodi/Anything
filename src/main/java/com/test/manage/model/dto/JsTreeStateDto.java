@@ -1,8 +1,5 @@
 package com.test.manage.model.dto;
 
-/**
- * Created by hugo on 2016/5/11.
- */
 public class JsTreeStateDto {
     private Boolean opened;
     //private Boolean checked;

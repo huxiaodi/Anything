@@ -12,21 +12,11 @@
             user.user_mobile,
             user.user_certificate_type,
             user.user_certificate_number,
-            user.user_id_card_back_img,
             user.user_status,
             user.user_create_time,
-            user.user_register_from,
             company.company_id,
             company.company_name,
-            company.company_contact,
-            company.company_principal_id_code,
-            company.company_unified_social_img,
-            company.company_license_no_img,
-            company.company_tax_no_img,
-            company.company_organization_code_img,
-            company.company_is_three_in_one,
-            company.company_unified_social_credit_ldentifier,
-            company.company_license_no
+            company.company_contact
         FROM company
           LEFT JOIN user ON company.company_Id=user.user_company_id
         <where>
@@ -48,8 +38,7 @@
                   POSITION(#{keyword} IN user_mobile) OR
                   POSITION(#{keyword} IN company_name) OR
                   POSITION(#{keyword} IN company_contact) OR
-                  POSITION(#{keyword} IN user_certificate_number) OR
-                  POSITION(#{keyword} IN company_principal_id_code)
+                  POSITION(#{keyword} IN user_certificate_number)
                 )
             </if>
         </where>

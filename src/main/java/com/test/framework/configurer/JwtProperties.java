@@ -4,9 +4,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Created by hugo on 2017/11/21.
- */
 @Configuration
 @ConfigurationProperties(prefix = "awesome.jwt")
 @EnableConfigurationProperties(JwtProperties.class)

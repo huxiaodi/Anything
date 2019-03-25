@@ -20,7 +20,6 @@
         <swiper v-if="type == 1" :options="swiperOption">
           <swiper-slide>
             <div class="button-box">
-              <img class="e-title" src="../assets/img/e-title.png" alt="">
               <el-button class="login-btn" @click="login()">登 录</el-button>
               <el-button class="register-btn" @click="regist()">注 册</el-button>
             </div>
@@ -28,25 +27,6 @@
           </swiper-slide>
           <swiper-slide>
             <div class="img-location">
-              <img src="../assets/img/bg-text-2.png" alt="">
-              <i class="login-icon el-icon-arrow-down"></i>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="img-location">
-              <img src="../assets/img/bg-text-3.png" alt="">
-              <i class="login-icon el-icon-arrow-down"></i>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="img-location">
-              <img src="../assets/img/bg-text-4.png" alt="">
-              <i class="login-icon el-icon-arrow-down"></i>
-            </div>
-          </swiper-slide>
-          <swiper-slide>
-            <div class="img-location">
-              <img src="../assets/img/bg-text-5.png" alt="">
               <i class="login-icon el-icon-arrow-up"></i>
             </div>
           </swiper-slide>
@@ -70,7 +50,7 @@
               </div>
             </div>
             <div class="login-sideba-content" style="height:40px;font-weight:bold;color:#009eff;">
-              400-9855-888
+              88888888888
             </div>
           </div>
           <div class="login-sidebar-item">
@@ -92,7 +72,7 @@
               </div>
             </div>
             <div class="login-sideba-content">
-              <img src="../assets/img/login-icon/img22.jpg" alt="">
+              <img src="../assets/img/login-icon/img11.jpg" alt="">
             </div>
           </div>
         </div>

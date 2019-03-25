@@ -59,25 +59,16 @@ public class CompanyManageController extends BaseController {
         }
         Company c = new Company();
         c.setCompanyId(company.getCompanyId());
-        c.setCompanyPrincipalName(company.getCompanyPrincipalName());
-        c.setCompanyPrincipalIdCode(company.getCompanyPrincipalIdCode());
-        c.setCompanyPrincipalTel(company.getCompanyPrincipalTel());
         c.setCompanyTel(company.getCompanyTel());
         c.setCompanyName(company.getCompanyName());
-        c.setCompanyToPublicBank(company.getCompanyToPublicBank());
-        c.setCompanyToPublicAccountBank(company.getCompanyToPublicAccountBank());
         c.setCompanyShortName(company.getCompanyShortName());
         c.setCompanyContact(company.getCompanyContact());
         c.setCompanyContactTel(company.getCompanyContactTel());
         c.setCompanyContactIdCard(company.getCompanyContactIdCard());
-        c.setCompanyTaxpayerRegistrationNumber(company.getCompanyTaxpayerRegistrationNumber());
-        c.setCompanyFax(company.getCompanyFax());
-        c.setCompanyRegistedCapital(company.getCompanyRegistedCapital());
         c.setCompanyEmail(company.getCompanyEmail());
         c.setCompanyProvince(company.getCompanyProvince());
         c.setCompanyCity(company.getCompanyCity());
         c.setCompanyDistrict(company.getCompanyDistrict());
-        c.setCompanyUnifiedSocialImg(company.getCompanyUnifiedSocialImg());
         companyService.updateByPrimaryKeySelective(c);
         return success("信息修改成功");
     }

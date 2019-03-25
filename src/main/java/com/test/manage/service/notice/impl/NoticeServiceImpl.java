@@ -16,11 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @Description：
- * @Author:hudi
- * @Date: Created in 17:00 2019/3/21
- */
 @Service
 public class NoticeServiceImpl implements NoticeService {
 

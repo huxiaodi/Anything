@@ -1,11 +1,3 @@
-/**
- * @Title: HttpInteractionUtils.java
- * @Package com.dllg.ams.common
- * @Description: TODO(用一句话描述该文件做什么)
- * @author duyixin
- * @date 2016年5月4日 下午4:35:51
- * @version V1.0
- */
 
 
 package com.test.common;
@@ -21,13 +13,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @ClassName: HttpInteractionUtils
- * @Description: HTTP协议调用子系统的工具类
- * @author duyixin
- * @date 2016年5月4日 下午4:35:51
- *
- */
 @Component
 public class HttpInteractionUtils {
 

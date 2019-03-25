@@ -26,11 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @Description：
- * @Author:hudi
- * @Date: Created in 13:46 2019/3/12
- */
 @RequestMapping("/order")
 @RestController
 public class OrderController extends BaseController {

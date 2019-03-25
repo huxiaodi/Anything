@@ -79,20 +79,6 @@ public class User {
     private String userIdCard;
 
     /**
-     *   身份证正面图片
-     *   user.user_id_card_font_img
-     * @mbg.generated
-     */
-    private String userIdCardFontImg;
-
-    /**
-     *   身份证反面图片
-     *   user.user_id_card_back_img
-     * @mbg.generated
-     */
-    private String userIdCardBackImg;
-
-    /**
      *   头像图片
      *   user.user_head_img
      * @mbg.generated
@@ -112,20 +98,6 @@ public class User {
      * @mbg.generated
      */
     private String userEmail;
-
-    /**
-     *   注册来源
-     *   user.user_register_from
-     * @mbg.generated
-     */
-    private String userRegisterFrom;
-
-    /**
-     *   调账密码
-     *   user.user_pay_password
-     * @mbg.generated
-     */
-    private String userPayPassword;
 
     /**
      *   0-禁用,1启用
@@ -357,42 +329,6 @@ public class User {
     }
 
     /**
-     * 身份证正面图片
-     * @return the value of user.user_id_card_font_img
-     * @mbg.generated
-     */
-    public String getUserIdCardFontImg() {
-        return userIdCardFontImg;
-    }
-
-    /**
-     * 身份证正面图片
-     * @param userIdCardFontImg the value for user.user_id_card_font_img
-     * @mbg.generated
-     */
-    public void setUserIdCardFontImg(String userIdCardFontImg) {
-        this.userIdCardFontImg = userIdCardFontImg == null ? null : userIdCardFontImg.trim();
-    }
-
-    /**
-     * 身份证反面图片
-     * @return the value of user.user_id_card_back_img
-     * @mbg.generated
-     */
-    public String getUserIdCardBackImg() {
-        return userIdCardBackImg;
-    }
-
-    /**
-     * 身份证反面图片
-     * @param userIdCardBackImg the value for user.user_id_card_back_img
-     * @mbg.generated
-     */
-    public void setUserIdCardBackImg(String userIdCardBackImg) {
-        this.userIdCardBackImg = userIdCardBackImg == null ? null : userIdCardBackImg.trim();
-    }
-
-    /**
      * 头像图片
      * @return the value of user.user_head_img
      * @mbg.generated
@@ -444,42 +380,6 @@ public class User {
      */
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail == null ? null : userEmail.trim();
-    }
-
-    /**
-     * 注册来源
-     * @return the value of user.user_register_from
-     * @mbg.generated
-     */
-    public String getUserRegisterFrom() {
-        return userRegisterFrom;
-    }
-
-    /**
-     * 注册来源
-     * @param userRegisterFrom the value for user.user_register_from
-     * @mbg.generated
-     */
-    public void setUserRegisterFrom(String userRegisterFrom) {
-        this.userRegisterFrom = userRegisterFrom == null ? null : userRegisterFrom.trim();
-    }
-
-    /**
-     * 调账密码
-     * @return the value of user.user_pay_password
-     * @mbg.generated
-     */
-    public String getUserPayPassword() {
-        return userPayPassword;
-    }
-
-    /**
-     * 调账密码
-     * @param userPayPassword the value for user.user_pay_password
-     * @mbg.generated
-     */
-    public void setUserPayPassword(String userPayPassword) {
-        this.userPayPassword = userPayPassword == null ? null : userPayPassword.trim();
     }
 
     /**

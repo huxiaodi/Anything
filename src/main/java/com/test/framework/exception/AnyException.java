@@ -2,9 +2,6 @@ package com.test.framework.exception;
 
 import com.test.framework.enums.ApiCodeEnum;
 
-/**
- * Created by hugo on 2017/10/15.
- */
 public class AnyException extends RuntimeException {
     private Integer code;
 

@@ -2,9 +2,8 @@ package com.test.manage.dao.generator;
 
 import com.test.manage.model.generator.Resource;
 import com.test.manage.model.generator.ResourceExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ResourceMapper {
     /**

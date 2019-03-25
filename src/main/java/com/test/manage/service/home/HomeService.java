@@ -4,9 +4,6 @@ import com.test.manage.model.generator.User;
 
 import java.util.List;
 
-/**
- *
- */
 public interface HomeService {
 
     User selectUser(String userId);

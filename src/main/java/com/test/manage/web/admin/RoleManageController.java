@@ -107,38 +107,4 @@ public class RoleManageController extends BaseController {
         }
     }
 
-
-    /**
-     * 设置调账密码
-     */
-    @PostMapping("/setUserPayPassword")
-    public ApiResult setUserPayPassword(@RequestBody User user) {
-        try {
-            AuthUser authUser = auth.getCurrentUser();
-            boolean flag = roleService.checkSet(authUser.getUserId());
-            if (flag) {
-                user.setUserId(authUser.getUserId());
-                return roleService.setUserPayPassword(user);
-            } else {
-                return error("已设置调账密码，请前往修改");
-            }
-        } catch (Exception e) {
-            return error("设置失败" + e);
-        }
-    }
-
-    /**
-     * 判断是否已设置调账密码
-     */
-    @GetMapping("/checkUserPayPassword")
-    public ApiResult checkUserPayPassword() {
-        AuthUser authUser = auth.getCurrentUser();
-        boolean flag = roleService.checkSet(authUser.getUserId());
-        if (flag) {
-            return success("未设置");
-        } else {
-            return error("已设置调账密码，请前往修改");
-        }
-    }
-
 }

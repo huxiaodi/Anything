@@ -17,9 +17,6 @@ import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * Created by hugo on 2017/11/19.
- */
 
 @Component
 public class Auth {

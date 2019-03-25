@@ -76,7 +76,6 @@ public interface UserService {
 
     List<Resource> getResource(String userId);
 
-    boolean checkAdjustPsw(String userId);
 
     void loginOut(String token);
 }

@@ -14,13 +14,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.*;
 
-/**
- * @Title: CommonUtil
- * @Description: 工具类
- * @Author:zjh
- * @Since:2016年5月3日
- * @Version:1.1.0
- */
 public class CommonUtil {
 //
 //    public static FileSystemResource convertFile(MultipartFile file) throws IOException {

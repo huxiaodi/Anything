@@ -7,11 +7,6 @@ import com.test.manage.model.request.QueryParams;
 
 import java.util.List;
 
-/**
- * @Description：
- * @Author:hudi
- * @Date: Created in 13:47 2019/3/12
- */
 public interface OrderService {
     void assignOrder(OrderForm orderForm);
 

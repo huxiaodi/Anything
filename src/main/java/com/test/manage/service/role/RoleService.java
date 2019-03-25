@@ -32,17 +32,7 @@ public interface RoleService {
     List<Role> getAllRole();
 
     ApiResult checkMobile(RoleParams roleParams);
-
-    ApiResult changeUserPayPassword(RoleParams roleParams);
-
-    boolean checkSet(String userId);
-
-    ApiResult setUserPayPassword(User user);
-
-    ApiResult checkUserPayPassword(RoleParams roleParams);
-
     List<Resource> allRoleResources();
     List<Resource> frontRoleResources();
-
     public void addFrontUserRole(User user);
 }

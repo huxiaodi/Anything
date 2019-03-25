@@ -3,9 +3,6 @@ package com.test.framework.controller;
 import com.test.framework.enums.ApiCodeEnum;
 import com.test.framework.model.ApiResult;
 
-/**
- * Created by hugo on 2017/10/15.
- */
 public class BaseController {
 
     protected final <T> ApiResult<T> success() {

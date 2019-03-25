@@ -3,9 +3,8 @@ package com.test.manage.dao.generator;
 import com.test.manage.model.generator.RoleResource;
 import com.test.manage.model.generator.RoleResourceExample;
 import com.test.manage.model.generator.RoleResourceKey;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface RoleResourceMapper {
     /**

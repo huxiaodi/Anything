@@ -5,9 +5,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by hugo on 2017/11/20.
- */
 @Component
 public class GuavaCacheUtil {
 

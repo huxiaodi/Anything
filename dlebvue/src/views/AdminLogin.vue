@@ -1,14 +1,10 @@
 <template>
   <div class="admin-login">
     <header>
-      <img src="../assets/img/logo.png" alt="">
     </header>
     <aside class="left"></aside>
     <aside class="right"></aside>
     <article>
-      <div class="admin-login-title">
-        <img src="../assets/img/admin-login-title.png" alt="">
-      </div>
       <div class="login-box">
         <span class="login-box-title">用户登录</span>
         <el-form :model="loginForm" ref="loginForm" :rules="formRules">
@@ -27,10 +23,6 @@
 
     </article>
     <footer>
-      Copyright (c) 2017 Copyright Holder All Rights Reserved.
-      <a target="_blank" href="https://www.qiatuchina.com/" style="float:right">
-        无锡恰途网络科技有限公司技术支持
-      </a>
     </footer>
 
   </div>

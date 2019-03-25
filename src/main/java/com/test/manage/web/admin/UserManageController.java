@@ -10,7 +10,6 @@ import com.test.manage.service.user.UserService;
 import com.test.framework.controller.BaseController;
 import com.test.framework.model.ApiResult;
 import com.test.framework.security.Auth;
-import com.test.framework.utils.FileUploadUtils;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,6 @@ public class UserManageController extends BaseController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private FileUploadUtils fileUploadUtils;
     @Autowired
     private RoleService roleService;
     @Autowired
@@ -109,8 +106,6 @@ public class UserManageController extends BaseController {
         u.setUserCnName(user.getUserCnName());
         u.setUserCertificateType(user.getUserCertificateType());
         u.setUserCertificateNumber(user.getUserCertificateNumber());
-        u.setUserIdCardFontImg(user.getUserIdCardFontImg());
-        u.setUserIdCardBackImg(user.getUserIdCardBackImg());
         return success(u);
     }
 
@@ -121,7 +116,7 @@ public class UserManageController extends BaseController {
     public ApiResult fileUpload(String userId, MultipartFile file) {
         String url = "";
         if (file != null && !file.isEmpty()) {
-            url = fileUploadUtils.upload(file, userId, FileUploadUtils.FOLDER_USER);
+            url = "";
         }
         return success(url);
     }
@@ -135,11 +130,7 @@ public class UserManageController extends BaseController {
         if (StringUtils.isBlank(id)) {
             return error("参数错误");
         }
-        String fontImg = user.getUserIdCardFontImg();
-        String backImg = user.getUserIdCardBackImg();
         User u = new User();
-        u.setUserIdCardFontImg(fontImg);
-        u.setUserIdCardBackImg(backImg);
         u.setUserId(user.getUserId());
         u.setUserName(user.getUserName());
         u.setUserMobile(user.getUserMobile());

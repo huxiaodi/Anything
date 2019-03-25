@@ -13,7 +13,6 @@ import com.test.manage.model.request.LoginRequest;
 import com.test.manage.model.request.QueryParams;
 import com.test.manage.model.request.UserRequest;
 import com.test.manage.service.role.RoleService;
-import com.test.manage.service.user.UserLogService;
 import com.test.manage.service.user.UserService;
 import com.test.framework.enums.AuthEnum;
 import com.test.framework.exception.AnyException;
@@ -50,15 +49,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CompanyMapper companyMapper;
     @Autowired
-    private FileUploadUtils fileUploadUtils;
-    @Autowired
     private EbpayProperties ebpayProperties;
     @Autowired
     private RoleCuMapper roleCuMapper;
     @Autowired
     private userRoleMapper userRoleMapper;
-    @Autowired
-    private UserLogService userLogService;
     @Autowired
     private RoleService roleService;
     @Autowired
@@ -129,7 +124,6 @@ public class UserServiceImpl implements UserService {
         company.setCompanyStatus(1);
         company.setCompanyCreateTime(new Date());
         company.setCompanyIsDelete(false);
-        user.setUserRegisterFrom("网页注册");
         companyMapper.insertSelective(company);
         roleService.addFrontUserRole(user);
         return success("注册成功");
@@ -353,14 +347,6 @@ public class UserServiceImpl implements UserService {
         return userCuMapper.getResource(userId);
     }
 
-    @Override
-    public boolean checkAdjustPsw(String userId) {
-        User user = userMapper.selectByPrimaryKey(userId);
-        if (user.getUserPayPassword() != null && !"".equals(user.getUserPayPassword())) {
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public void loginOut(String token) {

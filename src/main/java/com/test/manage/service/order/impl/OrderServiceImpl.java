@@ -23,11 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @Description：
- * @Author:hudi
- * @Date: Created in 13:47 2019/3/12
- */
 @Transactional
 @Service
 public class OrderServiceImpl implements OrderService {

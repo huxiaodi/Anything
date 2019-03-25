@@ -2,9 +2,8 @@ package com.test.manage.dao.generator;
 
 import com.test.manage.model.generator.User;
 import com.test.manage.model.generator.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     /**

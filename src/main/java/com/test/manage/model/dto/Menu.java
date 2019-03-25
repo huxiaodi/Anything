@@ -2,9 +2,6 @@ package com.test.manage.model.dto;
 
 import java.util.List;
 
-/**
- * Created by hugo on 2016/5/3.
- */
 public class Menu {
     private String resourceId;
     private String parentResourceId;

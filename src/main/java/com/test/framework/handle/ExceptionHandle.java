@@ -28,9 +28,6 @@ import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMeth
 
 import javax.validation.ConstraintViolationException;
 
-/**
- * Created by hugo on 2017/10/15.
- */
 @RestControllerAdvice
 public class ExceptionHandle {
     private final static Logger logger = LoggerFactory.getLogger(ExceptionHandle.class);

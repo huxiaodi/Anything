@@ -6,11 +6,6 @@ import com.test.manage.model.request.QueryParams;
 
 import java.util.List;
 
-/**
- * @Description：
- * @Author:hudi
- * @Date: Created in 16:59 2019/3/21
- */
 public interface NoticeService {
 
     void insertNotice(Notice notice);
